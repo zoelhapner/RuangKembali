@@ -1,0 +1,704 @@
+﻿REKAP ANALISIS HARGA SATUAN PEKERJAAN (AHSP) BIDANG CIPTA KARYA;;;;;
+;;;;;
+;;;;;
+;;;;;
+HARGA SATUAN PEKERJAAN;;;;;
+No;Kode;;Jenis Pekerjaan;Satuan;Harga
+PP;A.2.2.1;HARGA SATUAN PEKERJAAN PERSIAPAN;;;
+1;PP1;A.2.2.1.1.;(K3) Pembuatan 1 m2 pagar sementara dari kayu tinggi 2 meter;m2;Rp709.984
+2;PP2;A.2.2.1.2;(K3) Pembuatan 1 m2 pagar sementara dari seng gelombang tinggi 2 meter;m2;Rp873.325
+3;PP3;A.2.2.1.3.;Pembuatan 1 m2 pagar sementara dari kawat duri tinggi 1,8 meter;m2;Rp456.916
+4;PP4;A.2.2.1.4.;Pengukuran dan pemasangan 1 m’ Bouwplank;m';Rp216.296
+5;PP5;A.2.2.1.5.;(K3) Pembuatan 1 m2 kantor sementara lantai plesteran;m2;Rp2.700.456
+6;PP6;A.2.2.1.6.;(K3) Pembuatan 1 m2 rumah jaga (konstruksi kayu );m2;Rp2.969.699
+7;PP7;A.2.2.1.7.;(K3) Pembuatan 1 m2 gudang semen dan peralatan;m2;Rp2.510.998
+8;PP8;A.2.2.1.8.;(K3) Pembuatan 1 m2 bedeng pekerja;m2;Rp2.364.979
+9;PP9;A.2.2.1.9.;(K3) Pembersihan  1 m2 lapangan dan perataan;m2;Rp16.261
+10;PP10;A.2.2.1.10.;(K3) Pembuatan 1 m2 steger/perancah  dari bambu;m2;Rp384.382
+11;PP11;A.2.2.1.11.;Pembuatan 1 buah kotak adukan ukuran 40cm x50cm x25cm;Buah;Rp164.795
+12;PP12;A.2.2.1.12.;Pembuatan 1 m2 jalan sementara;m2;Rp165.837
+13;PP13;A.2.2.1.13.;Pembongkaran  1 m3 beton bertulang;m3;Rp216.736
+14;PP14;A.2.2.1.14.;Pembongkaran  1 m3 dinding tembok bata;m3;Rp108.368
+15;PP15;A.2.2.1.15.;Pemasangan 1 m2 pagar kawat jaring galvanis panjang 240 cm;m2;Rp35.795
+16;PP16;A.2.2.1.16.;Pemasangan 1 m2 panel beton pracetak 5x50x240 cm;m2;Rp2.163.794
+;;;;;
+PT;A.2.3.1;HARGA SATUAN PEKERJAAN TANAH;;;
+17;PT1;A.2.3.1.1.;Penggalian 1 m3 tanah biasa sedalam 1 m;m3;Rp79.415
+18;PT2;A.2.3.1.2.;Penggalian 1 m3 tanah biasa sedalam 2 m;m3;Rp97.121
+19;PT3;A.2.3.1.3.;Menggali 1 m3 tanah biasa sedalam 3 m;m3;Rp115.070
+20;PT4;A.2.3.1.4.;Menggali 1 m3 tanah keras sedalam 1 m;m3;Rp105.724
+21;PT5;A.2.3.1.5.;Menggali 1 m3 tanah cadas sedalam 1 m;m3;Rp160.045
+22;PT6;A.2.3.1.6.;Menggali 1 m3 tanah lumpur sedalam 1 m;m3;Rp127.672
+23;PT7;A.2.3.1.7.;Pengerjaan stripping 1 m2 tanah tebing setinggi 1 meter;m2;Rp5.699
+24;PT8;A.2.3.1.8.;(K3) Pembuangan  1 m3 tanah sejauh 30 meter;m3;Rp34.821
+25;PT9;A.2.3.1.9.;"Pengurugan kembali 1 m3 galian tanah (1/3 Galian;-Tanah  Biasa Sedalam 1 M)";m3;Rp28.497
+26;PT10;A.2.3.1.10.;(K3) Pemadatan tanah 1 m3 tanah ( per 20 cm);m3;Rp56.995
+27;PT11;A.2.3.1.11.;Pengurugan 1 m3 dengan pasir urug;m3;Rp163.560
+28;PT12;A.2.3.1.12.;Pemasangan 1 m3 lapisan pudel campuran 1KP:3PP:7TL;m3;Rp326.790
+29;PT13;A.2.3.1.13.;Pemasangan 1 m2 lapisan ijuk tebal 10 cm untuk bidang resapan;m2;Rp282.526
+30;PT14;A.2.3.1.14.;Pengurugan 1 m3 sirtu padat;m3;Rp210.486
+;;;;;
+PD;A.3.2.2;HARGA SATUAN PEKERJAAN PONDASI;;;
+31;PD1;A.3.2.1.1.;Pemasangan 1 m3 pondasi batu belah campuran 1SP : 3PP;m3;Rp877.050
+32;PD2;A.3.2.1.2.;Pemasangan 1 m3 pondasi batu belah campuran 1SP : 4PP;m3;Rp828.693
+33;PD3;A.3.2.1.3.;Pemasangan 1 m3 pondasi batu belah campuran 1SP : 5PP;m3;Rp795.182
+34;PD4;A.3.2.1.4.;Pemasangan 1 m3 pondasi batu belah campuran 1SP : 6PP;m3;Rp771.616
+35;PD5;A.3.2.1.5.;Pemasangan 1 m3 pondasi batu belah campuran 1SP : 8PP;m3;Rp739.330
+36;PD6;A.3.2.1.6.;Pemasangan 1 m3 pondasi batu belah campuran 1SP : 1KP : 2PP;m3;Rp833.246
+37;PD7;A.3.2.1.7.;Pemasangan 1 m3 pondasi batu belah campuran 1 SP : 3 KP : 10 PP;m3;Rp703.057
+38;PD8;A.3.2.1.8.;Pemasangan 1 m3 pondasi batu belah campuran ¼ SP : 1 KP : 4PP;m3;Rp678.173
+39;PD9;A.3.2.1.9.;Pemasangan 1 m3 batu kosong (anstamping);m3;Rp457.877
+40;PD10;A.3.2.1.10.;(K3) Pemasangan 1 m3 pondasi siklop, 60% beton campuran 1SP : 2 PB : 3 Kr dan 40% batu;m3;Rp2.404.221
+41;PD11;A.3.2.1.11.;Pemasangan 1 m3 pondasi sumuran, diameter 100 cm;m3;Rp873.979
+;;;;;
+PB;A.4.1.1;HARGA SATUAN PEKERJAAN BETON;;;
+42;PB1;A.4.1.1.1;Membuat 1 m3 beton mutu f’c = 7,4 MPa (K 100);m3;Rp856.012
+43;PB2;A.4.1.1.2;Membuat 1 m3 beton mutu f’= 9,8 MPa (K 125);m3;Rp891.107
+44;PB3;A.4.1.1.3;Membuat 1 m3 beton mutu f’= 12,2 MPa (K 150);m3;Rp918.646
+45;PB4;A.4.1.1.4;Membuat 1 m3 lantai kerja beton mutu f’c = 7,4 MPa (K 100), slump (3-6) cm, w/c = 087;m3;Rp783.670
+46;PB5;A.4.1.1.5.;Membuat 1 m3 beton mutu f’ = 14,5 MPa (K 175), slump (12 ±2) cm, w/c = 0,66;m3;Rp951.167
+47;PB6;A.4.1.1.6;Membuat 1 m3 beton mutu f’= 16,9 MPa (K 200), slump (120 ± 20) mm, w/c = 0,61;m3;Rp982.320
+48;PB7;A.4.1.1.7.;Membuat 1 m3 beton mutu f’ = 19,3 MPa (K 225), slump (120 ± 20) mm, w/c = 0,58;m3;Rp1.005.534
+49;PB8;A.4.1.1.8.;Membuat 1 m3 beton mutu f’= 21,7 MPa (K 250), slump (120 ± 20) mm, w/c = 0,56;m3;Rp1.021.028
+50;PB9;A.4.1.1.9.;Membuat 1 m3 beton mutu f’ = 24,0 MPa (K 275), slump (120 ± 20) mm, w/c = 0,53;m3;Rp1.047.692
+51;PB10;A.4.1.1.10.;Membuat 1 m3 beton mutu f’c = 26,4 MPa (K 300), slump (120 ± 20) mm, w/c = 0,52;m3;Rp1.055.959
+52;PB11;A.4.1.1.11.;Membuat 1 m3 beton mutu f’c = 28,8 MPa (K 325), slump (120 ± 20) mm, w/c = 0,49;m3;Rp1.144.636
+53;PB12;A.4.1.1.12.;Membuat 1 m3 beton mutu f’c = 31,2 MPa (K 350), slump (120 ± 20) mm, w/c = 0,48;m3;Rp1.155.477
+54;PB13;A.4.1.1.13;Membuat 1 m3 beton kedap air dengan strorox - 100;m3;Rp1.025.924
+55;PB14;A.4.1.1.14;Pemasangan 1 m’ PVC Waterstop lebar 150 mm;m';Rp243.786
+56;PB15;A.4.1.1.15;Pemasangan 1 m’ PVC Waterstop lebar 200 mm;m';Rp315.963
+57;PB16;A.4.1.1.16;Membuat 1 m’ PVC Waterstop lebar 230 mm - 320 mm;m';Rp348.542
+58;PB17;A.4.1.1.17;Pembesian 10 kg dengan besi polos atau besi ulir;10kg;Rp133.378
+59;PB18;A.4.1.1.18;Pemasangan 10 kg kabel presstressed polos/strands;10kg;Rp128.020
+60;PB19;A.4.1.1.19;Pemasangan 10 kg jaring kawat baja (wiremesh);10kg;Rp433.495
+61;PB20;A.4.1.1.20;(K3) Pemasangan 1 m2 bekisting untuk pondasi;m2;Rp188.272
+62;PB21;A.4.1.1.21;(K3) Pemasangan 1 m2 bekisting untuk sloof;m2;Rp199.709
+63;PB22;A.4.1.1.22;(K3) Pemasangan 1 m2 bekisting untuk kolom;m2;Rp330.010
+64;PB23;A.4.1.1.23;(K3) Pemasangan 1 m2 bekisting untuk balok;m2;Rp342.459
+65;PB24;A.4.1.1.24;(K3) Pemasangan 1 m2 bekisting untuk lantai;m2;Rp465.790
+66;PB25;A.4.1.1.25;(K3) Pemasangan 1 m2 bekisting untuk dinding;m2;Rp493.716
+67;PB26;A.4.1.1.26;(K3) Pemasangan 1 m2 bekisting untuk tangga;m2;Rp317.615
+68;PB27;A.4.1.1.27;Pemasangan 1 m2 jembatan untuk pengecoran beton;m2;Rp128.350
+69;PB28;A.4.1.1.28;Membuat 1 m3 pondasi beton bertulang (150 kg besi + bekisting);m3;Rp3.409.134
+70;PB29;A.4.1.1.29;Membuat 1 m3 sloof beton bertulang (200 kg besi + bekisting);m3;Rp4.124.217
+71;PB30;A.4.1.1.30;Membuat 1 m3 kolom beton bertulang (300 kg besi + bekisting);m3;Rp9.872.233
+72;PB31;A.4.1.1.31;Membuat 1 m3 balok beton bertulang (200 kg besi + bekisting);m3;Rp7.826.864
+73;PB32;A.4.1.1.32;Membuat 1 m3 kolom beton bertulang (150 kg besi + bekisting);m3;Rp7.963.552
+74;PB33;A.4.1.1.33;Membuat 1 m3 dinding beton bertulang (150 kg besi + bekisting);m3;Rp7.083.303
+75;PB34;A.4.1.1.34;Membuat 1 m3 dinding beton bertulang (200 kg besi + bekisting);m3;Rp7.073.347
+76;PB35;A.4.1.1.35;Membuat 1 m’ kolom praktis beton bertulang (11 x 11) cm;m';Rp125.912
+77;PB36;A.4.1.1.36;Membuat 1 m’ ring balok beton bertulang (10 x 15) cm;m';Rp149.546
+;;;;;
+PB;A.4.1.2;HARGA SATUAN PEKERJAAN BETON PRACETAK;;;
+78;PB37;A.4.1.2.1.;(K3) Pembuatan 1 m2 lahan produksi tebal 8cm beton f’c 14,5 Mpa (K 175) slump (120 ± 20) mm;m2;Rp76.109
+79;PB38;A.4.1.2.2.;(K3) Pembuatan 1 m2 lahan produksi tebal 10 cm beton f’c 14,5 Mpa (K 175) slump (120 ± 20) mm;m2;Rp95.157
+80;PB39;A.4.1.2.3.;(K3) Pembuatan 1 m2 lahan produksi tebal 12 cm beton f’c 14,5 Mpa (K 175) slump (120 ± 20) mm;m2;Rp104.522
+81;PB40;A.4.1.2.4.;(K3) Pembuatan 1 m2 lahan produksi tebal 15 cm beton f’c 14,5 Mpa (K 175) slump (120 ± 20) mm;m2;Rp142.743
+82;PB41;A.4.1.2.5.;Pembuatan 1 m2 bekisting untuk plat beton pracetak ( 5 kali pakai);m2;Rp344.941
+83;PB42;A.4.1.2.6.;Pembuatan 1 m2 bekisting untuk balok beton pracetak ( 10-12 kali pakai);m2;Rp76.117
+84;PB43;A.4.1.2.7.;Pembuatan 1 m2 bekisting untuk kolom beton pracetak (10-12 kali pakai);m2;Rp69.893
+85;PB44;A.4.1.2.8.;Pemasangan dan membuka bekisting 1 buah komponen plat beton pracetak;Buah;Rp7.937
+86;PB45;A.4.1.2.9.;Pemasangan dan membuka bekisting 1 buah komponen balok beton pracetak;Buah;Rp12.890
+87;PB46;A.4.1.2.10.;Pemasangan dan membuka bekisting 1 buah komponen Kolom beton pracetak;Buah;Rp10.413
+88;PB47;A.4.1.2.11.;Penuangan/menebar beton untuk 1 buah komponen plat pracetak;Buah;Rp59.256
+89;PB48;A.4.1.2.12.;Penuangan/menebar beton untuk 1 buah komponen balok pracetak;Buah;Rp60.972
+90;PB49;A.4.1.2.13.;Penuangan/menebar beton untuk 1 buah komponen kolom pracetak;Buah;Rp54.864
+91;PB50;A.4.1.2.14.;Ereksi 1 buah komponen untuk pelat pracetak;Buah;Rp344.648
+92;PB51;A.4.1.2.15.;Ereksi 1 buah komponen untuk balok pracetak;Buah;Rp321.598
+93;PB52;A.4.1.2.16.;Ereksi 1 buah komponen untuk Kolom pracetak;Buah;Rp491.634
+94;PB53;A.4.1.2.17.;Melangsir 1 buah komponen plat pracetak ( ± 20 m);Buah;Rp67.126
+95;PB54;A.4.1.2.18.;Melangsir 1 buah komponen balok pracetak ( ± 20 m);Buah;Rp67.126
+96;PB55;A.4.1.2.19.;Melangsir 1 buah komponen kolom pracetak ( ± 20 m);Buah;Rp67.126
+97;PB56;A.4.1.2.20.;Bahan 1 m3 grouting campuran;m3;Rp6.433.508
+98;PB57;A.4.1.2.21.;Bahan 1 m3 grouting tidak campuran;m3;Rp8.711.163
+99;PB58;A.4.1.2.22.;Upah melakukan 1 titik grouting pada join pracetak;Titik;Rp52.469
+100;PB59;A.4.1.2.23.;Pemasangan 1 titik Bekisting join pracetak;Titik;Rp147.034
+101;PB60;A.4.1.2.24.;Upah 1 titik Join dengan Sling;Titik;Rp70.957
+;;;;;
+PBA;A.4.2.1;HARGA SATUAN PEKERJAAN BESI DAN ALUMUNIUM;;;
+102;PBA1;A.4.2.1.1.;Pemasangan 1 kg besi profil;1 kg;Rp28.658
+103;PBA2;A.4.2.1.2.;Pemasangan 1 kg rangka kuda-kuda baja IWF;1 kg;Rp28.658
+104;PBA3;A.4.2.1.3.;Pengerjaan 100 kg pekerjaan perakitan;100 kg;Rp268.320
+105;PBA4;A.4.2.1.4.;Pembuatan 1 m2 pintu besi plat baja tebal 2 mm rangkap, rangka baja siku;m2;Rp1.177.428
+106;PBA5;A.4.2.1.5.;Pengerjaan 10 cm pengelasan dengan las listrik;10 cm;Rp141.151
+107;PBA6;A.4.2.1.6.;Pembuatan 1 m2 rangka jendela besi scuare tube/Pipa kotak (25 x 5) cm;m2;Rp320.303
+108;PBA7;A.4.2.1.7.;Pemasangan 1 m2 pintu rolling door besi;m2;Rp515.073
+109;PBA8;A.4.2.1.8.;Pemasangan 1 m2 pintu lipat (folding door) bahan plastik/PVC;m2;Rp358.663
+110;PBA9;A.4.2.1.9.;Pemasangan 1 m2 sunscreen alluminium;m2;Rp299.772
+111;PBA10;A.4.2.1.10.;Pemasangan 1 m2 rolling door alluminium;m2;Rp490.505
+112;PBA11;A.4.2.1.11.;Pemasangan 1 m kusen pintu alluminium;m';Rp88.640
+113;PBA12;A.4.2.1.12.;Pemasangan 1 m2 pintu alluminium strip lebar 8 cm;m2;Rp477.006
+114;PBA13;A.4.2.1.13.;Pemasangan 1 m2 pintu kaca rangka alluminium;m2;Rp1.236.129
+115;PBA14;A.4.2.1.14.;Pemasangan 1 m2 venetions blinds dan Vertical blinds;m2;Rp168.146
+116;PBA15;A.4.2.1.15.;Pemasangan 1 m2 terali besi strip (2 x 3) mm;m2;Rp479.000
+117;PBA16;A.4.2.1.16.;Pemasangan 1 m2 kawat nyamuk;m2;Rp91.062
+118;PBA17;A.4.2.1.17.;Pemasangan 1 m2 jendela nako & tralis;m2;Rp478.702
+119;PBA18;A.4.2.1.18.;Pemasangan 1 m’ talang datar/ jurai seng bjls 28 lebar 90 cm;m';Rp259.046
+120;PBA19;A.4.2.1.19;Pemasangan 1 m talang ½ lingkaran D-15 cm, seng plat bjls 30 lebar 45 cm;m';Rp114.392
+121;PBA20;A.4.2.1.20.;Pemasangan 1 m2 rangka besi hollow 1x40.40.2mm,  modul 60 x 120 cm, dinding partisi;m2;Rp211.273
+122;PBA21;A.4.2.1.21.;Pemasangan 1 m2 rangka besi hollow 1x40.40.2mm,  modul 60 x 60 cm, plafon;m2;Rp247.534
+123;PBA22;A.4.2.1.22.;(K3) Pemasangan 1 m2 atap pelana rangka atap baja canai dingin profil C75;m2;Rp261.258
+124;PBA23;A.4.2.1.23.;(K3) Pemasangan 1 m2 atap jurai rangka atap baja canai dingin profil C75;m2;Rp255.266
+125;PBA24;A.4.2.1.24.;Pemasangan 1 M2 Pasang Kuda-Kuda Baja Ringan + Reng Untuk Atap Genteng Biasa/Metal;m2;Rp882.557
+;PBA25;A.4.2.1.25.;Pemasangan 1 M2 Aluminium Composite Panel (ACP) Lengkap Dengan Rangka;m2;Rp989.949
+;;;;;
+PPD;A.4.4.1;HARGA SATUAN PEKERJAAN PASANGAN DINDING;;;
+126;PPD1;A.4.4.1.1.;Pemasangan 1 m2 dinding bata merah (5x11x22) cm tebal 1 batu campuran 1 SP : 2 PP;m2;Rp266.866
+127;PPD2;A.4.4.1.2.;Pemasangan 1 m2 dinding bata merah (5x11x22) cm tebal 1 batu campuran 1 SP : 3 PP;m2;Rp254.005
+128;PPD3;A.4.4.1.3.;Pemasangan 1 m2 dinding bata merah (5x11x22) cm tebal 1 batu campuran 1 SP : 4 PP;m2;Rp245.532
+129;PPD4;A.4.4.1.4.;Pemasangan 1 m2 dinding bata merah (5x11x22) cm tebal 1 batu campuran 1 SP : 5 PP;m2;Rp240.870
+130;PPD5;A.4.4.1.5.;Pemasangan 1 m2 dinding Bata Merah (5x11x22) cm tebal 1 batu campuran 1 SP : 6 PP;m2;Rp238.676
+131;PPD6;A.4.4.1.6;Pemasangan 1 m2 dinding bata merah (5x11x22) cm tebal 1 batu campuran 1SP : 3KP : 10P;m2;Rp226.283
+132;PPD7;A.4.4.1.7;Pemasangan 1 m2 dinding bata merah (5x11x22) cm tebal ½ batu campuran 1SP : 2PP;m2;Rp129.313
+133;PPD8;A.4.4.1.8;Pemasangan 1 m2 dinding bata merah (5x11x22) cm tebal ½ batu campuran 1SP : 3PP;m2;Rp123.331
+134;PPD9;A.4.4.1.9;Pemasangan 1 m2 dinding bata merah (5x11x22) cm tebal ½ batu campuran 1SP :4PP;m2;Rp119.834
+135;PPD10;A.4.4.1.10;Pemasangan 1 m2 dinding bata merah (5x11x22)cm tebal ½ batu campuran 1 SP : 5 PP;m2;Rp117.630
+136;PPD11;A.4.4.1.11;Pemasangan 1 m2 dinding bata merah (5x11x22)cm tebal ½ batu campuran 1 SP : 6 PP;m2;Rp116.343
+137;PPD12;A.4.4.1.12;Pemasangan 1 m2 dinding bata merah (5x11x22)cm tebal ½ batu campuran 1SP : 8 PP;m2;Rp113.995
+138;PPD13;A.4.4.1.13;Pemasangan 1 m2 dinding bata merah (5x11x22)cm tebal ½ batu campuran 1SP : 3KP :10P;m2;Rp113.094
+139;PPD14;A.4.4.1.14;Pemasangan 1 m2 dinding bata merah (5x11x22)cm tebal ½ batu campuran 1SM : 1KP :1PP;m2;Rp102.970
+140;PPD15;A.4.4.1.15;Pemasangan 1 m2 dinding bata merah (5x11x22) cm tebal ½ batu campuran 1SM : 1KP :2P;m2;Rp103.858
+141;PPD16;A.4.4.1.16;Pemasangan 1 m2 dinding conblock HB20 campuran 1SP : 3PP;m2;Rp255.553
+142;PPD17;A.4.4.1.17;Pemasangan 1 m2 dinding conblock HB20 campuran 1SP:4PP;m2;Rp253.574
+143;PPD18;A.4.4.1.18;Pemasangan 1 m2 dinding conblock HB15 campuran 1SP :3PP;m2;Rp208.421
+144;PPD19;A.4.4.1.19;Pemasangan 1 m2 dinding conblock HB15 campuran 1SP :4PP;m2;Rp206.800
+145;PPD20;A.4.4.1.20;Pemasangan 1 m2 dinding conblock HB10 campuran 1SP :3PP;m2;Rp162.204
+146;PPD21;A.4.4.1.21;Pemasangan 1 m2 dinding conblock HB10 campuran 1SP :4PP;m2;Rp161.502
+147;PPD22;A.4.4.1.22;Pemasangan 1 m2 dinding terawang (rooster) 12x11x24 campuran 1SP :3PP;m2;Rp314.006
+148;PPD23;A.4.4.1.23;Pemasangan 1 m2 dinding terawang (rooster) 12x11x24 campuran 1SP :4PP;m2;Rp353.426
+149;PPD24;A.4.4.1.24;Pemasangan 1 m2 dinding bata berongga ekspose 12x11x24 campuran 1 SP : 3 PP;m2;Rp656.507
+150;PPD25;A.4.4.1.25;Pemasangan 1 m2 dinding bata ringan tebal 7,5 cm dengan mortar siap pakai B.;m2;Rp134.804
+151;PPD26;A.4.4.1.26;Pemasangan 1 m2 dinding bata ringan tebal 10 cm dengan mortar siap pakai;m2;Rp159.904
+;;;;;
+PPT;A.4.4.2;HARGA SATUAN PEKERJAAN PLESTERAN;;;
+152;PPT1;A.4.4.2.1.;Pemasangan 1 m2 plesteran 1SP : 1PP tebal 15 mm.;m2;Rp73.729
+153;PPT2;A.4.4.2.2.;Pemasangan 1 m2 plesteran 1SP : 2PP tebal 15 mm.;m2;Rp67.076
+154;PPT3;A.4.4.2.3.;Pemasangan 1 m2 plesteran 1SP : 3PP tebal 15mm.;m2;Rp64.156
+155;PPT4;A.4.4.2.4.;Pemasangan 1 m2 plesteran 1SP : 4PP tebal 15 mm;m2;Rp62.198
+156;PPT5;A.4.4.2.5.;Pemasangan 1 m2 plesteran 1SP : 5PP tebal 15 mm;m2;Rp61.039
+157;PPT6;A.4.4.2.6.;Pemasangan 1 m2 plesteran 1SP : 6PP tebal 15 mm.;m2;Rp60.132
+158;PPT7;A.4.4.2.7.;Pemasangan 1 m2 plesteran 1SP : 7PP tebal 15 mm;m2;Rp59.618
+159;PPT8;A.4.4.2.8.;Pemasangan 1 m2 plesteran 1SP : 8PP tebal 15 mm;m2;Rp59.105
+160;PPT9;A.4.4.2.9.;Pemasangan 1 m2 plesteran 1SP : 1/2KP : 3PP tebal 15 mm;m2;Rp63.236
+161;PPT10;A.4.4.2.10.;Pemasangan 1 m2 plesteran 1SP : 2KP : 8PP tebal 15 mm;m2;Rp60.708
+162;PPT11;A.4.4.2.11.;Pemasangan 1 m2 plesteran 1SM : 1KP : 1PP tebal 15 mm;m2;Rp55.525
+163;PPT12;A.4.4.2.12.;Pemasangan 1 m2 plesteran 1SM : 1KP : 2PP tebal 15 mm;m2;Rp56.138
+164;PPT13;A.4.4.2.13.;Pemasangan 1 m2 plesteran 1SP : 1PP tebal 20 mm;m2;Rp89.726
+165;PPT14;A.4.4.2.14.;Pemasangan 1 m2 plesteran 1SP : 3PP tebal 20 mm;m2;Rp70.482
+166;PPT15;A.4.4.2.15.;Pemasangan 1 m2 plesteran 1SP : 4PP tebal 20 mm.;m2;Rp83.173
+167;PPT16;A.4.4.2.16.;Pemasangan 1 m2 plesteran 1SP : 5PP tebal 20 mm;m2;Rp81.677
+168;PPT17;A.4.4.2.17.;Pemasangan 1 m2 plesteran 1SP : 6PP tebal 20 mm;m2;Rp80.419
+169;PPT18;A.4.4.2.18.;Pemasangan 1 m2 plesteran 1SM : 1KP : 2PP tebal 20 mm;m2;Rp77.341
+170;PPT19;A.4.4.2.19.;Pemasangan 1 m2 berapen 1SP : 5PP tebal 15 mm;m2;Rp36.052
+171;PPT20;A.4.4.2.20.;Pemasangan 1 m’ plesteran skoning 1SP : 3PP lebar 10 cm;m';Rp58.750
+172;PPT21;A.4.4.2.21.;Pemasangan 1 m2 plesteran granit 1SP : 2 granit tebal 1cm;m2;Rp202.456
+173;PPT22;A.4.4.2.22.;Pemasangan 1 m2 plesteran traso 1SP : 2 traso tebal 1cm;m2;Rp222.166
+174;PPT23;A.4.4.2.23.;Pemasangan 1 m2 plesteran ciprat 1SP : 2PP;m2;Rp51.040
+175;PPT24;A.4.4.2.24;Pemasangan 1 m2 finishing siar pasangan bata merah;m2;Rp29.478
+176;PPT25;A.4.4.2.25.;Pemasangan 1 m2 finishing siar pasangan conblock ekspose;m2;Rp14.025
+177;PPT26;A.4.4.2.26.;Pemasangan 1 m2 finishing siar pasangan batu kali, campuran 1SP : 2PP.;m2;Rp55.353
+178;PPT27;A.4.4.2.27.;Pemasangan 1 m2 acian.;m2;Rp37.923
+179;PPT28;A.4.4.2.28.;Pemasangan 1 m2 plesteran dengan mortar siap pakai (MSP);m2;Rp83.499
+180;PPT29;A.4.4.2.29.;Pemasangan 1 m2 Acian dengan mortar siap pakai (MSP);m2;Rp40.964
+181;PPT30;A.4.4.2.30;Pemasangan 1 M' Plesteran Skoning/Benangan 1 Pc : 2 Psr;m';Rp58.750
+182;PPT31;A.4.4.2.31.;Pemasangan 1 m2 Benangan;m2;Rp14.394
+;;;;;
+PPL;A.4.4.3;HARGA SATUAN PEKERJAAN PENUTUP LANTAI DAN PENUTUP DINDING;;;
+181;PPL1;A.4.4.3.1.;Pemasangan 1 m2 lantai ubin PC abu-abu ukuran 40cm x40cm;m2;Rp164.199
+182;PPL2;A.4.4.3.2.;Pemasangan 1 m2 lantai ubin PC abu-abu ukuran 30cm x30 cm;m2;Rp175.189
+183;PPL3;A.4.4.3.3.;Pemasangan 1 m2 lantai ubin PC abu-abu ukuran 20cm x20 cm;m2;Rp176.270
+184;PPL4;A.4.4.3.4.;Pemasangan 1 m2 lantai ubin warna ukuran 40cm x40 cm;m2;Rp182.406
+185;PPL5;A.4.4.3.5.;Pemasangan 1 m2 lantai ubin warna ukuran 30cm x30cm;m2;Rp198.589
+186;PPL6;A.4.4.3.6.;Pemasangan 1 m2 lantai ubin warna ukuran 20cm x20cm;m2;Rp202.765
+187;PPL7;A.4.4.3.7.;Pemasangan 1 m2 lantai ubin teraso ukuran 40cm x40cm;m2;Rp179.502
+188;PPL8;A.4.4.3.8.;Pemasangan 1 m2 lantai ubin teraso ukuran 30cm x30cm;m2;Rp182.991
+189;PPL9;A.4.4.3.9.;Pemasangan 1 m2 lantai ubin granit ukuran 40cm x40cm;m2;Rp196.925
+190;PPL10;A.4.4.3.10.;Pemasangan 1 m2 lantai ubin granit ukuran 30cm x30cm;m2;Rp182.991
+191;PPL11;A.4.4.3.11.;Pemasangan 1 m2 lantai ubin teralux marmer ukuran 40cm x40cm;m2;Rp180.954
+192;PPL12;A.4.4.3.12.;Pemasangan 1 m2 lantai ubin teralux ukuran 30cm x30cm;m2;Rp182.991
+193;PPL13;A.4.4.3.13.;Pemasangan 1 m2 lantai ubin teralux marmer ukuran 60cm x60cm;m2;Rp190.578
+194;PPL14;A.4.4.3.14.;Pemasangan 1 m2 lantai ubin teralux marmer ukuran 40cm x40cm;m2;Rp198.377
+195;PPL15;A.4.4.3.15.;Pemasangan 1 m2 lantai ubin teralux marmer ukuran 30cm x30cm;m2;Rp182.991
+196;PPL16;A.4.4.3.16.;Pemasangan 1 m’ plint ubin Pc abu-abu ukuran 15cm x 20cm;m';Rp117.325
+197;PPL17;A.4.4.3.17.;Pemasangan 1 m’ plint ubin Pc abu-abu ukuran 10cm x 30cm;m';Rp79.424
+198;PPL18;A.4.4.3.18.;Pemasangan 1 m’ plint ubin Pc abu-abu ukuran 10cm x 40cm;m';Rp64.679
+199;PPL19;A.4.4.3.19.;Pemasangan 1 m’ plint ubin warna ukuran 10cm x 20cm;m';Rp66.579
+200;PPL20;A.4.4.3.20.;Pemasangan 1 m’ plint ubin warna ukuran 10cm x 30cm;m';Rp84.222
+201;PPL21;A.4.4.3.21.;Pemasangan 1 m’ plint ubin warna ukuran 10cm x 40cm;m';Rp72.962
+202;PPL22;A.4.4.3.22.;Pemasangan 1 m’ plint ubin teraso ukuran 10cm x 30cm;m';Rp80.743
+203;PPL23;A.4.4.3.23.;Pemasangan 1 m’ plint ubin teraso ukuran 10cm x 40cm;m';Rp65.998
+204;PPL24;A.4.4.3.24.;Pemasangan 1 m’ plint ubin granit ukuran 10cm x 60cm;m';Rp65.708
+205;PPL25;A.4.4.3.25.;Pemasangan 1 m’ plint ubin granit ukuran 10cm x 30cm;m';Rp79.197
+206;PPL26;A.4.4.3.26.;Pemasangan 1 m’ plint ubin teralux kerang ukuran 10cm x 40cm;m';Rp65.393
+207;PPL27;A.4.4.3.27.;Pemasangan 1 m’ plint ubin teralux kerang ukuran 10cm x 30cm;m';Rp78.811
+208;PPL28;A.4.4.3.28.;Pemasangan 1 m’ plint ubin teralux marmer ukuran 10cm x 60cm;m';Rp50.542
+209;PPL29;A.4.4.3.29.;Pemasangan 1 m’ plint ubin teralux marmer ukuran 10cm x 40cm;m';Rp65.708
+210;PPL30;A.4.4.3.30.;Pemasangan 1 m’ plint ubin teralux marmer ukuran 10cm x 30cm;m';Rp79.970
+211;PPL31;A.4.4.3.31.;Pemasangan 1 m2 lantai teraso cor di tempat, tebal 3cm;m2;Rp99.565
+212;PPL32;A.4.4.3.32.;Pemasangan 1 m2 lantai keramik artistik 10cm x 20cm;m2;Rp256.128
+213;PPL33;A.4.4.3.33.;Pemasangan 1 m2 lantai keramik artistik 10cm x 10cm atau 5cm x 20cm;m2;Rp285.896
+214;PPL34;A.4.4.3.34.;Pemasangan 1 m2 lantai keramik ukuran 33cm x 33cm;m2;Rp241.642
+215;PPL35;A.4.4.3.35.;Pemasangan 1 m2 lantai keramik ukuran 30cm x 30cm;m2;Rp242.337
+216;PPL36;A.4.4.3.36.;Pemasangan 1 m2 lantai keramik ukuran 20cm x 20cm;m2;Rp245.598
+217;PPL37;A.4.4.3.36.a;Pemasangan 1 m2 lantai keramik ukuran 40cm x 40cm;m2;Rp252.794
+218;PPL38;A.4.4.3.36.b;Pemasangan 1 m2 lantai keramik ukuran 50cm x 50cm;m2;Rp256.878
+219;PPL39;A.4.4.3.36.c;Pemasangan 1 m2 lantai keramik ukuran 60cm x 60cm;m2;Rp232.330
+220;PPL40;A.4.4.3.36.d;Pemasangan 1 m2 lantai Granit ukuran 60cm x 60cm;m2;Rp442.110
+221;PPL41;A.4.4.3.37.;Pemasangan 1 m2 keramik ukuran 10cm x 33cm untuk variasi/border;m2;Rp526.773
+222;PPL42;A.4.4.3.38.;Pemasangan 1 m2 lantai keramik mozaik ukuran 30cm x 30cm;m2;Rp267.436
+223;PPL43;A.4.4.3.39.;Pemasangan 1 m’ plint keramik ukuran 10cm x 20cm;m';Rp110.579
+224;PPL44;A.4.4.3.40.;Pemasangan 1 m’ plint keramik ukuran 10cm x 10cm;m';Rp196.835
+225;PPL45;A.4.4.3.41.;Pemasangan 1 m’ plint keramik ukuran 5cm x 20cm;m';Rp108.829
+226;PPL46;A.4.4.3.42.;Pemasangan 1 m’ plint internal cove artistik 5cm x 5cm x 20cm;m';Rp258.361
+227;PPL47;A.4.4.3.43.;Pemasangan 1 m2 lantai marmer ukuran 100cm x 100cm;m2;Rp405.105
+228;PPL48;A.4.4.3.44.;Pemasangan 1 m2 lantai karpet;m2;Rp100.785
+229;PPL49;A.4.4.3.45.;Pemasangan 1 m2 underlayer (pelapis bawah karpet);m2;Rp71.217
+230;PPL50;A.4.4.3.46.;Pemasangan 1 m2 lantai parquet kayu;m2;Rp427.083
+231;PPL51;A.4.4.3.47.;Pemasangan 1 m2 lantai kayu gymfloor;m2;Rp426.968
+232;PPL52;A.4.4.3.48.;Pemasangan 1 m2 dinding porslen 11cm x 11cm;m2;Rp289.282
+233;PPL53;A.4.4.3.49.;Pemasangan 1 m2 dinding porslen 10cm x 20cm;m2;Rp287.246
+234;PPL54;A.4.4.3.50.;Pemasangan 1 m2 dinding porslen 20cm x 20cm;m2;Rp271.069
+235;PPL55;A.4.4.3.51.;Pemasangan 1 m2 dinding keramik artistik 10cm x 20cm;m2;Rp287.246
+236;PPL56;A.4.4.3.52.;Pemasangan 1 m2 dinding keramik artistik 5cm x 20cm;m2;Rp289.430
+237;PPL57;A.4.4.3.53.;Pemasangan 1 m2 dinding keramik 10cm x 20cm;m2;Rp287.246
+238;PPL58;A.4.4.3.54.;Pemasangan 1 m2 dinding keramik 20cm x 20cm;m2;Rp272.547
+239;PPL59;A.4.4.3.54.a;Pemasangan 1 m2 dinding keramik 20cm x 25cm;m2;Rp275.951
+240;PPL60;A.4.4.3.54.b;Pemasangan 1 m2 dinding keramik 25cm x 40cm;m2;Rp279.773
+241;PPL61;A.4.4.3.54.c;Pemasangan 1 m2 dinding keramik 30cm x 60cm;m2;Rp283.693
+242;PPL62;A.4.4.3.55.;Pemasangan 1 m2 dinding marmer 100cm x 100cm;m2;Rp631.730
+243;PPL63;A.4.4.3.56.;Pemasangan 1 m2 dinding bata pelapis 3cm x 7cm x 24cm;m2;Rp414.296
+244;PPL64;A.4.4.3.57.;Pemasangan 1 m2 dinding batu paras;m2;Rp142.723
+245;PPL65;A.4.4.3.58.;Pemasangan 1 m2 dinding batu tempel hitam;m2;Rp147.300
+246;PPL66;A.4.4.3.59.;Pemasangan 1 m2 lantai vynil ukuran 30cm x 30cm;m2;Rp622.079
+247;PPL67;A.4.4.3.60.;Pemasangan 1 m2 wallpaper lebar 50 cm;m2;Rp339.613
+248;PPL68;A.4.4.3.61.;Pemasangan 1 m2 floor harderner;m2;Rp640.420
+249;PPL69;A.4.4.3.62.;Pemasangan 1 m’ plint vynil 15cm x 30cm;m';Rp53.528
+250;PPL70;A.4.4.3.63.;Pemasangan 1 m’ plint kayu tebal 2 cm lebar 10 cm;m';Rp57.151
+251;PPL71;A.4.4.3.64.;Pemasangan 1 m2 paving block natural tebal 6 cm;m2;Rp132.546
+252;PPL72;A.4.4.3.65.;Pemasangan 1 m2 paving block natural tebal 8 cm;m2;Rp161.324
+253;PPL73;A.4.4.3.66.;Pemasangan 1 m2 paving block berwarna tebal 6 cm;m2;Rp144.833
+254;PPL74;A.4.4.3.67.;Pemasangan 1 m2 paving block berwarna tebal 8 cm;m2;Rp173.246
+255;PPL75;A.4.4.3.68.;Pemasangan 1 M2 Aluminium Composite Panel;m2;Rp387.816
+;;;;;
+PLL;A.4.5.1;HARGA SATUAN PEKERJAAN LANGIT-LANGIT  (PLAFOND);;;
+249;PLL1;A.4.5.1.1.;Pemasangan 1 m2 langit-langit asbes semen, tebal 4 mm, 5 mm, dan 6 mm;m2;Rp106.164
+250;PLL2;A.4.5.1.2.;Pemasangan 1 m2 langit-langit akustik ukuran (30 x 30) cm;m2;Rp733.971
+251;PLL3;A.4.5.1.3.;Pemasangan 1 m2 langit-langit akustik ukuran (30 x 60) cm;m2;Rp701.559
+252;PLL4;A.4.5.1.4.;Pemasangan 1 m2 langit-langit akustik ukuran (60 x 120) cm;m2;Rp461.214
+253;PLL5;A.4.5.1.5.;Pemasangan 1 m2 langit-langit tripleks ukuran (120 x 240) cm, tebal 3 mm, 4 mm & 6;m2;Rp138.666
+254;PLL6;A.4.5.1.6.;Pemasangan 1 m2 langit-langit lambrisering kayu, tebal 9 mm;m2;Rp306.175
+255;PLL7;A.4.5.1.7.;Pemasangan 1 m2 langit-langit gypsum board ukuran (120x240x9) mm, tebal 9 mm;m2;Rp50.911
+256;PLL8;A.4.5.1.8.;Pemasangan 1 m2 langit-langit akustik ukuran (60 x 120) cm berikut rangka alluminium;m2;Rp896.197
+257;PLL9;A.4.5.1.9.;Pemasangan 1 m’ list langit-langit kayu profil;m';Rp160.607
+258;PLL10;A.4.5.1.10.;Pemasangan 1 m2 Plafond PVC;m2;Rp182.350
+259;PLL11;A.4.5.1.10.;Pemasangan 1 m2 List Plafond PVC;m2;Rp78.298
+260;PLL12;A.4.5.1.10.;Pemasangan Rangka Plafon Gypsum Rangka Metal Furing;m2;Rp138.822
+261;PLL13;A.4.5.1.10.;Pemasangan Dinding Partisi Double {Pembatas Ruang (gypsum);m2;Rp459.283
+262;PLL14;A.4.5.1.10.;Pemasangan Rangka Plafon Hollow;m2;Rp147.729
+;;;;;
+PPA;A.4.5.2.;HARGA SATUAN PEKERJAAN PENUTUP ATAP;;;
+263;PPA1;A.4.5.2.1.;Pemasangan 1 m2 atap genteng palentong kecil;m2;Rp68.966
+264;PPA2;A.4.5.2.2.;Pemasangan 1 m2 atap genteng kodok ;m2;Rp82.712
+265;PPA3;A.4.5.2.3.;Pemasangan 1 m2 atap genteng palentong besar/super;m2;Rp173.706
+266;PPA4;A.4.5.2.4.;Pemasangan 1 m’ bubung genteng palentong;m';Rp169.547
+267;PPA5;A.4.5.2.5.;Pemasangan 1 m’ bubung genteng kodok ;m';Rp169.547
+268;PPA6;A.4.5.2.6.;Pemasangan 1 m’ bubung genteng palentong besar;m';Rp151.698
+269;PPA7;A.4.5.2.7.;Pemasangan 1 m2 roof light fibreglass 90x180;m2;Rp112.068
+270;PPA8;A.4.5.2.8.;Pemasangan 1 m2 atap asbes gelombang 0,92mx2,5m x 5mm;m2;Rp98.239
+271;PPA9;A.4.5.2.9.;Pemasangan 1 m2 atap asbes gelombang 0,92mx2,25m  x 5mm;m2;Rp112.573
+272;PPA10;A.4.5.2.10.;Pemasangan 1 m2 atap asbes gelombang 0,92mx2,00m  x 5mm;m2;Rp111.798
+273;PPA11;A.4.5.2.11.;Pemasangan 1 m2 atap asbes gelombang 0,92mx1.80m  x 5mm;m2;Rp133.299
+274;PPA12;A.4.5.2.12.;Pemasangan 1 m2 atap asbes gelombang 1.05mx3.00m  x 4mm;m2;Rp75.965
+275;PPA13;A.4.5.2.13.;Pemasangan 1 m2 atap asbes gelombang 1.05mx2.70m  x 4mm;m2;Rp85.998
+276;PPA14;A.4.5.2.14.;Pemasangan 1 m2 atap asbes gelombang 1.05mx2.40m  x 4mm;m2;Rp88.865
+277;PPA15;A.4.5.2.15.;Pemasangan 1 m2 atap asbes gelombang 1.05mx2.10m  x 4mm;m2;Rp98.898
+278;PPA16;A.4.5.2.16.;Pemasangan 1 m2 atap asbes gelombang 1.05mx1.50m  x 4mm;m2;Rp140.466
+279;PPA17;A.4.5.2.17.;Pemasangan 1 m2 atap asbes gelombang 1.08mx3.00m  x 6mm;m2;Rp78.831
+280;PPA18;A.4.5.2.18.;Pemasangan 1 m2 atap asbes gelombang 1.08mx2.70m  x 6mm;m2;Rp80.265
+281;PPA19;A.4.5.2.19.;Pemasangan 1 m2 atap asbes gelombang 1.08mx2.40m  x 6mm;m2;Rp91.731
+282;PPA20;A.4.5.2.20.;Pemasangan 1 m2 atap asbes gelombang 1.08mx2.10m  x 6mm;m2;Rp96.032
+283;PPA21;A.4.5.2.21.;Pemasangan 1 m2 atap asbes gelombang 1.08mx1.80m  x 6mm;m2;Rp107.498
+284;PPA22;A.4.5.2.22.;Pemasangan 1 m’ bubung stel gelombang 0,92m;m';Rp406.863
+285;PPA23;A.4.5.2.23.;Pemasangan 1 m’ bubung stel gelombang 1,05m;m';Rp373.783
+286;PPA24;A.4.5.2.24.;Pemasangan 1 m’ bubung stel gelombang 1,08m;m';Rp368.269
+287;PPA25;A.4.5.2.25.;Pemasangan 1 m’ nok paten 0,92m;m';Rp199.776
+288;PPA26;A.4.5.2.26.;Pemasangan 1 m’ nok paten 1,05m;m';Rp199.776
+289;PPA27;A.4.5.2.27.;Pemasangan 1 m’ nok paten 1,08m;m';Rp199.776
+290;PPA28;A.4.5.2.28.;Pemasangan 1 m’ nok stel rata 0,92m;m';Rp199.292
+291;PPA29;A.4.5.2.29.;Pemasangan 1 m’ nok stel rata 1,05m;m';Rp194.980
+292;PPA30;A.4.5.2.30.;Pemasangan 1 m2 genteng beton;m2;Rp144.879
+293;PPA31;A.4.5.2.31.;Pemasangan 1 m2 genteng aspal;m2;Rp209.110
+294;PPA32;A.4.5.2.32.;Pemasangan 1 m2 genteng metal ukuran 80 x 100 atap pelana;m2;Rp39.312
+295;PPA33;A.4.5.2.33.;Pemasangan 1 m2 genteng metal ukuran 80 x 100 atap Jurai;m2;Rp40.921
+296;PPA34;A.4.5.2.34.;Pemasangan 1 m2 atap sirap kayu;m2;Rp297.923
+297;PPA35;A.4.5.2.35.;Pemasangan 1 m’ nok genteng beton;m';Rp122.569
+298;PPA36;A.4.5.2.36.;Pemasangan 1 m’ nok genteng aspal;m';Rp172.427
+299;PPA37;A.4.5.2.37.;Pemasangan 1 m’ nok genteng metal;m';Rp85.129
+300;PPA38;A.4.5.2.38.;Pemasangan 1 m’ nok sirap;m';Rp203.868
+301;PPA39;A.4.5.2.39.;Pemasangan 1 m2 atap seng gelombang;m2;Rp102.341
+302;PPA40;A.4.5.2.40.;Pemasangan 1 m’nok atap seng;m';Rp144.888
+303;PPA41;A.4.5.2.41.;Pemasangan 1 m2 atap alumunium;m2;Rp284.685
+304;PPA42;A.4.5.2.42.;Pemasangan 1 m’ nok alumunium;m';Rp200.374
+305;PPA43;A.4.5.2.43.;Pemasangan 1 m2 alumunium foil/sisalation;m2;Rp31.736
+;;;;;
+PK;A.4.6.1;HARGA SATUAN PEKERJAAN KAYU;;;
+306;PK1;A.4.6.1.1.;Pembuatan dan pemasangan 1 m3 kusen pintu dan kusen jendela, kayu kelas I;m3;Rp13.981.409
+307;PK2;A.4.6.1.2.;Pembuatan dan pemasangan 1 m3 kusen pintu dan kusen jendela, kayu kelas II atau III;m3;Rp14.481.616
+308;PK3;A.4.6.1.3.;Pembuatan dan pemasangan 1 m2 pintu klamp standar, kayu kelas II;m2;Rp606.159
+309;PK4;A.4.6.1.4.;Pembuatan dan pemasangan 1 m2 pintu klamp sederhana, kayu kelas III;m2;Rp606.159
+310;PK5;A.4.6.1.5.;Pembuatan dan pemasangan 1 m2 daun pintu panel, kayu kelas I atau II;m2;Rp952.422
+311;PK6;A.4.6.1.6.;Pembuatan dan pemasangan 1 m2 pintu dan jendela kaca, kayu kelas I atau II;m2;Rp664.386
+312;PK7;A.4.6.1.7.;Pembuatan dan pemasangan 1 m2 pintu dan jendela jalusi kayu kelas I atau II;m2;Rp1.217.911
+313;PK8;A.4.6.1.8.;Pembuatan 1 m2 daun pintu plywood rangkap, rangka kayu kelas II tertutup;m2;Rp776.018
+314;PK9;A.4.6.1.9.;Pembuatan 1 m2 pintu plywood rangkap, rangka expose kayu kelas I atau II;m2;Rp829.122
+315;PK10;A.4.6.1.10.;Pemasangan 1 m2 jalusi kusen, kayu kelas I atau II;m2;Rp1.013.459
+316;PK11;A.4.6.1.11.;Pemasangan 1 m2 teakwood rangkap, rangka expose kayu kelas I;m2;Rp905.880
+317;PK12;A.4.6.1.12.;Pemasangan 1 m2 teakwood rangkap lapis formika, rangka expose kayu kelas II;m2;Rp1.074.042
+318;PK13;A.4.6.1.13.;Pemasangan 1 m3 konstruksi kuda-kuda konvensional,  kayu kelas I, II dan III bentang 6 m;m3;Rp12.746.851
+319;PK14;A.4.6.1.14.;Pemasangan 1 m3 konstruksi kuda-kuda expose, kayu kelas I;m3;Rp14.966.312
+320;PK15;A.4.6.1.15.;Pemasangan 1 m3 konstruksi gordeng, kayu kelas II;m3;Rp13.950.196
+321;PK16;A.4.6.1.16.;Pemasangan 1 m2 rangka atap genteng keramik, kayu kelas II;m2;Rp238.264
+322;PK17;A.4.6.1.17.;Pemasangan 1 m2 rangka atap genteng beton, kayu kelas II;m2;Rp287.119
+323;PK18;A.4.6.1.18.;Pemasangan 1 m2 rangka atap sirap, kayu kelas II;m2;Rp156.348
+324;PK19;A.4.6.1.19.;Pemasangan 1 m2 rangka langit-langit (50 x 100) cm, kayu kelas II atau III;m2;Rp179.886
+325;PK20;A.4.6.1.20.;Pemasangan 1 m2 rangka langit-langit (60 x 60) cm, kayu kelas II atau III;m2;Rp184.835
+326;PK21;A.4.6.1.21.;Pemasangan 1 m’ lisplank ukuran (3 x 20) cm, kayu kelas I atau kelas II;m';Rp156.015
+327;PK22;A.4.6.1.22.;Pemasangan 1 m’ lisplank ukuran (3 x 30) cm, kayu kelas I atau kelas II;m';Rp157.242
+328;PK23;A.4.6.1.23.;Pemasangan 1 m2 rangka dinding pemisah (60 x 120) cm kayu kelas II atau III;m2;Rp342.880
+329;PK24;A.4.6.1.24.;Pemasangan 1 m2 dinding pemisah teakwood rangkap, rangka kayu kelas II;m2;Rp602.649
+330;PK25;A.4.6.1.25.;Pemasangan 1 m2 dinding pemisah plywood rangkap, rangka kayu kelas II;m2;Rp527.132
+331;PK26;A.4.6.1.26.;Pemasangan 1 m2 dinding lambrisering dari Kayu Papan kelas I;m2;Rp361.160
+332;PK27;A.4.6.1.27.;Pemasangan 1 m2 dinding lambrisering dari plywood ukuran (120 x 240) cm;m2;Rp63.963
+333;PK28;A.4.6.1.28.;Pemasangan 1 m2 dinding bilik, rangka kayu kelas III atau IV;m2;Rp154.823
+;;;;;
+PKK;A.4.6.2;HARGA SATUAN PEKERJAAN KUNCI DAN KACA;;;
+334;PKK1;A.4.6.2.1.;Pemasangan 1 buah kunci tanam antik;Buah;Rp343.910
+335;PKK2;A.4.6.2.2.;Pemasangan 1 buah kunci tanam biasa;Buah;Rp283.151
+336;PKK3;A.4.6.2.3.;Pemasangan 1 buah kunci kamar mandi;Buah;Rp336.929
+337;PKK4;A.4.6.2.4.;Pemasangan 1 buah kunci silinder;Buah;Rp309.773
+338;PKK5;A.4.6.2.5.;Pemasangan 1 buah engsel pintu;Buah;Rp125.896
+339;PKK6;A.4.6.2.6.;Pemasangan 1 buah engsel jendela kupu-kupu;Buah;Rp125.865
+340;PKK7;A.4.6.2.7.;Pemasangan 1 buah engsel angin;Buah;Rp98.633
+341;PKK8;A.4.6.2.8.;Pemasangan 1 buah spring knip;Buah;Rp49.793
+342;PKK9;A.4.6.2.9.;Pemasangan 1 buah kait angin;Buah;Rp26.907
+343;PKK10;A.4.6.2.10.;Pemasangan 1 buah door closer;Buah;Rp277.564
+344;PKK11;A.4.6.2.11.;Pemasangan 1 buah kunci slot;Buah;Rp282.281
+345;PKK12;A.4.6.2.12.;Pemasangan 1 buah Door holder;Buah;Rp195.220
+346;PKK13;A.4.6.2.13.;Pemasangan 1 buah door stop;Buah;Rp118.966
+347;PKK14;A.4.6.2.14.;Pemasangan 1 buah Rrel pintu sorong;Buah;Rp165.315
+348;PKK15;A.4.6.2.15.;Pemasangan 1 buah kunci lemari;Buah;Rp178.944
+349;PKK16;A.4.6.2.16.;Pemasangan 1 m2 kaca tebal 3 mm;m2;Rp192.817
+350;PKK17;A.4.6.2.17.;Pemasangan 1 m2 kaca tebal 5 mm;m2;Rp250.633
+351;PKK18;A.4.6.2.18.;Pemasangan 1 m2 kaca tebal 8 mm;m2;Rp471.205
+352;PKK19;A.4.6.2.19.;Pemasangan 1 m2 kaca buram tebal 12 mm;m2;Rp607.452
+353;PKK20;A.4.6.2.20.;Pemasangan 1 m2 kaca cermin tebal 5 mm;m2;Rp264.971
+354;PKK21;A.4.6.2.21.;Pemasangan 1 m2 kaca cermin tebal 8 mm;m2;Rp479.306
+355;PKK22;A.4.6.2.22.;Pemasangan 1 m2 kaca wireglassed tebal 5 mm;m2;Rp252.083
+356;PKK23;A.4.6.2.23.;Pemasangan 1 m2 kaca patri tebal 5 mm;m2;Rp257.494
+;;;;;
+PC;A.4.7.1;HARGA SATUAN PEKERJAAN PENGECATAN;;;
+357;PC1;A.4.7.1.1.;Pengikisan/pengerokan 1 m2 permukaan cat lama;m2;Rp17.129
+358;PC2;A.4.7.1.2.;Pencucian 1 m2 bidang permukaan tembok yang pernah dicat;m2;Rp16.346
+359;PC3;A.4.7.1.3.;Pengerokan 1 m2 karat pada permukaan baja cara manual;m2;Rp16.954
+360;PC4;A.4.7.1.4.;Pengecatan 1 m2 bidang kayu baru (1 lapis plamuur, 1 lapis cat dasar, 2 lapis cat penutup);m2;Rp73.422
+361;PC5;A.4.7.1.5.;Pengecatan 1 m2 bidang kayu baru (1 lapis plamuur, 1 lapis cat dasar, 3 lapis cat Penutup);m2;Rp91.514
+362;PC6;A.4.7.1.6.;Pelaburan 1 m2 bidang kayu dengan teak oil;m2;Rp22.335
+363;PC7;A.4.7.1.7.;Pelaburan 1 m2 bidang kayu dengan politur;m2;Rp107.910
+364;PC8;A.4.7.1.8.;Pelaburan 1 m2 bidang kayu dengan cat residu dan ter;m2;Rp16.470
+365;PC9;A.4.7.1.9.;Pelaburan 1 m2 bidang kayu dengan vernis;m2;Rp47.193
+366;PC10;A.4.7.1.10.;Pengecatan 1 m2 tembok baru ( 1lapis plamuur, 1 lapis cat dasar, 2 lapis cat penutup);m2;Rp35.897
+367;PC11;A.4.7.1.11.;Pengecatan 1 m2 tembok lama ( 1 lapis cat dasar, 2 lapis cat penutup);m2;Rp25.884
+368;PC12;A.4.7.1.12.;Pelaburan 1 m2 tembok dengan kalkarium;m2;Rp24.975
+369;PC13;A.4.7.1.13.;Pelaburan 1 m2 tembok dengan kapur sirih;m2;Rp18.726
+370;PC14;A.4.7.1.14.;Pelaburan 1 m2 tembok lama dengan kapur sirih (pemeliharaan);m2;Rp9.850
+371;PC15;A.4.7.1.15.;Pemasangan 1 m2 wallpaper;m2;Rp186.147
+372;PC16;A.4.7.1.16.;Pengecatan 1 m2 permukaan baja dengan menie besi;m2;Rp33.349
+373;PC17;A.4.7.1.17.;Pengecatan 1 m2 permukaan baja dengan menie besi dengan perancah;m2;Rp71.346
+374;PC18;A.4.7.1.18.;Pengecatan 1 m2 permukaan baja galvanis secara manual 4 lapis;m2;Rp77.251
+375;PC19;A.4.7.1.19.;Pengecatan 1 m2 permukaan baja galvanis secara manual sistem 1 lapis cat mutakhir;m2;Rp41.643
+376;PC20;A.4.7.1.20.;Pengecatan 1 m2 permukaan baja galvanis secara manual sistem 3 lapis;m2;Rp170.957
+377;PC21;A.4.7.1.21.;Pengecatan 1 m2 permukaan baja galvanis secara semprot sistem 3 lapis cat mutakhir;m2;Rp153.560
+378;PC22;A.4.7.1.22.;Plituran 10 m2 dengan plitur melamic;m2;Rp153.691
+;;;;;
+PSD;A.5.1.1;HARGA SATUAN PEKERJAAN SANITASI DALAM GEDUNG;;;
+379;PSD1;A.5.1.1.1.;(K3) Pemasangan 1 buah closet duduk/monoblock;Buah;Rp1.365.310
+380;PSD2;A.5.1.1 2.;Pemasangan 1 buah closet jongkok porslen;Buah;Rp729.895
+381;PSD3;A.5.1.1 3.;Pemasangan 1 buah closet jongkok teraso;Buah;Rp721.891
+382;PSD4;A.5.1.1 4.;(K3) Pemasangan 1 buah urinoir;Buah;Rp383.613
+383;PSD5;A.5.1.1 5.;(K3) Pemasangan 1 buah wastafel;Buah;Rp1.343.045
+384;PSD6;A.5.1.1 6.;(K3) Pemasangan 1 buah bathcuip porselen;Buah;Rp1.015.019
+385;PSD7;A.5.1.1 7.;(K3) Pemasangan 1 buah bak fibreglass vol 1 m3;Buah;Rp1.369.135
+386;PSD8;A.5.1.1 8.;(K3) Pemasangan 1 buah bak mandi batu bata vol 0,30 m3;Buah;Rp1.814.700
+387;PSD9;A.5.1.1 9.;Pemasangan 1 buah bak mandi teraso vol 0,30 m3;Buah;Rp1.369.135
+388;PSD10;A.5.1.1 10.;Pemasangan 1 buah bak air fibreglass vol 1 m3;Buah;Rp551.428
+389;PSD11;A.5.1.1 11.;Pemasangan 1 buah bak beton volume 1 m3;Buah;Rp27.483.790
+390;PSD12;A.5.1.1 12.;Pemasangan 1 buah bak cuci piring stainlessteel;Buah;Rp339.379
+391;PSD13;A.5.1.1 13.;Pemasangan 1 buah bak cuci piring teraso;Buah;Rp400.967
+392;PSD14;A.5.1.1 14.;Pemasangan 1 buah floor drain;Buah;Rp89.730
+393;PSD15;A.5.1.1 15.;Pemasangan 1 buah bak kontrol pasangan bata 30x30 tinggi 35 cm;Buah;Rp460.812
+394;PSD16;A.5.1.1 16.;Pemasangan 1 buah bak kontrol pasangan bata 45cm x45cm tinggi 50 cm;Buah;Rp692.573
+395;PSD17;A.5.1.1 17.;Pemasangan 1 buah bak kontrol pasangan bata 60cm x60cm tinggi 65 cm;Buah;Rp839.069
+396;PSD18;A.5.1.1 18.;Pemasangan 1 m’ pipa galvanis diameter ½”;m';Rp49.817
+397;PSD19;A.5.1.1 19.;Pemasangan 1 buah kran diameter ½” atau 3/4”;Buah;Rp90.318
+398;PSD20;A.5.1.1 20.;Pemasangan 1 m’ pipa galvanis diameter 3/4”;m';Rp57.977
+399;PSD21;A.5.1.1 21.;Pemasangan 1 m’ pipa galvanis diameter 1”;m';Rp78.554
+400;PSD22;A.5.1.1 22.;Pemasangan 1 m’ pipa galvanis diameter 1 ½”;m';Rp121.351
+401;PSD23;A.5.1.1 23.;Pemasangan 1 m’ pipa galvanis diameter 3”;m';Rp237.784
+402;PSD24;A.5.1.1 24.;Pemasangan 1 m’ pipa galvanis diameter 4”;m';Rp325.769
+403;PSD25;A.5.1.1 25.;Pemasangan 1 m’ pipa PVC tipe AW diameter 1/2”;m';Rp22.752
+404;PSD26;A.5.1.1 26.;Pemasangan 1 m’ pipa PVC tipe AW diameter 3/4”;m';Rp22.752
+405;PSD27;A.5.1.1 27.;Pemasangan 1 m’ pipa PVC tipe AW diameter 1”;m';Rp25.945
+406;PSD28;A.5.1.1 28.;Pemasangan 1 m’ pipa PVC tipe AW diameter 11/2”;m';Rp43.175
+407;PSD29;A.5.1.1 29.;Pemasangan 1 m’ pipa PVC tipe AW diameter 2”;m';Rp48.142
+408;PSD30;A.5.1.1 30.;Pemasangan 1 m’ pipa PVC tipe AW diameter 21/2”;m';Rp70.378
+409;PSD31;A.5.1.1 31.;Pemasangan 1 m’ pipa PVC tipe AW diameter 3”;m';Rp85.101
+410;PSD32;A.5.1.1 32.;Pemasangan 1 m’ pipa PVC tipe AW diameter 4”;m';Rp125.546
+411;PSD33;A.5.1.1 33.;Pemasangan 1 m’ pipa air limbah jenis pipa tanah;m';Rp214.814
+412;PSD34;A.5.1.1 34.;Pemasangan 1 m’ pipa air limbah jenis pipa tanah diameter 15 cm;m';Rp164.019
+413;PSD35;A.5.1.1 35.;Pemasangan 1 m’ pipa beton diameter 15 - 20 cm;m';Rp168.856
+414;PSD36;A.5.1.1.36.;Pemasangan 1 m’ pipa beton diameter 30 - 100 cm;m';Rp223.819
+;PSD37;A.5.1.1.37.;Pemasangan 1 m’ buis beton beton diameter 20 cm;m';Rp106.584
+;PSD38;A.5.1.1.38.;Pemasangan 1 m’ buis beton beton diameter 30 cm;m';Rp146.332
+;PSD39;A.5.1.1.39.;Pemasangan 1 buah roof drain;Buah;Rp90.239
+;;;;;
+PPP;A.8.4.1;HARGA SATUAN PEKERJAAN PEMASANGAN  PIPA;;;
+415;PPP1;A.8.4.1.1;(K3) Pemasangan 1 m pipa PVC Ø 63 mm;m';Rp21.364
+416;PPP2;A.8.4.1.2;(K3) Pemasangan 1 m pipa PVC Ø 90 mm;m';Rp24.064
+417;PPP3;A.8.4.1.3;(K3) Pemasangan 1 m pipa PVC Ø 110 mm;m';Rp26.571
+418;PPP4;A.8.4.1.4;(K3) Pemasangan 1 m pipa PVC Ø 150 mm;m';Rp30.366
+419;PPP5;A.8.4.1.5;(K3) Pemasngan 1 m pipa PVC Ø 200 mm;m';Rp46.847
+420;PPP6;A.8.4.1.6;(K3) Pemasangan 1 m pipa PVC Ø 250 mm;m';Rp63.959
+421;PPP7;A.8.4.1.7;(K3) Pemasangan 1 m pipa PVC Ø 300 mm;m';Rp76.662
+422;PPP8;A.8.4.1.8;(K3) Pemasangan 1 m pipa PVC Ø 400 mm;m';Rp131.761
+423;PPP9;A.8.4.1.9;(K3) Pemasangan 1 m pipa PVC Ø 450 mm;m';Rp161.451
+424;PPP10;A.8.4.1.10;(K3) Pemasangan 1 m pipa PVC Ø 500 mm;m';Rp199.955
+425;PPP11;A.8.4.1.11;(K3) Pemasangan 1 m pipa PVC Ø 600 mm;m';Rp236.461
+426;PPP12;A.8.4.1.12;(K3) Pemasangan 1 m pipa PVC Ø 800 mm;m';Rp380.609
+427;PPP13;A.8.4.1.13;(K3) Pemasangan 1 m pipa PVC Ø 900 mm;m';Rp403.642
+428;PPP14;A.8.4.1.14;(K3) Pemasangan 1 m pipa PVC Ø 1000 mm;m';Rp450.852
+429;PPP15;A.8.4.1.15;(K3) Pemasangan 1 m pipa PVC Ø 1100 mm;m';Rp512.974
+430;PPP16;A.8.4.1.16;(K3) Pemasangan 1 m pipa PVC Ø 1200 mm;m';Rp556.887
+431;PPP17;A.8.4.1.17;(K3) Pemasangan 1 m pipa HDPE Ø 63 mm;m';Rp25.839
+432;PPP18;A.8.4.1.18;(K3) Pemasangan 1 m pipa HDPE Ø 100 mm;m';Rp40.589
+433;PPP19;A.8.4.1.19;(K3) Pemasangan 1 m pipa HDPE Ø 125 mm;m';Rp51.287
+434;PPP20;A.8.4.1.20;(K3) Pemasangan 1 m pipa HDPE Ø 150 mm;m';Rp79.183
+435;PPP21;A.8.4.1.21;(K3) Pemasangan 1 m pipa HDPE Ø 200 mm;m';Rp121.586
+436;PPP22;A.8.4.1.22;(K3) Pemasangan 1 m pipa HDPE Ø 250 mm;m';Rp186.127
+437;PPP23;A.8.4.1.23;(K3) Pemasangan 1 m pipa HDPE Ø 300 mm;m';Rp291.583
+438;PPP24;A.8.4.1.24;(K3) Pemasangan 1 m pipa HDPE Ø 400 mm;m';Rp469.258
+439;PPP25;A.8.4.1.25;(K3) Pemasangan 1 m pipa HDPE Ø 450 mm;m';Rp597.260
+440;PPP26;A.8.4.1.26;(K3) Pemasangan 1 m pipa HDPE Ø 500 mm;m';Rp741.412
+441;PPP27;A.8.4.1.27;(K3) Pemasangan 1 m pipa HDPE Ø 600 mm;m';Rp1.144.105
+442;PPP28;A.8.4.1.28;(K3) Pemasangan 1 m pipa HDPE Ø 800 mm;m';Rp1.956.025
+443;PPP29;A.8.4.1.29;(K3) Pemasangan 1 m pipa HDPE Ø 900 mm;m';Rp2.579.288
+444;PPP30;A.8.4.1.30;(K3) Pemasangan 1 m pipa HDPE Ø 1000 mm;m';Rp3.147.592
+445;PPP31;A.8.4.1.31;(K3) Pemasangan 1 m pipa HDPE Ø 1100 mm;m';Rp3.455.186
+446;PPP32;A.8.4.1.32;(K3) Pemasangan 1 m pipa HDPE Ø 1200 mm;m';Rp3.939.536
+447;PPP33;A.8.4.1.33;(K3) Pemasangan 1 m pipa GIP Ø 63 mm;m';Rp86.288
+448;PPP34;A.8.4.1.34;(K3) Pemasangan 1 m pipa GIP Ø 100 mm;m';Rp99.346
+449;PPP35;A.8.4.1.35;(K3) Pemasangan 1 m pipa GIP Ø 125 mm;m';Rp119.024
+450;PPP36;A.8.4.1.36;(K3) Pemasangan 1 m pipa GIP Ø 150 mm;m';Rp150.797
+451;PPP37;A.8.4.1.37;(K3) Pemasangan 1 m pipa GIP Ø 200 mm;m';Rp232.045
+452;PPP38;A.8.4.1.38;(K3) Pemasangan 1 m pipa GIP Ø 250 mm;m';Rp310.053
+453;PPP39;A.8.4.1.39;(K3) Pemasangan 1 m pipa GIP Ø 300 mm;m';Rp385.980
+454;PPP40;A.8.4.1.40;(K3) Pemasangan 1 m pipa GIP Ø 400 mm;m';Rp592.427
+455;PPP41;A.8.4.1.41;(K3) Pemasangan 1 m pipa GIP Ø 450 mm;m';Rp717.725
+456;PPP42;A.8.4.1.42;(K3) Pemasangan 1 m pipa GIP Ø 500 mm;m';Rp833.106
+457;PPP43;A.8.4.1.43;(K3) Pemasangan 1 m pipa GIP Ø 600 mm;m';Rp949.485
+458;PPP44;A.8.4.1.44;(K3) Pemasangan 1 m pipa GIP Ø 800 mm;m';Rp1.354.894
+459;PPP45;A.8.4.1.45;(K3) Pemasangan 1 m pipa GIP Ø 900 mm;m';Rp1.564.421
+460;PPP46;A.8.4.1.46;(K3) Pemasangan 1 m pipa GIP Ø 1000 mm;m';Rp1.690.910
+461;PPP47;A.8.4.1.47;(K3) Pemasangan 1 m pipa GIP Ø 1100 mm;m';Rp2.080.629
+462;PPP48;A.8.4.1.48;(K3) Pemasangan 1 m pipa GIP Ø 1200 mm;m';Rp1.950.619
+463;PPP49;A.8.4.1.49;(K3) Pemasangan 1 m pipa DCI Ø 100 mm;m';Rp145.512
+464;PPP50;A.8.4.1.50;(K3) Pemasangan 1 m pipa DCI Ø 125 mm;m';Rp156.066
+465;PPP51;A.8.4.1.51;(K3) Pemasangan 1 m pipa DCI Ø 150 mm;m';Rp197.978
+466;PPP52;A.8.4.1.52;(K3) Pemasangan 1 m pipa DCI Ø 200 mm;m';Rp241.859
+467;PPP53;A.8.4.1.53;(K3) Pemasangan 1 m pipa DCI Ø 250 mm;m';Rp216.633
+468;PPP54;A.8.4.1.54;(K3) Pemasangan 1 m pipa DCI Ø 300 mm;m';Rp228.742
+469;PPP55;A.8.4.1.55;(K3) Pemasangan 1 m pipa DCI Ø 400 mm;m';Rp371.995
+470;PPP56;A.8.4.1.56;(K3) Pemasangan 1 m pipa DCI Ø 450 mm;m';Rp488.297
+471;PPP57;A.8.4.1.57;(K3) Pemasangan 1 m pipa DCI Ø 500 mm;m';Rp680.198
+472;PPP58;A.8.4.1.58;(K3) Pemasangan 1 m Pipa DCI Ø 600 mm;m';Rp797.631
+473;PPP59;A.8.4.1.59;(K3) Pemasangan 1 m pipa DCI Ø800 mm;m';Rp1.212.652
+474;PPP60;A.8.4.1.60;(K3) Pemasangan 1 m pipa DCI Ø900 mm;m';Rp1.537.173
+475;PPP61;A.8.4.1.61;(K3) Pemasangan 1 m pipa DCI Ø1000 mm;m';Rp1.933.677
+476;PPP62;A.8.4.1.62;(K3) Pemasangan 1 m pipa DCI Ø1100 mm;m';Rp2.336.478
+477;PPP63;A.8.4.1.63;(K3) Pemasangan 1 m pipa DCI Ø1200 mm;m';Rp2.651.104
+478;PPP64;A.8.4.1.64;(K3) Pemasangan 1 m pipa baja Ø 63 mm;m';Rp131.259
+479;PPP65;A.8.4.1.65;(K3) Pemasangan 1 m pipa baja Ø 100 mm;m';Rp164.762
+480;PPP66;A.8.4.1.66;(K3) Pemasangan 1 m pipa baja Ø 125 mm;m';Rp327.551
+481;PPP67;A.8.4.1.67;(K3) Pemasangan 1 m pipa baja Ø 150 mm;m';Rp477.590
+482;PPP68;A.8.4.1.68;(K3) Pemasangan 1 m pipa baja Ø 200 mm;m';Rp731.020
+483;PPP69;A.8.4.1.69;(K3) Pemasangan 1 m' pipa baja Ø 250 mm;m';Rp1.069.456
+484;PPP70;A.8.4.1.70;(K3) Pemasangan 1 m pipa baja Ø 300 mm;m';Rp1.519.963
+485;PPP71;A.8.4.1.71;(K3) Pemasangan 1 m pipa baja Ø 400 mm;m';Rp2.681.238
+486;PPP72;A.8.4.1.72;(K3) Pemasangan 1 m pipa baja Ø 450 mm;m';Rp3.231.328
+487;PPP73;A.8.4.1.73;(K3) Pemasangan 1 m pipa baja Ø 500 mm;m';Rp3.928.875
+488;PPP74;A.8.4.1.74;(K3) Pemasangan 1 m pipa baja Ø 600 mm;m';Rp5.072.600
+489;PPP75;A.8.4.1.75;(K3) Pemasangan 1 m pipa baja Ø 800 mm;m';Rp7.135.005
+490;PPP76;A.8.4.1.76;(K3) Pemasangan 1 m pipa baja Ø 900 mm;m';Rp8.347.197
+491;PPP77;A.8.4.1.77;(K3) Pemasangan 1 m pipa baja Ø 1000 mm;m';Rp9.196.641
+492;PPP78;A.8.4.1.78;(K3) Pemasangan 1 m pipa baja Ø 1100 mm;m';Rp10.509.032
+493;PPP79;A.8.4.1.79;(K3) Pemasangan 1 m pipa baja Ø 1200 mm;m';Rp11.435.612
+;;;;;
+PTP;A.8.4.2;HARGA SATUAN PEKERJAAN PEMOTONGAN  PIPA;;;
+494;PTP1;A.8.4.2.1;(K3) Pemotongan 1 buah pipa PVC Ø 63 mm;Buah;Rp7.826
+495;PTP2;A.8.4.2.2;(K3) Pemotongan 1 buah pipa PVC Ø 90 mm;Buah;Rp9.668
+496;PTP3;A.8.4.2.3;(K3) Pemotongan 1 buah pipa PVC Ø 110 mm;Buah;Rp11.252
+497;PTP4;A.8.4.2.4;(K3) Pemotongan 1 buah pipa PVC Ø 150 mm;Buah;Rp14.143
+498;PTP5;A.8.4.2.5;(K3) Pemotongan 1 buah pipa PVC Ø 200 mm;Buah;Rp26.038
+499;PTP6;A.8.4.2.6;(K3) Pemotongan 1 buah pipa PVC Ø 250 mm;Buah;Rp39.114
+500;PTP7;A.8.4.2.7;(K3) Pemotongan 1 buah pipa PVC Ø 300 mm;Buah;Rp49.419
+501;PTP8;A.8.4.2.8;(K3) Pemotongan 1 buah pipa PVC Ø 400 mm;Buah;Rp88.965
+502;PTP9;A.8.4.2.9;(K3) Pemotongan 1 buah pipa PVC Ø 450 mm;Buah;Rp109.120
+503;PTP10;A.8.4.2.10;(K3) Pemotongan 1 buah pipa PVC Ø 500 mm;Buah;Rp138.498
+504;PTP11;A.8.4.2.11;(K3) Pemotongan 1 buah pipa PVC Ø 600 mm;Buah;Rp165.538
+505;PTP12;A.8.4.2.12;(K3) Pemotongan 1 buah pipa PVC Ø 800 mm;Buah;Rp267.309
+506;PTP13;A.8.4.2.13;(K3) Pemotongan 1 buah pipa PVC Ø 900 mm;Buah;Rp285.618
+507;PTP14;A.8.4.2.14;(K3) Pemotongan 1 buah pipa PVC Ø 1000 mm;Buah;Rp319.780
+508;PTP15;A.8.4.2.15;(K3) Pemotongan 1 buah pipa PVC Ø 1100 mm;Buah;Rp368.646
+509;PTP16;A.8.4.2.16;(K3) Pemotongan 1 buah pipa PVC Ø 1200 mm;Buah;Rp399.510
+510;PTP17;A.8.4.2.17;(K3) Pemotongan 1 buah pipa HDPE Ø 63 mm;Buah;Rp23.714
+511;PTP18;A.8.4.2.18;(K3) Pemotongan 1 buah pipa HDPE Ø 100 mm;Buah;Rp44.319
+512;PTP19;A.8.4.2.19;(K3) Pemotongan 1 buah pipa HDPE Ø 125 mm;Buah;Rp58.689
+513;PTP20;A.8.4.2.20;(K3) Pemotongan 1 buah pipa HDPE Ø 150 mm;Buah;Rp88.860
+514;PTP21;A.8.4.2.21;(K3) Pemotongan 1 buah pipa HDPE Ø 200 mm;Buah;Rp135.518
+515;PTP22;A.8.4.2.22;(K3) Pemotongan 1 buah pipa HDPE Ø 250 mm;Buah;Rp202.212
+516;PTP23;A.8.4.2.23;(K3) Pemotongan 1 buah pipa HDPE Ø 300 mm;Buah;Rp308.924
+517;PTP24;A.8.4.2.24;(K3) Pemotongan 1 buah pipa HDPE Ø 400 mm;Buah;Rp478.965
+518;PTP25;A.8.4.2.25;(K3) Pemotongan 1 buah pipa HDPE Ø 450 mm;Buah;Rp601.542
+519;PTP26;A.8.4.2.26;(K3) Pemotongan 1 buah pipa HDPE Ø 500 mm;Buah;Rp739.338
+520;PTP27;A.8.4.2.27;(K3) Pemotongan 1 buah pipa HDPE Ø 600 mm;Buah;Rp1.142.881
+521;PTP28;A.8.4.2.28;(K3) Pemotongan 1 buah pipa HDPE Ø 800 mm;Buah;Rp1.911.094
+522;PTP29;A.8.4.2.29;(K3) Pemotongan 1 buah pipa HDPE Ø 900 mm;Buah;Rp2.457.257
+523;PTP30;A.8.4.2.30;(K3) Pemotongan 1 buah pipa HDPE Ø 1000 mm;Buah;Rp3.013.760
+524;PTP31;A.8.4.2.31;(K3) Pemotongan 1 buah pipa HDPE Ø 1100 mm;Buah;Rp3.272.371
+525;PTP32;A.8.4.2.32;(K3) Pemotongan 1 buah pipa HDPE Ø 1200 mm;Buah;Rp3.660.604
+526;PTP33;A.8.4.2.33;(K3) Pemotongan 1 buah pipa GIP Ø 63 mm;Buah;Rp27.586
+527;PTP34;A.8.4.2.34;(K3) Pemotongan 1 buah pipa GIP Ø 100 mm;Buah;Rp37.805
+528;PTP35;A.8.4.2.35;(K3) Pemotongan 1 buah pipa GIP Ø 125 mm;Buah;Rp56.184
+529;PTP36;A.8.4.2.36;(K3) Pemotongan 1 buah pipa GIP Ø 150 mm;Buah;Rp84.250
+530;PTP37;A.8.4.2.37;(K3) Pemotongan 1 buah pipa GIP Ø 200 mm;Buah;Rp152.998
+531;PTP38;A.8.4.2.38;(K3) Pemotongan 1 buah pipa GIP Ø 250 mm;Buah;Rp228.897
+532;PTP39;A.8.4.2.39;(K3) Pemotongan 1 buah pipa GIP Ø 300 mm;Buah;Rp307.244
+533;PTP40;A.8.4.2.40;(K3) Pemotongan 1 buah pipa GIP Ø 400 mm;Buah;Rp511.724
+534;PTP41;A.8.4.2.41;(K3) Pemotongan 1 buah pipa GIP Ø 450 mm;Buah;Rp629.564
+535;PTP42;A.8.4.2.42;(K3) Pemotongan 1 buah pipa GIP Ø 500 mm;Buah;Rp738.247
+536;PTP43;A.8.4.2.43;(K3) Pemotongan 1 buah pipa GIP Ø 600 mm;Buah;Rp866.529
+537;PTP44;A.8.4.2.44;(K3) Pemotongan 1 buah pipa GIP Ø 800 mm;Buah;Rp1.220.935
+538;PTP45;A.8.4.2.45;(K3) Pemotongan 1 buah pipa GIP Ø 900 mm;Buah;Rp1.414.854
+539;PTP46;A.8.4.2.46;(K3) Pemotongan 1 buah pipa GIP Ø 1000 mm;Buah;Rp1.528.308
+540;PTP47;A.8.4.2.47;(K3) Pemotongan 1 buah pipa GIP Ø 1100 mm;Buah;Rp1.903.892
+541;PTP48;A.8.4.2.48;(K3) Pemotongan 1 buah pipa GIP Ø 1200 mm;Buah;Rp2.079.408
+542;PTP49;A.8.4.2.49;(K3) Pemotongan 1 buah pipa DCI Ø 100 mm;Buah;Rp35.738
+543;PTP50;A.8.4.2.50;(K3) Pemotongan 1 buah pipa DCI Ø 125 mm;Buah;Rp44.982
+544;PTP51;A.8.4.2.51;(K3) Pemotongan 1 buah pipa DCI Ø 150 mm;Buah;Rp85.535
+545;PTP52;A.8.4.2.52;(K3) Pemotongan 1 buah pipa DCI Ø 200 mm;Buah;Rp129.805
+546;PTP53;A.8.4.2.53;(K3) Pemotongan 1 buah pipa DCI Ø 250 mm;Buah;Rp155.593
+547;PTP54;A.8.4.2.54;(K3) Pemotongan 1 buah pipa DCI Ø 300 mm;Buah;Rp167.351
+548;PTP55;A.8.4.2.55;(K3) Pemotongan 1 buah pipa DCI Ø 400 mm;Buah;Rp271.858
+549;PTP56;A.8.4.2.56;(K3) Pemotongan 1 buah pipa DCI Ø 450 mm;Buah;Rp367.606
+550;PTP57;A.8.4.2.57;(K3) Pemotongan 1 buah pipa DCI Ø 500 mm;Buah;Rp541.211
+551;PTP58;A.8.4.2.58;(K3) Pemotongan 1 buah pipa DCI Ø 600 mm;Buah;Rp632.886
+552;PTP59;A.8.4.2.59;(K3) Pemotongan 1 buah pipa DCI Ø 800 mm;Buah;Rp915.069
+553;PTP60;A.8.4.2.60;(K3) Pemotongan 1 buah pipa DCI Ø 900 mm;Buah;Rp1.171.145
+554;PTP61;A.8.4.2.61;(K3) Pemotongan 1 buah pipa DCI Ø 1000 mm;Buah;Rp1.472.235
+555;PTP62;A.8.4.2.62;(K3) Pemotongan 1 buah pipa DCI Ø 1100 mm;Buah;Rp1.834.674
+556;PTP63;A.8.4.2.63;(K3) Pemotongan 1 buah pipa DCI Ø 1200 mm;Buah;Rp2.073.172
+557;PTP64;A.8.4.2.64;(K3) Pemotongan 1 buah pipa baja Ø 63 mm;Buah;Rp69.343
+558;PTP65;A.8.4.2.65;(K3) Pemotongan 1 buah pipa baja Ø 100 mm;Buah;Rp99.797
+559;PTP66;A.8.4.2.66;(K3) Pemotongan 1 buah pipa baja Ø 125 mm;Buah;Rp259.906
+560;PTP67;A.8.4.2.67;(K3) Pemotongan 1 buah pipa baja Ø 150 mm;Buah;Rp408.888
+561;PTP68;A.8.4.2.68;(K3) Pemotongan 1 buah pipa baja Ø 200 mm;Buah;Rp648.104
+562;PTP69;A.8.4.2.69;(K3) Pemotongan 1 buah pipa baja Ø 250 mm;Buah;Rp983.600
+563;PTP70;A.8.4.2.70;(K3) Pemotongan 1 buah pipa baja Ø 300 mm;Buah;Rp1.433.339
+564;PTP71;A.8.4.2.71;(K3) Pemotongan 1 buah pipa baja Ø 400 mm;Buah;Rp2.547.600
+565;PTP72;A.8.4.2.72;(K3) Pemotongan 1 buah pipa baja Ø 450 mm;Buah;Rp3.111.282
+566;PTP73;A.8.4.2.73;(K3) Pemotongan 1 buah pipa baja Ø 500 mm;Buah;Rp3.801.021
+567;PTP74;A.8.4.2.74;(K3) Pemotongan 1 buah pipa baja Ø 600 mm;Buah;Rp4.960.432
+568;PTP75;A.8.4.2.75;(K3) Pemotongan 1 buah pipa baja Ø 800 mm;Buah;Rp6.943.330
+569;PTP76;A.8.4.2.76;(K3) Pemotongan 1 buah pipa baja Ø 900 mm;Buah;Rp8.216.410
+570;PTP77;A.8.4.2.77;(K3) Pemotongan 1 buah pipa baja Ø 1000 mm;Buah;Rp8.957.155
+571;PTP78;A.8.4.2.78;(K3) Pemotongan 1 buah pipa baja Ø 1100 mm;Buah;Rp10.246.542
+572;PTP79;A.8.4.2.79;(K3) Pemotongan 1 buah pipa baja Ø 1200 mm;Buah;Rp11.148.472
+;;;;;
+PAP;A.8.4.3;HARGA SATUAN PEKERJAAN PEMASANGAN  AKSESORIS PIPA;;;
+573;PAP1;A.8.4.3.1;(K3) Pemasangan 1 buah Valve Ø 150 mm;Buah;Rp273.093
+574;PAP2;A.8.4.3.2;(K3) Pemasangan 1 buah Valve Ø 200 mm;Buah;Rp361.404
+575;PAP3;A.8.4.3.3;(K3) Pemasangan 1 buah Valve Ø 250 mm;Buah;Rp393.553
+576;PAP4;A.8.4.3.4;(K3) Pemasangan 1 buah Valve Ø 300 mm;Buah;Rp472.821
+577;PAP5;A.8.4.3.5;(K3) Pemasangan 1 buah Valve Ø 400 mm;Buah;Rp797.751
+578;PAP6;A.8.4.3.6;(K3) Pemasangan 1 buah Valve Ø 450 mm;Buah;Rp822.498
+579;PAP7;A.8.4.3.7;(K3) Pemasangan 1 buah Valve Ø 500 mm;Buah;Rp931.079
+580;PAP8;A.8.4.3.8;(K3) Pemasangan 1 buah Valve Ø 600 mm;Buah;Rp1.081.053
+581;PAP9;A.8.4.3.9;(K3) Pemasangan 1 buah Valve Ø 700 mm;Buah;Rp1.513.170
+582;PAP10;A.8.4.3.10;(K3) Pemasangan 1 buah Valve Ø 800 mm;Buah;Rp1.638.373
+583;PAP11;A.8.4.3.11;(K3) Pemasangan 1 buah Valve Ø 900 mm;Buah;Rp2.275.020
+584;PAP12;A.8.4.3.12;(K3) Pemasangan 1 buah Valve Ø 1000 mm;Buah;Rp3.084.904
+585;PAP13;A.8.4.3.13;(K3) Pemasangan 1 buah Valve Ø 1100 mm;Buah;Rp3.246.894
+586;PAP14;A.8.4.3.14;(K3) Pemasangan 1 buah Valve Ø 1200 mm;Buah;Rp3.350.591
+587;PAP15;A.8.4.3.15;(K3) Pemasangan 1 buah Tee Ø 150 mm;Buah;Rp39.063
+588;PAP16;A.8.4.3.16;(K3) Pemasangan 1 buah Tee Ø 200 mm;Buah;Rp65.857
+589;PAP17;A.8.4.3.17;(K3) Pemasangan 1 buah Tee Ø 250 mm;Buah;Rp88.444
+590;PAP18;A.8.4.3.18;(K3) Pemasangan 1 buah Tee Ø 300 mm;Buah;Rp180.890
+591;PAP19;A.8.4.3.19;(K3) Pemasangan 1 buah Tee Ø 400 mm;Buah;Rp233.211
+592;PAP20;A.8.4.3.20;(K3) Pemasangan 1 buah Tee Ø 450 mm;Buah;Rp271.800
+593;PAP21;A.8.4.3.21;(K3) Pemasangan 1 buah Tee Ø 500 mm;Buah;Rp318.448
+594;PAP22;A.8.4.3.22;(K3) Pemasangan 1 buah Tee Ø 600 mm;Buah;Rp497.924
+595;PAP23;A.8.4.3.23;(K3) Pemasangan 1 buah Tee Ø 700 mm;Buah;Rp583.718
+596;PAP24;A.8.4.3.24;(K3) Pemasangan 1 buah Tee Ø 800 mm;Buah;Rp672.221
+597;PAP25;A.8.4.3.25;(K3) Pemasangan 1 buah Tee Ø 900 mm;Buah;Rp820.557
+598;PAP26;A.8.4.3.26;(K3) Pemasangan 1 buah Tee Ø 1000 mm;Buah;Rp971.838
+599;PAP27;A.8.4.3.27;(K3) Pemasangan 1 buah Tee Ø 1100 mm;Buah;Rp1.067.455
+600;PAP28;A.8.4.3.28;(K3) Pemasangan 1 buah Tee Ø 1200 mm;Buah;Rp1.233.202
+;;;;;
+PSB;A.8.4.4;HARGA SATUAN PEKERJAAN PENYAMBUNGAN PIPA BARU KE PIPA LAMA;;;
+601;PSB1;A.8.4.4.1;(K3) Penyambungan  1 buah pipa baru ke pipa yang ada Ø 80 mm;Buah;Rp530.108
+602;PSB2;A.8.4.4.2;(K3) Penyambungan  1 buah pipa baru ke pipa yang ada Ø 100 mm;Buah;Rp640.540
+603;PSB3;A.8.4.4.3;(K3) Penyambungan  1 buah pipa baru ke pipa yang ada Ø 150 mm;Buah;Rp958.448
+604;PSB4;A.8.4.4.4;(K3) Penyambungan  1 buah pipa baru ke pipa yang ada Ø 200 mm;Buah;Rp1.276.576
+605;PSB5;A.8.4.4.5;(K3) Penyambungan  1 buah pipa baru ke pipa yang ada Ø 250 mm;Buah;Rp1.712.197
+606;PSB6;A.8.4.4.6;(K3) Penyambungan  1 buah pipa baru ke pipa yang ada Ø 300 mm;Buah;Rp2.280.532
+607;PSB7;A.8.4.4.7;(K3) Penyambungan  1 buah pipa baru ke pipa yang ada Ø 400 mm;Buah;Rp3.493.524
+608;PSB8;A.8.4.4.8;(K3) Penyambungan  1 buah pipa baru ke pipa yang ada Ø 450 mm;Buah;Rp4.175.520
+609;PSB9;A.8.4.4.9;(K3) Penyambungan  1 buah pipa baru ke pipa yang ada Ø 500 mm;Buah;Rp4.890.366
+610;PSB10;A.8.4.4.10;(K3) Penyambungan  1 buah pipa baru ke pipa yang ada Ø 600 mm;Buah;Rp6.044.994
+611;PSB11;A.8.4.4.11;(K3) Penyambungan  1 buah pipa baru ke pipa yang ada Ø 700 mm;Buah;Rp6.823.271
+612;PSB12;A.8.4.4.12;(K3) Penyambungan  1 buah pipa baru ke pipa yang ada Ø 800 mm;Buah;Rp8.065.499
+;;;;;
+PTS;A.8.4.5;HARGA SATUAN PEKERJAAN PENGETESAN  PIPA;;;
+613;PTS1;A.8.4.5.1;(K3) Pengetesan 1 m pipa Ø 50 mm;m';Rp1.404
+614;PTS2;A.8.4.5.2;(K3) Pengetesan 1 m pipa Ø 75 mm;m';Rp1.408
+615;PTS3;A.8.4.5.3;(K3) Pengetesan 1 m pipa Ø 100 mm;m';Rp1.416
+616;PTS4;A.8.4.5.4;(K3) Pengetesan 1 m pipa Ø 150 mm;m';Rp1.434
+617;PTS5;A.8.4.5.5;(K3) Pengetesan 1 m pipa Ø 200 mm;m';Rp1.458
+618;PTS6;A.8.4.5.6;(K3) Pengetesan 1 m pipa Ø 250 mm;m';Rp1.492
+619;PTS7;A.8.4.5.7;(K3) Pengetesan 1 m pipa Ø 300 mm;m';Rp1.533
+620;PTS8;A.8.4.5.8;(K3) Pengetesan 1 m pipa Ø 400 mm;m';Rp1.635
+621;PTS9;A.8.4.5.9;(K3) Pengetesan 1 m pipa Ø 500 mm;m';Rp1.695
+622;PTS10;A.8.4.5.10;(K3) Pengetesan 1 m pipa Ø 600 mm;m';Rp1.928
+;;;;;
+PKL;A.8.4.6;HARGA SATUAN PEKERJAAN ELEKTRIKAL;;;
+623;PKL1;A.8.4.6.1;(K3) Pemasangan 1 buah titik lampu;titik;Rp352.498
+624;PKL2;A.8.4.6.2;Memasang 1 Titik Instalasi Penerangan;titik;Rp282.110
+625;PKL3;A.8.4.6.3;Memasang 1 Titik Instalasi Lampu TL;titik;Rp342.244
+626;PKL4;A.8.4.6.4;Memasang 1 Titik Instalasi Lampu SL;titik;Rp305.890
+627;PKL5;A.8.4.6.5;Memasang 1 Titik Instalasi Lampu XL;titik;Rp329.761
+628;PKL6;A.8.4.6.6;Memasang 1 Titik Instalasi Lampu Downlight;titik;Rp277.639
+629;PKL7;A.8.4.6.7;Memasang AC Ukuran 0.5 PK s/d 1 PK;unit;Rp4.962.433
+630;PKL8;A.8.4.6.7;Memasang AC Ukuran 1.5 PK s/d 2 PK;unit;Rp6.073.529
+631;PKL9;A.8.4.6.8;Memasang 1 titik Instalasi Sekakelar / Stop Kontak;titik;Rp205.972
+632;PKL10;A.8.4.6.9;Memasang 1 titik MCB;titik;Rp128.921
+633;PKL11;A.8.4.6.10;Memasang Lampu TL;unit;Rp158.775
+634;PKL12;A.8.4.6.11;Memasang Lampu TL 2x ;unit;Rp241.557
+635;PKL13;A.8.4.6.12;Memasang Lampu SL;unit;Rp78.950
+636;PKL14;A.8.4.6.13;Memasang Lampu Downlight;unit;Rp124.064
+637;PKL15;A.8.4.6.14;Memasang LED Strip;m';Rp51.158
+638;PKL16;A.8.4.6.15;Memasang 1 Exhaust Fan;unit;Rp370.220
+639;PKL17;A.8.4.6.16;Memasang 1m Kabel Tray;m';Rp217.697
+640;;;;;
+641;;;;;
+642;;;;;
+643;;;;;
+644;;;;;

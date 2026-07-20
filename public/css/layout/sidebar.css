@@ -1,0 +1,4 @@
+.app-sidebar .nav-link.active {
+    background-color: black; 
+    color: #fff;
+}

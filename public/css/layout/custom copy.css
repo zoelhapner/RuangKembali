@@ -1,0 +1,424 @@
+label.required::after {
+  content: " *";
+  color: #db2827;
+}
+
+/* Hilangkan bayangan untuk kolom yang di-fixed di kiri */
+table.dataTable th.dtfc-fixed-left,
+table.dataTable td.dtfc-fixed-left {
+    box-shadow: none !important;
+    background-color: white !important;
+    z-index: 2 !important;
+}
+
+/* Pastikan juga scroll header-nya tidak memberi efek aneh */
+.dataTables_scrollHeadInner {
+    box-shadow: none !important;
+}
+
+/* Atasi celah vertikal karena z-index rendah */
+table.dataTable th,
+table.dataTable td {
+    z-index: 1;
+}
+
+/* Tambahkan border kanan agar kolom sticky tetap kelihatan rapi */
+table.dataTable th.dtfc-fixed-left:last-child,
+table.dataTable td.dtfc-fixed-left:last-child {
+    border-right: 1px solid #dee2e6;
+}
+
+/* Styling badge di tabel agar tidak terlalu tebal */
+table.dataTable .badge {
+    padding: 4px 8px !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    border: 1px solid currentColor !important;
+    border-radius: 4px !important;
+    color: #fff !important;
+}
+
+button.bg-transparent {
+    cursor: pointer;
+}
+/* button.bg-transparent:hover {
+    background-color: #f5f5f5;
+} */
+
+.badge {
+    padding: 4px 8px !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    border: 1px solid currentColor !important;
+    border-radius: 4px !important;
+    color: #fff !important;
+}
+
+.notification-dropdown, 
+.notification-dropdown * {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 400 !important;
+}
+
+.notification-item, 
+.notification-item * {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 400 !important; /* Normal */
+}
+
+/* Gunakan Poppins di semua elemen */
+input, select, textarea, button {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 400 !important;
+}
+
+/* Label form juga */
+label {
+    font-weight: 400 !important;
+}
+
+/* Placeholder tetap Poppins */
+::placeholder {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 400 !important;
+    font-style: italic;
+}
+
+/* Styling untuk user menu di navbar */
+.nav-link .d-none.d-xl-block.ps-2 div:first-child {
+    font-weight: 600;
+    font-style: normal;
+    font-size: 0.9rem;
+    color:black;
+    padding-bottom: 4px;
+}
+
+.nav-link .d-none.d-xl-block.ps-2 {
+    font-style: italic;
+    font-size: 0.75rem;
+    color:gray;
+}
+
+/* Samakan tampilan select2 dengan form-control Bootstrap */
+.select2-container--default .select2-selection--single {
+    height: calc(2.25rem + 2px); /* Tinggi sama dengan form-control */
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem;
+    display: flex;
+    align-items: center;
+}
+
+/* Teks di tengah secara vertikal */
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 1.5;
+    padding-left: 0;
+    color: #212529;
+}
+
+/* Panah dropdown sejajar */
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: calc(2.25rem + 2px);
+    right: 0.75rem;
+}
+
+/* Fokus sama seperti input bootstrap */
+.select2-container--default.select2-container--focus .select2-selection--single {
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+}
+
+.select2-container--open {
+    z-index: 2060 !important;
+}
+
+
+.product-image-wrapper {
+    position: relative;
+}
+
+.product-hover-action {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    transition: .2s;
+    border-radius: 10px;
+}
+
+.product-image-wrapper:hover .product-hover-action {
+    opacity: 1;
+}
+
+.product-image {
+    transition: transform .2s ease;
+}
+
+.product-image-wrapper:hover .product-image {
+    transform: scale(1.03);
+}
+
+#detail-rows {
+    table-layout: fixed;   /* Supaya kolom paten, tidak mengecil */
+    width: 100%;
+}
+
+#detail-rows th,
+#detail-rows td {
+    vertical-align: middle;
+    text-align: center;
+    padding: 6px;
+}
+
+#detail-rows .form-select,
+#detail-rows .form-control {
+    width: 100% !important; /* Paksa full width dalam kolom */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 400 !important;
+  background-color: #f8f9fc;
+  background: #f3f4f6;
+}
+
+.sidebar-logo-wrapper,
+.navbar-brand,
+.navbar-brand-image {
+  min-width: 204px;
+  display: inline-block;
+  background: #ffff;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.sidebar-menu-wraper {
+  flex: 1;
+  background: #ced4da;
+  max-height: calc(100vh - 100px); /* sesuaikan tinggi logo */
+  
+}
+
+.navbar.navbar-vertical.navbar-expand-lg {
+  color:#000 !important;
+  display: flex !important;
+  min-width: 16rem;
+  width: 19rem;
+  margin: 0 10px;
+  flex-direction: column;
+  padding-top: 15px;
+  position: fixed;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.nav-link {
+  white-space: nowrap !important;
+  color:#000 !important;
+}
+
+/* MAIN CONTENT */
+.page,
+.page-title {
+  margin-left: 20px;
+  padding: 20px;
+} 
+
+.btn,
+.btn-sm
+.btn-list {
+  font-size: 14px !important;
+}
+
+
+.topbar.container-xl {
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20px;
+}
+
+footer {
+  margin-left: 35px;
+}
+
+.avatar {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #f1f1f1;
+    text-align: center;
+    line-height: 40px;
+}
+.avatar i {
+    font-size: 24px;
+}
+
+
+/* CARD */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin: 0 30px;
+}
+
+/* TABLE */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 10px;
+}
+
+.table th,
+.table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 14px !important;
+}
+
+.table th {
+  font-weight: 600;
+  color: #666;
+}
+
+.table-fixed {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.role-dropdown {
+    padding: 2px 6px;
+    font-size: 14px;
+    width: 150px;
+}
+
+.status {
+  padding: 43px 12px;
+  background: #000;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+  display: inline-block;
+}
+
+/* ACTION BUTTONS */ 
+.action {
+  display: flex;
+  gap: 8px;
+}
+
+.action button {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.action button:hover {
+  opacity: 0.8;
+}
+
+.doc-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.doc-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.doc-actions .btn-delete-file {
+    padding: 0.25rem 0.4rem;
+}
+
+.doc-meta {
+    font-size: 12px;
+    color: #6c757d;
+    line-height: 1.3;
+}
+    .file-wrapper {
+    position: relative;
+    min-width: 200px;
+}
+
+.file-wrapper .text-muted{
+    line-height: 1.2;
+}
+
+.btn-delete-file {
+    position: absolute;
+    top: 0px;
+    right: 6px;
+
+    width: 18px;
+    height: 18px;
+
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+
+    font-size: 10px;
+    line-height: 18px;
+    text-align: center;
+
+    cursor: pointer;
+    padding: 4px 4px;
+}
+
+.btn-delete-file:hover {
+    background: #bb2d3b;
+}
+
+/* Kolom dokumen */
+.task-document {
+    min-width: 200px;
+}
+.action-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.action-meta {
+    font-size: 12px;
+    line-height: 1.3;
+    text-align: center;
+}

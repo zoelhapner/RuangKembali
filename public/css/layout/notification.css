@@ -1,0 +1,11 @@
+.notification-dropdown, 
+.notification-dropdown * {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 400 !important;
+}
+
+.notification-item, 
+.notification-item * {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 400 !important; /* Normal */
+}
