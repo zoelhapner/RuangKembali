@@ -5,7 +5,7 @@
     <div class="container-xl">
         <div class="row align-items-center">
             <div class="col d-flex align-items-center">
-                <a href="{{ route('users.index') }}" class="btn btn-dark d-flex align-items-center">
+                <a href="{{ route('users.index') }}" class="btn btn-primary d-flex align-items-center">
                     <i class="ti ti-arrow-left"></i>
                 </a>
                 
@@ -41,7 +41,7 @@
                                     </div>
                     
                                 <label for="photo"
-                                    class="btn btn-sm btn-dark position-absolute bottom-0 end-0 translate-middle rounded-circle"
+                                    class="btn btn-sm btn-primary position-absolute bottom-0 end-0 translate-middle rounded-circle"
                                     title="Ganti Foto">
                                     <i class="ti ti-camera"></i>
                                 </label>
@@ -131,7 +131,7 @@
                                     <h3 class="fw-semibold mb-3 border-bottom pb-2">📞 Kontak & Alamat</h3>
                                     <div class="row g-4">
                                         <div class="col-md-4">
-                                            <label class="form-label">Telepon</label>
+                                            <label class="form-label required">Telepon</label>
                                             <input type="number" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ old('phone') }}">
                                             @error('phone')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -146,7 +146,15 @@
                                         </div>
                                         <div class="col-md-4">
                                             <label class="form-label required" for="password">Kata sandi </label>
-                                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" placeholder="Kata sandi min. 8 karakter" required>
+                                            <div class="input-group">
+                                                <span class="input-group-text bg-transparent border-end-0">
+                                                    <i class="ti ti-lock"></i>
+                                                </span>
+                                                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" placeholder="Kata sandi min. 8 karakter" required>
+                                                <button type="button" class="btn btn-light border toggle-password"">
+                                                    <i class="ti ti-eye"></i>
+                                                </button>
+                                            </div>
                                             @error('password')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -228,7 +236,7 @@
                                     </div> --}}
 
                             <div class="text-end mt-5">
-                                <button type="submit" class="btn btn-dark px-4">
+                                <button type="submit" class="btn btn-primary px-4">
                                     <i class="ti ti-device-floppy me-1"></i> Simpan Data
                                 </button>
                             </div>
@@ -306,6 +314,22 @@ $('.select2').select2({
         }
     });
 </script>
+    <script>
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', function () {
+
+                const input = this.closest('.input-group').querySelector('input');
+
+                const type = input.type === 'password' ? 'text' : 'password';
+
+                input.type = type;
+
+                this.innerHTML = type === 'password'
+                    ? '<i class="ti ti-eye"></i>'
+                    : '<i class="ti ti-eye-off"></i>';
+            });
+        });
+    </script>
     <script>
         document.getElementById('photo').addEventListener('change', function (event) {
         const input = event.target;

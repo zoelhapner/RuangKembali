@@ -65,42 +65,29 @@ class RolePermissionSeeder extends Seeder
             'lihat daftar menu',
             'ubah data menu',
             'hapus data menu',
-
-            // ARSITEK
             'tambah data mitra',
             'lihat daftar mitra',
             'lihat data mitra',
             'ubah data mitra',
             'hapus data mitra',
-            'riwayat penggajian mitra',
+            'tambah data vendor',
+            'lihat daftar vendor',
+            'lihat data vendor',
+            'ubah data vendor',
+            'hapus data vendor',
         ];
 
         foreach ($permissions as $permissionName) {
             if (str_contains($permissionName, 'tim')) $module = 'Tim';
-            elseif (str_contains($permissionName, 'gudang')) $module = 'Gudang';
-            elseif (str_contains($permissionName, 'produk')) $module = 'Produk';
             elseif (str_contains($permissionName, 'member')) $module = 'Member';
             elseif (str_contains($permissionName, 'affiliator')) $module = 'Affiliator';
-            elseif (str_contains($permissionName, 'supplier')) $module = 'Supplier';
-            elseif (str_contains($permissionName, 'investor')) $module = 'Investor';
-            elseif (str_contains($permissionName, 'tukang')) $module = 'Tukang';
-            elseif (str_contains($permissionName, 'kontraktor')) $module = 'Kontraktor';
-            elseif (str_contains($permissionName, 'dokumen')) $module = 'Dokumen';
-            elseif (str_contains($permissionName, 'pembelian')) $module = 'Pembelian Produk';
-            elseif (str_contains($permissionName, 'penjualan')) $module = 'Penjualan Produk';
-            elseif (str_contains($permissionName, 'proyek')) $module = 'Proyek';
-            elseif (str_contains($permissionName, 'rab')) $module = 'RAB';
+            elseif (str_contains($permissionName, 'vendor')) $module = 'Vendor';
             elseif (str_contains($permissionName, 'akun-akuntansi')) $module = 'Akun Akuntansi';
             elseif (str_contains($permissionName, 'jurnal')) $module = 'Jurnal';
             elseif (str_contains($permissionName, 'user')) $module = 'User';
             elseif (str_contains($permissionName, 'role')) $module = 'Role';
-            elseif (str_contains($permissionName, 'absensi')) $module = 'Absensi';
-            elseif (str_contains($permissionName, 'pelatihan')) $module = 'Pelatihan';
             elseif (str_contains($permissionName, 'kinerja')) $module = 'Kinerja';
             elseif (str_contains($permissionName, 'menu')) $module = 'Menu';
-            elseif (str_contains($permissionName, 'kategori')) $module = 'Kategori';
-            elseif (str_contains($permissionName, 'merk')) $module = 'Merk';
-            elseif (str_contains($permissionName, 'tipe')) $module = 'Tipe';
             elseif (str_contains($permissionName, 'akun')) $module = 'Manajemen Akun';
             else $module = 'Lainnya';
 
@@ -122,6 +109,7 @@ class RolePermissionSeeder extends Seeder
                 'Super-Admin',
                 'Tim',
                 'Tim Finance',
+                'Vendor',
                 ],
             'Eksternal' => [
                 'Mitra',

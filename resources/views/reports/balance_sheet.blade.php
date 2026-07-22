@@ -40,7 +40,7 @@
     </div>
 
     <div class="col-md-3">
-        <button type="submit" class="btn btn-primary text-white">Filter</button>
+        <button type="submit" class="btn btn-primary text-black">Filter</button>
     </div>
 </form>
 

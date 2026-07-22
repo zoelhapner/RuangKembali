@@ -4,7 +4,7 @@
 <div class="container-xl" style="padding-top:80px">
         <div class="row align-items-center" style="padding-bottom:20px">
             <div class="col d-flex align-items-center">
-                <a href="{{ route('users.index') }}" class="btn btn-dark d-flex align-items-center">
+                <a href="{{ route('users.index') }}" class="btn btn-primary d-flex align-items-center">
                     <i class="ti ti-arrow-left"></i>
                 </a>
                     <h2 class="page-title">Detail Pengguna</h2>

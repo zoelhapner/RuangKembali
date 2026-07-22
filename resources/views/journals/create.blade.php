@@ -5,7 +5,7 @@
         <div class="container-xl">
             <div class="row align-items-center">
                 <div class="col d-flex align-items-center">
-                    <a href="{{ route('journals.index') }}" class="btn btn-dark d-flex align-items-center">
+                    <a href="{{ route('journals.index') }}" class="btn btn-primary d-flex align-items-center">
                         <i class="ti ti-arrow-left"></i>
                     </a>      
                         <h2 class="page-title mb-0">Tambah Jurnal</h2> 
@@ -112,7 +112,7 @@
                                                 </td>
                                                 <td><input type="text" name="details[0][debit]" class="form-control debit-input"></td>
                                                 <td><input type="text" name="details[0][credit]" class="form-control credit-input"></td>
-                                                <td><button type="button" class="btn btn-sm btn-dark remove-row" title="Hapus">
+                                                <td><button type="button" class="btn btn-sm btn-primary remove-row" title="Hapus">
                                                         <i class="ti ti-trash"></i>
                                                     </button>
                                                 </td>
@@ -120,7 +120,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <td colspan="6"><button type="button" id="add-row" class="btn btn-sm btn-dark text-white">Tambah Baris</button></td>
+                                                <td colspan="6"><button type="button" id="add-row" class="btn btn-sm btn-primary text-black">Tambah Baris</button></td>
                                             </tr>
                                             <tr>
                                                 <th colspan="3">Subtotal</th>
@@ -139,15 +139,30 @@
                                 </div>
 
                                 <div class="col-md-4 mb-3">
-                                    <label for="enclosure" class="form-label">Lampiran</label>
-                                    <input type="file" name="enclosure" class="form-control">
+                                    <label class="form-label">Lampiran</label>
+
+                                    <input
+                                        type="file"
+                                        name="enclosure[]"
+                                        id="enclosure"
+                                        class="form-control"
+                                        multiple
+                                        accept=".jpg,.jpeg,.png,.gif,.webp,.pdf,.doc,.docx,.xls,.xlsx"
+                                    >
+
+                                    <div id="previewContainer" class="row mt-3"></div>
+
                                     @error('enclosure')
                                         <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+
+                                    @error('enclosure.*')
+                                        <small class="text-danger d-block">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 
                                 <div class="text-end">
-                                    <button type="submit" class="btn btn-dark text-white">Simpan</button>
+                                    <button type="submit" class="btn btn-primary text-black">Simpan</button>
                                 </div>
 
                                 {{-- @if(!auth()->user()->hasRole('Super-Admin'))
@@ -230,10 +245,10 @@ $(document).ready(function () {
         $select.empty().append('<option value="">-- Pilih User --</option>');
 
         let url = '';
-        if (type === "employee") url = '/get-employees';
-        else if (type === "customer") url = '/get-customers';
-        else if (type === "worker") url = '/get-workers';
-        else if (type === "license") url = '/get-licenses';
+        if (type === "team") url = '/get-teams';
+        else if (type === "member") url = '/get-members';
+        else if (type === "mitra") url = '/get-partners';
+        else if (type === "vendor") url = '/get-vendors';
 
         if (url) {
             if (userCache[type]) {
@@ -286,7 +301,7 @@ $(document).ready(function () {
                 <td><input type="text" name="details[${rowCount}][debit]" class="form-control debit-input"></td>
                 <td><input type="text" name="details[${rowCount}][credit]" class="form-control credit-input"></td>
                 <td>
-                    <button type="button" class="btn btn-sm btn-dark remove-row">
+                    <button type="button" class="btn btn-sm btn-primary remove-row">
                         <i class="ti ti-trash"></i>
                     </button>
                 </td>
@@ -444,6 +459,102 @@ $('#transaction_date').on('change', function () {
             $('#period-warning').addClass('d-none');
             $('button[type="submit"]').prop('disabled', false);
         }
+
+    });
+
+});
+</script>
+<script>
+document.getElementById('enclosure').addEventListener('change', function(e){
+
+    const container = document.getElementById('previewContainer');
+    container.innerHTML = '';
+
+    [...e.target.files].forEach(file => {
+
+        const ext = file.name.split('.').pop().toLowerCase();
+
+        const col = document.createElement('div');
+        col.className = 'col-md-4 mb-3';
+
+        let html = '';
+
+        // Image
+        if (file.type.startsWith('image/')) {
+
+            html = `
+                <div class="card">
+                    <img src="${URL.createObjectURL(file)}"
+                        class="card-img-top"
+                        style="height:180px;object-fit:cover">
+
+                    <div class="card-body p-2">
+                        <small>${file.name}</small>
+                    </div>
+                </div>
+            `;
+
+        }
+
+        // PDF
+        else if(ext === 'pdf'){
+
+            html = `
+                <div class="card">
+                    <embed
+                        src="${URL.createObjectURL(file)}"
+                        type="application/pdf"
+                        width="100%"
+                        height="180px">
+
+                    <div class="card-body p-2">
+                        <small>${file.name}</small>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Word
+        else if(['doc','docx'].includes(ext)){
+
+            html = `
+                <div class="card text-center p-4">
+                    <i class="ti ti-file-word text-primary"
+                       style="font-size:60px"></i>
+
+                    <small class="mt-2">${file.name}</small>
+                </div>
+            `;
+        }
+
+        // Excel
+        else if(['xls','xlsx'].includes(ext)){
+
+            html = `
+                <div class="card text-center p-4">
+                    <i class="ti ti-file-spreadsheet text-success"
+                       style="font-size:60px"></i>
+
+                    <small class="mt-2">${file.name}</small>
+                </div>
+            `;
+        }
+
+        // lainnya
+        else{
+
+            html = `
+                <div class="card text-center p-4">
+                    <i class="ti ti-file"
+                       style="font-size:60px"></i>
+
+                    <small class="mt-2">${file.name}</small>
+                </div>
+            `;
+        }
+
+        col.innerHTML = html;
+        container.appendChild(col);
 
     });
 

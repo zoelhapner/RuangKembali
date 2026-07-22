@@ -18,7 +18,7 @@
                     <div class="btn-list">
 
                         <a href="{{ route('reports.income_statement.excel', request()->all()) }}"
-                           class="btn btn-dark"
+                           class="btn btn-primary"
                            target="_blank">
 
                             <i class="ti ti-file-export"></i>
@@ -57,7 +57,7 @@
                         </div>
 
                         <div class="col-md-3 align-self-end">
-                            <button type="submit" class="btn btn-dark text-white">Filter</button>
+                            <button type="submit" class="btn btn-primary text-black w-100">Filter</button>
                         </div>
                     </form>
                 </div>

@@ -5,7 +5,7 @@
     <div class="container-xl">
         <div class="row align-items-center">
             <div class="col d-flex align-items-center">
-                <a href="{{ route('employees.index') }}" class="btn btn-dark d-flex align-items-center" style="margin-left: 20px;">
+                <a href="{{ route('teams.index') }}" class="btn btn-primary d-flex align-items-center">
                     <i class="ti ti-arrow-left"></i>
                 </a>
                 
@@ -21,7 +21,7 @@
     <div class="container-xl">
         <div class="card shadow-sm border-0">
             <div class="card-body px-5 py-4">
-                <form action="{{ route('employees.update', $employee->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('teams.update', $team->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                     @if ($errors->any())
@@ -48,7 +48,7 @@
                                 </div>
                             @endif
                             <label for="photo"
-                                class="btn btn-sm btn-dark position-absolute bottom-0 end-0 translate-middle rounded-circle"
+                                class="btn btn-sm btn-primary position-absolute bottom-0 end-0 translate-middle rounded-circle"
                                 title="Ganti Foto">
                                 <i class="ti ti-camera"></i>
                             </label>
@@ -81,8 +81,8 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-2">
-                                    <label class="form-label required">Jenis Kelamin</label>
-                                    <select name="gender" class="form-select select2" required>
+                                    <label class="form-label">Jenis Kelamin</label>
+                                    <select name="gender" class="form-select select2">
                                         <option value="">-- Pilih --</option>
                                         <option value="1" {{ old('gender', $user->gender) == 1 ? 'selected' : '' }}>Laki-laki</option>
                                         <option value="2" {{ old('gender', $user->gender) == 2 ? 'selected' : '' }}>Perempuan</option>
@@ -96,16 +96,15 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="required">Tanggal Lahir</label>
-                                                <input type="date" name="birth_date" class="form-control" required
+                                    <label class="form-label">Tanggal Lahir</label>
+                                                <input type="date" name="birth_date" class="form-control"
                                                     value="{{ old('birth_date', $user->birth_date) }}"
                                                     pattern="\d{4}-\d{2}-\d{2}" placeholder="YYYY-MM-DD">
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label required">Agama</label>
+                                    <label class="form-label">Agama</label>
                                     <select name="religion_id"
-                                        class="form-select select2 @error('religion_id') is-invalid @enderror"
-                                        required>
+                                        class="form-select select2 @error('religion_id') is-invalid @enderror">
                                         <option value="">-- Pilih Agama --</option>
                                         @foreach($religions as $religion)
                                             <option value="{{ $religion->id }}" {{ old('religion_id', $user->religion_id) == $religion->id ? 'selected' : '' }}>
@@ -138,10 +137,10 @@
                                     <label>Status Pernikahan :</label>
                                     <select name="marital_status" class="form-select select2">
                                         <option value="">-- Pilih Status --</option>
-                                        <option value="1" {{ $employee->marital_status == 1 ? 'selected' : '' }}>Lajang</option>
-                                        <option value="2" {{ $employee->marital_status == 2 ? 'selected' : '' }}>Menikah</option>
-                                        <option value="3" {{ $employee->marital_status == 3 ? 'selected' : '' }}>Duda</option>
-                                        <option value="4" {{ $employee->marital_status == 4 ? 'selected' : '' }}>Janda</option>
+                                        <option value="1" {{ $team->marital_status == 1 ? 'selected' : '' }}>Lajang</option>
+                                        <option value="2" {{ $team->marital_status == 2 ? 'selected' : '' }}>Menikah</option>
+                                        <option value="3" {{ $team->marital_status == 3 ? 'selected' : '' }}>Duda</option>
+                                        <option value="4" {{ $team->marital_status == 4 ? 'selected' : '' }}>Janda</option>
                                     </select>
                                 </div>
                             </div>
@@ -151,14 +150,14 @@
                             <h3 class="fw-semibold mb-3 border-bottom pb-2">📞 Kontak & Alamat</h3>
                             <div class="row g-4">
                                 <div class="col-md-6">
-                                    <label class="form-label">Nomor Telepon</label>
+                                    <label class="form-label required">Nomor Telepon</label>
                                     <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" inputmode="numeric" pattern="[0-9]*" value="{{ old('phone', $user->phone) }}" required>
                                     @error('phone')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Email</label>
+                                    <label class="form-label required">Email</label>
                                     <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email', $user->email) }}">
                                     @error('email')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -174,8 +173,8 @@
                             </div>
                             <div class="row g-4 mt-2">
                                 <div class="col-md-6">
-                                    <label class="required">Provinsi</label>
-                                        <select name="province_id" id="province" class="form-select select2" required>
+                                    <label class="form-label">Provinsi</label>
+                                        <select name="province_id" id="province" class="form-select select2">
                                             <option value="">-- Pilih Provinsi --</option>
                                             @foreach($provinces as $province)
                                                 <option value="{{ $province->id }}"
@@ -186,8 +185,8 @@
                                         </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="required">Kabupaten/Kota</label>
-                                                <select name="city_id" id="city" class="form-select select2" required>
+                                    <label class="form-label">Kabupaten/Kota</label>
+                                                <select name="city_id" id="city" class="form-select select2">
                                                     <option value="">-- Pilih Kota --</option>
                                                     @foreach($cities as $city)
                                                         <option value="{{ $city->id }}"
@@ -198,8 +197,8 @@
                                                 </select>
                                 </div>
                                 <div class="col-md-5">
-                                    <label class="required">Kecamatan</label>
-                                                <select name="district_id" id="district" class="form-select select2" required>
+                                    <label class="form-label">Kecamatan</label>
+                                                <select name="district_id" id="district" class="form-select select2">
                                                     <option value="">-- Pilih Kecamatan --</option>
                                                     @foreach($districts as $district)
                                                         <option value="{{ $district->id }}"
@@ -210,8 +209,8 @@
                                                 </select>
                                 </div>
                                 <div class="col-md-5">
-                                    <label class="required">Kelurahan</label>
-                                                <select name="sub_district_id" id="sub_district" class="form-select select2" required>
+                                    <label class="form-label">Kelurahan</label>
+                                                <select name="sub_district_id" id="sub_district" class="form-select select2">
                                                     <option value="">-- Pilih kelurahan --</option>
                                                     @foreach($subDistricts as $sub_district)
                                                         <option value="{{ $sub_district->id }}"
@@ -222,8 +221,8 @@
                                                 </select>
                                 </div>
                                 <div class="col-md-2">
-                                    <label class="required">Kode Pos</label>
-                                                <select name="postal_code_id" id="postal_code" class="form-select select2" required>
+                                    <label class="form-label">Kode Pos</label>
+                                                <select name="postal_code_id" id="postal_code" class="form-select select2">
                                                     <option value="">-- Pilih Kode Pos --</option>
                                                     @foreach($postalCodes as $postal_code)
                                                         <option value="{{ $postal_code->id }}"
@@ -270,26 +269,26 @@
                         <div class="row g-4">
                             <div class="col-md-4">
                                 <label class="required">NIK</label>
-                                <input type="text" id="nik" name="nik" class="form-control" value="{{ old('nik', $employee->nik) }}" readonly>
+                                <input type="text" id="nik" name="nik" class="form-control" value="{{ old('nik', $team->nik) }}" readonly>
                                 @error('nik')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div class="col-md-4">
-                                <label class="required">Status Karyawan</label>
-                                <select name="employment_status" class="form-select" value="{{ old('employment_status', $employee->employment_status) }}" required>
+                                <label class="form-label">Status Team</label>
+                                <select name="employment_status" class="form-select select2" value="{{ old('employment_status', $team->employment_status) }}">
                                     <option value="">-- Pilih Status --</option>
-                                    <option value="Tetap" {{ $employee->employment_status == "Tetap" ? 'selected' : '' }}>Tetap</option>
-                                    <option value="Kontrak" {{ $employee->employment_status == "Kontrak" ? 'selected' : '' }}>Kontrak</option>
-                                    <option value="Harian" {{ $employee->employment_status == "Harian" ? 'selected' : '' }}>Harian</option>
-                                    <option value="Honorer" {{ $employee->employment_status == "Honorer" ? 'selected' : '' }}>Honorer</option>
+                                    <option value="Tetap" {{ $team->employment_status == "Tetap" ? 'selected' : '' }}>Tetap</option>
+                                    <option value="Kontrak" {{ $team->employment_status == "Kontrak" ? 'selected' : '' }}>Kontrak</option>
+                                    <option value="Harian" {{ $team->employment_status == "Harian" ? 'selected' : '' }}>Harian</option>
+                                    <option value="Honorer" {{ $team->employment_status == "Honorer" ? 'selected' : '' }}>Honorer</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
                                             <label class="form-label">Tanggal Mulai Kerja :</label>
                                             <input type="date" name="start_date" class="form-control" 
-                                                value="{{ old('start_date', $employee->start_date) }}"
+                                                value="{{ old('start_date', $team->start_date) }}"
                                                 pattern="\d{4}-\d{2}-\d{2}" placeholder="YYYY-MM-DD">
                                         </div>
                             <div class="col-md-12">
@@ -316,8 +315,8 @@
                                     <!-- PDF Surat Perjanjian Kerja -->
                                     <div class="col-md-6">
                                         <label>Surat Perjanjian Kerja Saat Ini:</label><br>
-                                        @if ($employee->contract_letter_file)
-                                            <a href="{{ asset('storage/' . $employee->contract_letter_file) }}"
+                                        @if ($team->contract_letter_file)
+                                            <a href="{{ asset('storage/' . $team->contract_letter_file) }}"
                                             target="_blank"
                                             class="btn btn-sm btn-outline-primary">
                                             Lihat / Unduh PDF
@@ -335,8 +334,8 @@
 
                                     <div class="col-md-6">
                                         <label>Sertifikat Pelatihan Saat Ini:</label><br>
-                                        @if ($employee->training_certificate)
-                                            <a href="{{ asset('storage/' . $employee->training_certificate) }}"
+                                        @if ($team->training_certificate)
+                                            <a href="{{ asset('storage/' . $team->training_certificate) }}"
                                             target="_blank"
                                             class="btn btn-sm btn-outline-primary">
                                             Lihat / Unduh PDF
@@ -380,33 +379,33 @@
                         <div class="row g-4">
                             <div class="col-md">
                                 <label class="form-label">Gaji Pokok</label>
-                                <input type="number" id="basic_salary" name="basic_salary" class="form-control @error('basic_salary') is-invalid @enderror" value="{{ old('basic_salary', $employee->basic_salary) }}">
+                                <input type="number" name="basic_salary" class="form-control @error('basic_salary') is-invalid @enderror" value="{{ old('basic_salary', $team->basic_salary) }}">
                                 @error('basic_salary')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="col-md">
                                 <label class="form-label">Tunjangan</label>
-                                <input type="number" name="allowance" class="form-control" value="{{ old('allowance', $employee->allowance) }}">
+                                <input type="number" name="allowance" class="form-control" value="{{ old('allowance', $team->allowance) }}">
                             </div>
                             <div class="col-md">
                                 <label class="form-label">Potongan</label>
-                                <input type="number" name="deduction" class="form-control" value="{{ old('deduction', $employee->deduction) }}">
+                                <input type="number" name="deduction" class="form-control" value="{{ old('deduction', $team->deduction) }}">
                             </div>
                             <div class="col-md">
                                 <label class="form-label">Bonus</label>
-                                <input type="number" name="bonus" class="form-control" value="{{ old('bonus', $employee->bonus) }}">
+                                <input type="number" name="bonus" class="form-control" value="{{ old('bonus', $team->bonus) }}">
                             </div>
                             <div class="col-md">
                                 <label class="form-label">THR</label>
-                                <input type="number" name="thr" class="form-control" value="{{ old('thr', $employee->thr) }}">
+                                <input type="number" name="thr" class="form-control" value="{{ old('thr', $team->thr) }}">
                             </div>
                         </div>
                     </div>
 
                     {{-- SUBMIT --}}
                     <div class="text-end mt-5">
-                        <button type="submit" class="btn btn-dark px-4">
+                        <button type="submit" class="btn btn-primary px-4">
                             <i class="ti ti-device-floppy me-1"></i> Simpan Data
                         </button>
                     </div>

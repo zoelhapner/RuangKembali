@@ -46,9 +46,9 @@ class AccountingJournalDetail extends Model
 
     // Kalau ada data person di DB, langsung proses sesuai type
      return match ($this->account->person_type) {
-        'customer'       => \App\Models\Customer::find($this->person)?->user?->fullname ?? '-',
-        'employee'      => \App\Models\Employee::find($this->person)?->user?->fullname ?? '-',
-        'worker' => \App\Models\Worker::find($this->person)?->user?->fullname ?? '-',
+        'member'       => \App\Models\Customer::find($this->person)?->user?->fullname ?? '-',
+        'team'      => \App\Models\Team::find($this->person)?->user?->fullname ?? '-',
+        'mitra' => \App\Models\Partner::find($this->person)?->user?->fullname ?? '-',
         'license'       => Str::isUuid($this->person)
                                 ? \App\Models\License::find($this->person)?->name
                                 : $this->person,

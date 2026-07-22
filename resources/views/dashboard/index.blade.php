@@ -15,7 +15,7 @@
                                     <strong>Profil Belum Lengkap</strong>
                                     Lengkapi profilmu untuk unlock fitur penuh dan pelayanan yang lebih personal dari 
                                     <b>Ruang Kembali</b>.
-                                    <a href="{{ route('customer.profile') }}" class="alert-link text-warning fw-semibold">Lengkapi sekarang.</a>
+                                    <a href="{{ route('member.profile') }}" class="alert-link text-warning fw-semibold">Lengkapi sekarang.</a>
                                 </div>
                             </div>                  
                         </div>

@@ -77,19 +77,19 @@ class TeamController extends Controller
                 })
                 ->addColumn('action', function ($team) {
                     $buttons = '';
-                    if (auth()->user()->can('ubah data karyawan')) {
-                        $buttons .= '<a href="' . route('teams.edit', $team->id) . '" class="btn btn-icon btn-sm btn-dark me-1" title="Ubah">
+                    if (auth()->user()->can('ubah data tim')) {
+                        $buttons .= '<a href="' . route('teams.edit', $team->id) . '" class="btn btn-icon btn-sm btn-warning me-1" title="Ubah">
                                         <i class="ti ti-edit"></i>
                                     </a>';
                     }
-                    if (auth()->user()->can('lihat data karyawan')) {
-                        $buttons .= '<a href="' . route('teams.show', $team->id) . '" class="btn btn-icon btn-sm btn-dark me-1" title="Lihat">
+                    if (auth()->user()->can('lihat data tim')) {
+                        $buttons .= '<a href="' . route('teams.show', $team->id) . '" class="btn btn-icon btn-sm btn-primary me-1" title="Lihat">
                                         <i class="ti ti-eye"></i>
                                     </a>';
 
                     }
-                    if (auth()->user()->can('hapus data karyawan')) {
-                        $buttons .= '<button data-id="' . $team->id . '" class="btn btn-icon btn-sm btn-dark delete-employee" title="Hapus">
+                    if (auth()->user()->can('hapus data tim')) {
+                        $buttons .= '<button data-id="' . $team->id . '" class="btn btn-icon btn-sm btn-danger delete-employee" title="Hapus">
                                         <i class="ti ti-trash"></i>
                                     </button>';
                     }
@@ -121,20 +121,20 @@ class TeamController extends Controller
         'user_id' => 'nullable|exists:users,id',
         'fullname' => 'required|string|max:255',
         'nickname' => 'nullable|string|max:100',
-        'gender' => 'required|in:1,2',
+        'gender' => 'nullable|in:1,2',
         'email' => 'required|email|unique:users,email',
         'birth_place' => 'nullable|string|max:100',
-        'birth_date' => 'required|date_format:Y-m-d',
-        'identity_number' => 'required|regex:/^[0-9]{16}$/|unique:users,identity_number',
-        'religion_id' => 'required|exists:religions,id',
+        'birth_date' => 'nullable|date_format:Y-m-d',
+        'identity_number' => 'nullable|digits:16|unique:users,identity_number',
+        'religion_id' => 'nullable|exists:religions,id',
         'npwp' => 'nullable|string|max:30',
         'phone' => 'required|string|max:20',
         'address' => 'nullable|string|max:255',
-        'province_id' => 'required|exists:provinces,id',
-        'city_id' => 'required|exists:cities,id',
-        'district_id' => 'required|exists:districts,id',
-        'sub_district_id' => 'required|exists:sub_districts,id',
-        'postal_code_id' => 'required|exists:postal_codes,id',
+        'province_id' => 'nullable|exists:provinces,id',
+        'city_id' => 'nullable|exists:cities,id',
+        'district_id' => 'nullable|exists:districts,id',
+        'sub_district_id' => 'nullable|exists:sub_districts,id',
+        'postal_code_id' => 'nullable|exists:postal_codes,id',
         'bank_id' => 'nullable|uuid|exists:banks,id',
         'account_number' => 'nullable|string|max:50',
         'account_holder' => 'nullable|max:50',
@@ -146,16 +146,16 @@ class TeamController extends Controller
         'role' => 'required|array',
         'role.*' => 'string|exists:roles,name',
         'marital_status' => 'nullable|in:1,2,3,4',
-        'employment_status' => 'required|in:Tetap,Kontrak,Harian,Honorer',
+        'employment_status' => 'nullable|in:Tetap,Kontrak,Harian,Honorer',
         'start_date' => ['nullable', 'date_format:Y-m-d'],
-        'basic_salary' => ['required', 'numeric', 'min:0'],
+        'basic_salary' => ['nullable', 'numeric', 'min:0'],
         'allowance' => ['nullable', 'numeric', 'min:0'],
         'deduction' => ['nullable', 'numeric', 'min:0'],
         'bonus' => ['nullable', 'numeric', 'min:0'],
         'thr' => ['nullable', 'numeric', 'min:0'],
 
         // --- file ---
-        'contract_letter_file' => ['required', 'file', 'mimes:pdf', 'max:2048'],
+        'contract_letter_file' => ['nullable', 'file', 'mimes:pdf', 'max:2048'],
         'training_certificate' => ['nullable', 'file', 'mimes:pdf', 'max:2048'],
     ]);
 
@@ -269,7 +269,6 @@ if ($request->hasFile('training_certificate')) {
             'thr' => $validated['thr'],
             'contract_letter_file' => $validated['contract_letter_file'] ?? null,
             'training_certificate' => $validated['training_certificate'] ?? null,
-            'signature' => $validated['signature'] ?? null,
         ]);
     });
 
@@ -282,7 +281,7 @@ if ($request->hasFile('training_certificate')) {
 
 public static function generateNikAjax()
 {
-    $lastNumber = Team::where('nik', 'like', 'E-%')
+    $lastNumber = Team::where('nik', 'ilike', 'E-%')
         ->selectRaw("
             MAX(
                 CAST(
@@ -327,7 +326,7 @@ public static function generateNikAjax()
         $postalCodes = PostalCode::where('sub_district_id', $user->sub_district_id)->get();
         
 
-        return view('teams.edit', compact('user', 'roles', 'internalRoles', 'tim',
+        return view('teams.edit', compact('user', 'roles', 'internalRoles', 'team',
         'religions', 'provinces', 'cities', 'districts', 'subDistricts', 'postalCodes', 'selectedRoles'));
     }
 
@@ -336,21 +335,22 @@ public static function generateNikAjax()
     $validated = $request->validate([
         // --- data user ---
         'fullname' => 'required|string|max:255',
+        'nickname' => 'nullable|string|max:50',
         'birth_place' => 'nullable|string|max:255',
         'birth_date' => 'nullable|date',
         'gender' => 'nullable|in:1,2',
         'phone' => 'nullable|string|max:20',
         'address' => 'nullable|string',
-        'province_id' => 'required|exists:provinces,id',
-        'city_id' => 'required|exists:cities,id',
+        'province_id' => 'nullable|exists:provinces,id',
+        'city_id' => 'nullable|exists:cities,id',
         'identity_number' => [
-            'required',
+            'nullable',
             'regex:/^[0-9]{16}$/',
             Rule::unique('users', 'identity_number')->ignore($team->user_id),
         ],
-        'district_id' => 'required|exists:districts,id',
-        'sub_district_id' => 'required|exists:sub_districts,id',
-        'postal_code_id' => 'required|exists:postal_codes,id',
+        'district_id' => 'nullable|exists:districts,id',
+        'sub_district_id' => 'nullable|exists:sub_districts,id',
+        'postal_code_id' => 'nullable|exists:postal_codes,id',
         'bank_id' => 'nullable|uuid|exists:banks,id',
         'account_number' => 'nullable|string|max:50',
         'account_holder' => 'nullable|string|max:100',
@@ -360,9 +360,9 @@ public static function generateNikAjax()
         'role' => 'required|array',
         'role.*' => 'string|exists:roles,name',
         'marital_status' => 'nullable|in:1,2,3,4',
-        'employment_status' => 'required',
+        'employment_status' => 'nullable',
         'start_date' => ['nullable', 'date_format:Y-m-d'],
-        'basic_salary' => ['required', 'numeric', 'min:0'],
+        'basic_salary' => ['nullable', 'numeric', 'min:0'],
         'allowance' => ['nullable', 'numeric', 'min:0'],
         'deduction' => ['nullable', 'numeric', 'min:0'],
         'bonus' => ['nullable', 'numeric', 'min:0'],
@@ -380,6 +380,7 @@ public static function generateNikAjax()
     // 🔹 Update data user
     $user->update([
         'fullname' => $validated['fullname'],
+        'nickname' => $validated['nickname'],
         'birth_place' => $validated['birth_place'] ?? null,
         'birth_date' => $validated['birth_date'] ?? null,
         'identity_number' => $validated['identity_number'],

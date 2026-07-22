@@ -5,7 +5,7 @@
     <title>Neraca</title>
     <style>
         body {
-            font-family: Poppins, sans-serif;
+            font-family: Montserrat, sans-serif;
             font-size: 11px;
         }
         table {
@@ -34,11 +34,8 @@
 <body>
     <div class="header">
         <h1 style="text-align:center;">Laporan Neraca </h1>
-        <h2 style="text-align:center;">Antosa Architect </h2>
+        <h2 style="text-align:center;">Ruang Kembali </h2>
         <h3>Periode: {{ \Carbon\Carbon::parse($startDate)->format('d/M/Y') }} - {{ \Carbon\Carbon::parse($endDate)->format('d/M/Y') }}</h3>
-        @if($licenses->where('id', $request->license_id)->first())
-            <h4>Lisensi: {{ $licenses->where('id', $request->license_id)->first()->name }}</h4>
-        @endif
     </div>
 
     <table>
@@ -60,14 +57,12 @@
                         <td colspan="4" class="fw-semibold fst-italic"><em>{{ $subCat }}</em></td>
                     </tr>
                     @foreach($data['accounts'] as $acc)
-                        @if(!$acc['is_parent'])
                             <tr>
                                 <td>{{ $acc['account_code'] }}</td>
                                 <td class="text-left">{{ $acc['account_name'] }}</td>
                                 <td>Rp {{ number_format($acc['debit'], 2, ',', '.') }}</td>
                                 <td>Rp {{ number_format($acc['credit'], 2, ',', '.') }}</td>
                             </tr>
-                        @endif
                     @endforeach
                     <tr>
                         <td colspan="2" class="text-right"><strong>Subtotal {{ $subCat }}</strong></td>

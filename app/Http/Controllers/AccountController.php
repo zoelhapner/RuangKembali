@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Employee;
+use App\Models\Team;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Carbon;
@@ -144,10 +144,10 @@ class AccountController extends Controller
 
         if ($internalRoles->isNotEmpty()) {
 
-            Employee::firstOrCreate(
+            Team::firstOrCreate(
                 ['user_id' => $user->id],
                 [
-                    'nik' => Employee::generateNik(),
+                    'nik' => Team::generateNik(),
 
                     'position' => $internalRoles
                         ->pluck('name')

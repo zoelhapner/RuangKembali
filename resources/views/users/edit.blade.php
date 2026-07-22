@@ -5,7 +5,7 @@
     <div class="container-xl">
         <div class="row align-items-center">
             <div class="col d-flex align-items-center">
-                <a href="{{ route('users.index') }}" class="btn btn-dark d-flex align-items-center">
+                <a href="{{ route('users.index') }}" class="btn btn-primary d-flex align-items-center">
                     <i class="ti ti-arrow-left"></i>
                 </a>
                     <h2 class="page-title mb-0">Ubah Data Pengguna</h2>
@@ -46,7 +46,7 @@
                                             </div>
                                         @endif
                                         <label for="photo"
-                                            class="btn btn-sm btn-dark position-absolute bottom-0 end-0 translate-middle rounded-circle"
+                                            class="btn btn-sm btn-primary position-absolute bottom-0 end-0 translate-middle rounded-circle"
                                             title="Ganti Foto">
                                             <i class="ti ti-camera"></i>
                                         </label>
@@ -245,7 +245,7 @@
                                 </div> --}}
 
                             <div class="text-end mt-5">
-                                <button type="submit" class="btn btn-dark px-4">
+                                <button type="submit" class="btn btn-primary px-4">
                                     <i class="ti ti-device-floppy me-1"></i> Simpan Data
                                 </button>
                             </div>

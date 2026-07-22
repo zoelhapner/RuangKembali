@@ -36,4 +36,8 @@ class AccountingJournal extends Model
     {
         return $this->hasMany(AccountingJournalDetail::class, 'journal_id');
     }
+    public function enclosures()
+{
+    return $this->hasMany(AccountingJournalEnclosure::class, 'journal_id');
+}
 }

@@ -22,7 +22,7 @@
                 <div class="btn-list">
 
                     <a href="{{ route('trial.export', request()->all()) }}"
-                        class="btn btn-dark"
+                        class="btn btn-primary"
                         target="_blank">
 
                         <i class="ti ti-file-export"></i>
@@ -70,7 +70,7 @@
                 </div>
                 
                 <div class="col-md-3 align-self-end">
-                    <button type="submit" class="btn btn-dark text-white">
+                    <button type="submit" class="btn btn-primary text-black">
                         <i class="ti ti-filter"></i> Filter
                     </button>
                 </div>
@@ -87,7 +87,7 @@
                 
                 <div class="col-md-6">
                     <div class="card shadow-sm mb-3">
-                        <div class="card-header bg-dark text-white">
+                        <div class="card-header bg-primary text-black">
                             <strong>AKTIVA</strong>
                         </div>
                         <div class="card-body">

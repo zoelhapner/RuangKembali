@@ -5,7 +5,7 @@
         <div class="container-xl">
             <div class="row align-items-center">
                 <div class="col d-flex align-items-center">
-                    <a href="{{ route('accounting.index') }}" class="btn btn-dark d-flex align-items-center">
+                    <a href="{{ route('accounting.index') }}" class="btn btn-primary d-flex align-items-center">
                         <i class="ti ti-arrow-left"></i>
                     </a>      
                         <h2 class="page-title mb-0">Edit Akun Akuntansi</h2> 
@@ -34,7 +34,7 @@
                                 <div class="row mb-4">
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Kode Akun</label>
-                                        <input type="text" name="account_code" value="{{ $account->account_code }}" class="form-control" required>
+                                        <input type="text" value="{{ $account->account_code }}" class="form-control" readonly>
                                     </div>
 
                                     <div class="col-md-6 mb-3">
@@ -104,7 +104,7 @@
                                     </div>
                                 </div>
                                 <div class="text-end mt-5">
-                                            <button type="submit" class="btn btn-dark px-4">
+                                            <button type="submit" class="btn btn-primary px-4">
                                                 <i class="ti ti-device-floppy me-1"></i>Simpan Perubahan
                                             </button>
                                 </div>

@@ -22,7 +22,7 @@ return new class extends Migration
 
             $table->timestamp('closed_at')->nullable();
             $table->uuid('closed_by')->nullable();
-
+            $table->uuid('license_id')->nullable();
             $table->timestamps();
 
             // optional tapi recommended

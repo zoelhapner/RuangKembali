@@ -10,6 +10,7 @@ use App\Http\Controllers\AccountingReportController;
 use App\Http\Controllers\AccountingPeriodController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\VendorController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\MembersController;
@@ -21,7 +22,7 @@ use App\Http\Controllers\ContractorController;
 use App\Http\Controllers\WorkerController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\InvestorController;
-use App\Http\Controllers\ArchitectController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\ProductColorController;
@@ -67,12 +68,12 @@ Route::middleware(['auth', 'role:Super-Admin'])->group(function () {
 Route::get('/member/profile', [DashboardController::class, 'edit'])->name('member.profile');
 Route::put('/member/profile', [DashboardController::class, 'update'])->name('member.update');
 Route::get('/affiliators/profile', [DashboardController::class, 'edit'])->name('affiliators.profile');
-Route::put('/affiliators/profile', [DashboardController::class, 'update'])->name('affiliators.update');
+Route::put('/affiliators/profile', [DashboardController::class, 'update'])->name('affiliators.updates');
 
 
 
 Route::middleware(['auth', 'permission:lihat daftar tim|lihat data tim'])->group(function () {
-    Route::resource('/teams', TeamController::class)->whereUuid('employee');
+    Route::resource('/teams', TeamController::class)->whereUuid('team');
 });
 
 Route::get('/teams/generate-nik', [TeamController::class, 'generateNikAjax'])
@@ -96,17 +97,22 @@ Route::middleware(['auth', 'permission:lihat daftar affiliator|lihat data affili
         Route::get('/affiliators/generate-nia', [AffiliatorController::class, 'generateNiaAjax'])->name('affiliators.generateNia');
         Route::resource('/affiliators', AffiliatorController::class)->whereUuid('affiliator');
     });
+Route::middleware(['auth', 'permission:lihat daftar vendor|lihat data vendor','activerole:Vendor' ])->group(function () {
+    Route::get('/vendors/generate-VendorId', [VendorController::class, 'generateVendorIdAjax'])->name('vendors.generateVendorId');
 
-Route::middleware(['auth', 'permission:lihat daftar supplier|lihat data supplier','activerole:Mitra Supplier,Direktur' ])->group(function () {
-    Route::get('/suppliers/generate-SupplierId', [SupplierController::class, 'generateSupplierIdAjax'])->name('suppliers.generateSupplierId');
-    Route::get('/supplier/{supplier}/products-datatable', [SupplierController::class, 'datatableProducts'])
-    ->name('supplier.products.datatable');
-
-    Route::resource('/suppliers', SupplierController::class);
-    Route::post('/suppliers/{supplier}/duplicate-product/{product}', 
-    [SupplierController::class, 'duplicateProduct']
-)->name('suppliers.duplicateProduct');
+    Route::resource('/vendors', VendorController::class);
 });
+// Route::middleware(['auth', 'permission:lihat daftar supplier|lihat data supplier','activerole:Vendor' ])->group(function () {
+//     Route::get('/supplier/generate-SupplierId', [SupplierController::class, 'generateSupplierIdAjax'])->name('vendors.generateSupplierId');
+//     Route::get('/supplier/{supplier}/products-datatable', [SupplierController::class, 'datatableProducts'])
+//     ->name('supplier.products.datatable');
+
+//     Route::resource('/supplier', SupplierController::class);
+//     Route::post('/supplier/{supplier}/duplicate-product/{product}', 
+//     [SupplierController::class, 'duplicateProduct']
+// )->name('supplier.duplicateProduct');
+// });
+
 
 // Supplier Catalog
 Route::get('/supplier/search-product', [SupplierCatalogController::class, 'searchProduct'])
@@ -140,17 +146,14 @@ Route::get('/catalog/supplier', [ProductCatalogController::class, 'supplierCatal
 Route::get('/catalog/member', [ProductCatalogController::class, 'memberCatalog'])
     ->name('catalog.member');
 
-
-
-
- Route::middleware(['auth', 'permission:lihat daftar investor|lihat data investor', 'activerole:Investor'])->group(function () {
+Route::middleware(['auth', 'permission:lihat daftar investor|lihat data investor', 'activerole:Investor'])->group(function () {
        Route::get('/investors/generate-InvestorId', [InvestorController::class, 'generateInvestorIdAjax'])->name('investors.generateInvestorId');
      Route::resource('/investors', InvestorController::class);
 });
 
-Route::middleware(['auth', 'permission:lihat daftar arsitek|lihat data arsitek', 'activerole:Mitra Arsitek'])->group(function () {
-   Route::get('/architects/generate-ArchitectId', [ArchitectController::class, 'generateArchitectIdAjax'])->name('architects.generateArchitectId');
-   Route::resource('/architects', ArchitectController::class);
+Route::middleware(['auth', 'permission:lihat daftar mitra|lihat data mitra', 'activerole:Mitra'])->group(function () {
+   Route::get('/partners/generate-ArchitectId', [PartnerController::class, 'generateArchitectIdAjax'])->name('partners.generateArchitectId');
+   Route::resource('/partners', PartnerController::class);
 });
 
 Route::middleware(['auth', 'permission:lihat daftar tukang|lihat data tukang', 'activerole:Tukang'])->group(function () {
@@ -347,7 +350,7 @@ Route::post(
 
 Route::get('/ajax/items/{type}', [JobCategoryController::class, 'getItems']);
 Route::get('/ajax/item-detail/{type}/{id}', [JobCategoryController::class, 'getItemDetail']);
-Route::get('/ajax/product/{id}/suppliers', [JobCategoryController::class, 'getSuppliersByProduct']);
+Route::get('/ajax/product/{id}/suppliers', [JobCategoryController::class, 'getvendorsByProduct']);
 Route::get('/ajax/product-supplier/{supplierId}', [JobCategoryController::class, 'getProductSupplierById']);
 
 Route::get('/job-categories/{id}/simple', [JobCategoryController::class, 'simple']);
@@ -726,9 +729,9 @@ Route::middleware(['auth'])->group(function () {
 
     // data untuk form jurnal
     Route::get('/get-accounts', [AjaxController::class, 'getAccounts']);
-    Route::get('/get-teams', [AjaxController::class, 'getteams']);
-    Route::get('/get-members', [AjaxController::class, 'getmembers']);
-    Route::get('/get-workers', [AjaxController::class, 'getWorkers']);
+    Route::get('/get-teams', [AjaxController::class, 'getTeams']);
+    Route::get('/get-members', [AjaxController::class, 'getMembers']);
+    Route::get('/get-partners', [AjaxController::class, 'getPartners']);
 
     Route::get('/ajax/journals/next-code', [AccountingJournalController::class, 'getNextCode']);
 });

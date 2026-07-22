@@ -46,7 +46,12 @@ class UpdateAccountingJournalRequest extends FormRequest
             'details.*.debit' => 'nullable|numeric',
             'details.*.credit' => 'nullable|numeric',
             'details.*.person' => 'nullable|string',
-            'enclosure' => 'nullable|file|mimes:jpg,jpeg,png,pdf',
+            'enclosure' => ['nullable', 'array'],
+            'enclosure.*' => [
+                'file',
+                'mimes:pdf,jpg,jpeg,png,doc,docx,xls,xlsx',
+                'max:2048', // 2 MB per file
+            ],
         ];
     }
 }

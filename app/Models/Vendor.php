@@ -1,0 +1,93 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+
+class Vendor extends Model
+{
+
+    public function user()
+{
+    return $this->belongsTo(User::class);
+}
+
+
+    public function province() {
+
+    return $this->belongsTo(Province::class);
+}
+
+    public function city() {
+
+    return $this->belongsTo(City::class);
+}
+
+    public function district() {
+
+    return $this->belongsTo(District::class);
+}
+
+    public function subDistrict() {
+
+    return $this->belongsTo(SubDistrict::class);
+}
+
+    public function postalCode()
+{
+    return $this->belongsTo(PostalCode::class, 'postal_code_id');
+}
+
+public function products()
+{
+    return $this->belongsToMany(Product::class, 'product_supplier')
+                ->using(ProductSupplier::class)
+                ->withPivot(['id', 'buying_prices', 'selling_prices', 'special_prices', 'stock', 'label'])
+                ->withTimestamps();
+}
+    public static function generateNis()
+    {
+        $lastNumber = self::selectRaw("MAX(CAST(SUBSTRING(vendor_id, 3) AS INTEGER)) as max_vendor_id")->value('max_vendor_id');
+        $newNumber = ($lastNumber ?? 0) + 1;
+
+        return 'V-' . str_pad($newNumber, 4, '0', STR_PAD_LEFT);
+    }
+
+    public static function getDefaultAttributes($user)
+    {
+        return [
+            'vendor_id' => self::generateNis(),
+            // 'province_id' => 15,
+            // 'city_id' => 234,
+            // 'district_id' => 3372,
+            // 'sub_district_id' => 42178,
+            // 'postal_code_id' => 42178,
+
+        ];
+    }
+
+    use HasFactory, HasUuids;
+
+    protected $table = 'vendors';
+    protected $keyType = 'string';
+    public $incrementing = false;
+
+    protected $fillable = [
+        'user_id',
+        'vendor_id',
+        'vendor_name',
+        'vendor_phone',
+        'vendor_address',
+        'province_id',
+        'city_id',
+        'district_id',
+        'sub_district_id',
+        'postal_code_id',
+        'notes',
+        'is_active',
+    ];
+
+}
+

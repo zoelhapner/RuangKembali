@@ -5,7 +5,7 @@
     <div class="container-xl">
         <div class="row align-items-center">
             <div class="col d-flex align-items-center">
-                <a href="{{ route('menus.index') }}" class="btn btn-dark d-flex align-items-center">
+                <a href="{{ route('menus.index') }}" class="btn btn-primary d-flex align-items-center">
                     <i class="ti ti-arrow-left"></i>
                 </a>
                 
@@ -86,7 +86,7 @@
                                 </select>
                             </div>
                             <div class="col-12 text-end mt-3">
-                                <button type="submit" class="btn btn-dark">
+                                <button type="submit" class="btn btn-primary">
                                     <i class="ti ti-check me-1"></i> Simpan Menu
                                 </button>
                             </div>

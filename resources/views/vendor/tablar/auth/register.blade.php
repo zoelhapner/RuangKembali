@@ -319,7 +319,7 @@ label {
                         <input id="password" type="password" name="password"
                             class="form-control border-start-0 @error('password') is-invalid @enderror"
                             placeholder="Masukkan kata kunci">
-                        <button type="button" class="btn btn-light border toggle-password"">
+                        <button type="button" class="btn btn-light border toggle-password">
                             <i class="ti ti-eye"></i>
                         </button>
                     </div>

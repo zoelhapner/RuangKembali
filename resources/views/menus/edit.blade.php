@@ -1,18 +1,24 @@
 @extends('tablar::page')
 
 @section('content')
-<div class="container-xl">
-    <div class="page-header d-print-none">
+<div class="page-header d-print-none mb-4">
+    <div class="container-xl">
         <div class="row align-items-center">
-            <div class="col">
-                <h2 class="page-title">Ubah Menu</h2>
-                <div class="text-muted mt-1">Kelola struktur navigasi sistem Antosa Architect</div>
+            <div class="col d-flex align-items-center">
+                <a href="{{ route('menus.index') }}" class="btn btn-primary d-flex align-items-center">
+                    <i class="ti ti-arrow-left"></i>
+                </a>
+                
+                    <h2 class="page-title mb-0">Ubah Data Menu</h2>
+                
             </div>
         </div>
     </div>
-
-    <div class="card mt-3 shadow-sm">
-        <div class="card-body">
+</div>
+<div class="page-body">
+    <div class="container-xl">
+    <div class="card shadow-sm border-0">
+        <div class="card-body px-5 py-4">
             <form action="{{ route('menus.update', $menu->id) }}" method="POST">
                 @csrf
                 @method('put')
@@ -100,13 +106,14 @@
                         <a href="{{ route('menus.index') }}" class="btn btn-light">
                             <i class="ti ti-arrow-left me-1"></i> Batal
                         </a>
-                        <button type="submit" class="btn btn-dark">
+                        <button type="submit" class="btn btn-primary">
                             <i class="ti ti-check me-1"></i> Simpan Menu
                         </button>
                     </div>
                 </div>
             </form>
         </div>
+    </div>
     </div>
 </div>
 @endsection

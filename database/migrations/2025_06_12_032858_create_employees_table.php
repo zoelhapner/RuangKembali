@@ -11,21 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('employees', function (Blueprint $table) {
+        Schema::create('teams', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
             $table->string('nik');
             $table->unsignedTinyInteger('marital_status')->nullable();;
             $table->string('position')->nullable();
-            $table->string('employment_status');
+            $table->string('employment_status')->nullable();
             $table->string('start_date', 10)->nullable();;
-            $table->decimal('basic_salary', 15, 2);
+            $table->decimal('basic_salary', 15, 2)->nullable();
             $table->decimal('allowance', 15, 2)->nullable();
             $table->decimal('deduction', 15, 2)->nullable();
             $table->decimal('bonus', 15, 2)->nullable();
             $table->decimal('thr', 15, 2)->nullable();
-            $table->string('contract_letter_file');
+            $table->string('contract_letter_file')->nullable();
             $table->string('training_certificate')->nullable();
             $table->string('photo')->nullable();            
         });

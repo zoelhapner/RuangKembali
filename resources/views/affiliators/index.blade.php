@@ -8,7 +8,7 @@
                 <div class="col-12 col-md-auto ms-auto d-print-none">
                     <div class="btn-list">
                         @can('tambah data affiliator')       
-                            <a href="{{ route("affiliators.create") }}" class="btn btn-dark">
+                            <a href="{{ route("affiliators.create") }}" class="btn btn-primary">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -17,7 +17,7 @@
                                     <line x1="12" y1="5" x2="12" y2="19"/>
                                     <line x1="5" y1="12" x2="19" y2="12"/>
                                 </svg>
-                                Tambah Data affiliator
+                                Tambah Data Affiliator
                             </a>
                         @endcan
                     </div>
@@ -33,8 +33,8 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <p class="text-center mb-4" style="font-size: 1.5rem; font-weight: 400; font-family: 'Poppins', sans-serif;">
-                                 Daftar affiliator
+                            <p class="text-center mb-4" style="font-size: 1.5rem; font-weight: 400; font-family: 'Montserrat', sans-serif;">
+                                 Daftar Affiliator
                             </p>
                         </div>
                         <div class="table-responsive">
@@ -84,15 +84,17 @@
 @push('js')
     <script>
         $(function() {
+            const isMobile = window.innerWidth < 576;
             const table = $('#tableaffiliators').DataTable({
                 scrollY: '500px',
                 scrollX: true,
                 scrollCollapse: true,
-                fixedColumns: {
+                fixedColumns: !isMobile ? {
                     leftColumns: 4
-                },
+                } : false,
                 serverSide: true,
                 processing: true,
+                responsive: false,
                 ajax: '{{ route("affiliators.index") }}',
                 columns: [
                     { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },

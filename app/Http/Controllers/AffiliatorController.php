@@ -65,18 +65,18 @@ class AffiliatorController extends Controller
                 ->addColumn('action', function ($affiliator) {
                     $buttons = '';
                     if (auth()->user()->can('ubah data affiliator')) {
-                        $buttons .= '<a href="' . route('affiliators.edit', $affiliator->id) . '" class="btn btn-icon btn-sm btn-dark me-1" title="Ubah">
+                        $buttons .= '<a href="' . route('affiliators.edit', $affiliator->id) . '" class="btn btn-icon btn-sm btn-warning me-1" title="Ubah">
                                         <i class="ti ti-edit"></i>
                                     </a>';
                     }
                     if (auth()->user()->can('lihat data affiliator')) {
-                        $buttons .= '<a href="' . route('affiliators.show', $affiliator->id) . '" class="btn btn-icon btn-sm btn-dark me-1" title="Lihat">
+                        $buttons .= '<a href="' . route('affiliators.show', $affiliator->id) . '" class="btn btn-icon btn-sm btn-primary me-1" title="Lihat">
                                         <i class="ti ti-eye"></i>
                                     </a>';
 
                     }
                     if (auth()->user()->can('hapus data affiliator')) {
-                        $buttons .= '<button data-id="' . $affiliator->id . '" class="btn btn-icon btn-sm btn-dark delete-affiliator" title="Hapus">
+                        $buttons .= '<button data-id="' . $affiliator->id . '" class="btn btn-icon btn-sm btn-danger delete-affiliator" title="Hapus">
                                         <i class="ti ti-trash"></i>
                                     </button>';
                     }
@@ -105,7 +105,10 @@ class AffiliatorController extends Controller
         $religions = Religion::all();
         $provinces = Province::all();
         $roles = Role::all();
-        return view('affiliators.create', compact('user', 'roles', 'religions', 'provinces'));
+        $externalRoles = Role::where('role_group', 'Eksternal')
+            ->orderBy('name')
+            ->pluck('name');
+        return view('affiliators.create', compact('user', 'roles', 'religions', 'provinces', 'externalRoles'));
     }
 
         public function store(Request $request)
@@ -114,20 +117,20 @@ class AffiliatorController extends Controller
         'user_id' => 'nullable|exists:users,id',
         'fullname' => 'required|string|max:255',
         'nickname' => 'nullable|string|max:100',
-        'gender' => 'required|in:1,2',
+        'gender' => 'nullable|in:1,2',
         'email' => 'required|email|unique:users,email',
         'birth_place' => 'nullable|string|max:100',
-        'birth_date' => 'required|date_format:d-m-Y',
-        'identity_number' => 'required|string|max:16',
-        'religion_id' => 'required|exists:religions,id',
+        'birth_date' => 'nullable|date_format:d-m-Y',
+        'identity_number' => 'nullable|string|max:16',
+        'religion_id' => 'nullable|exists:religions,id',
         'npwp' => 'nullable|string|max:30',
         'phone' => 'required|string|max:20',
         'address' => 'nullable|string|max:255',
-        'province_id' => 'required|exists:provinces,id',
-        'city_id' => 'required|exists:cities,id',
-        'district_id' => 'required|exists:districts,id',
-        'sub_district_id' => 'required|exists:sub_districts,id',
-        'postal_code_id' => 'required|exists:postal_codes,id',
+        'province_id' => 'nullable|exists:provinces,id',
+        'city_id' => 'nullable|exists:cities,id',
+        'district_id' => 'nullable|exists:districts,id',
+        'sub_district_id' => 'nullable|exists:sub_districts,id',
+        'postal_code_id' => 'nullable|exists:postal_codes,id',
         'bank_id' => 'nullable|uuid|exists:banks,id',
         'account_number' => 'nullable|string|max:50',
         'account_holder' => 'nullable|string|max:50',
@@ -138,17 +141,23 @@ class AffiliatorController extends Controller
         'role' => 'required|array',
         'role.*' => 'string|exists:roles,name',
         'membership' => 'nullable|in:1,2,3',
-        'saldo' => ['required', 'numeric', 'min:0'],
+        'saldo' => ['nullable', 'numeric', 'min:0'],
     ]);
 
     $birth_date = Carbon::createFromFormat('d-m-Y', $validated['birth_date'])->format('Y-m-d');
 
     // 🔹 Upload foto (jika ada)
     if ($request->hasFile('photo')) {
-        $file = $request->file('photo');
-        $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
-        $file->storeAs('photos', $filename, 'public');
-        $validated['photo'] = $filename;
+        $filename = Str::uuid().'.'.$request->file('photo')->getClientOriginalExtension();
+
+        $path = $request->file('photo')->storeAs(
+            'photos',
+            $filename,
+            'public'
+        );
+
+        // simpan full relative path
+        $validated['photo'] = $path;   // → photos/uuid.jpg
     }
 
     DB::transaction(function () use ($validated, $birth_date) {
@@ -168,7 +177,7 @@ class AffiliatorController extends Controller
                 'npwp' => $validated['npwp'],
                 'address' => $validated['address'],
                 'religion_id' => $validated['religion_id'],
-                'province_id' => $validated['user_province_id'],
+                'province_id' => $validated['province_id'],
                 'city_id' => $validated['city_id'],
                 'district_id' => $validated['district_id'],
                 'sub_district_id' => $validated['sub_district_id'],
@@ -195,9 +204,6 @@ class AffiliatorController extends Controller
             }
         }
 
-        
-
-        // 🔹 Simpan affiliators
         Affiliator::create([
             'id' => Str::uuid(),
             'user_id' => $user->id,
@@ -237,10 +243,6 @@ public function generateNiaAjax()
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-
     public function edit($id)
     {
         $affiliator = Affiliator::with(['user.roles', 'user.bank'])->findOrFail($id);
@@ -248,6 +250,9 @@ public function generateNiaAjax()
         $religions = Religion::all();
         $provinces = Province::all();
         $roles = Role::all();
+        $externalRoles = Role::where('role_group', 'Eksternal')
+            ->orderBy('name')
+            ->pluck('name');
         $selectedRoles = $user->roles->pluck('name')->toArray();
         $cities = City::where('province_id', $user->province_id)->get();
         $districts = District::where('city_id', $user->city_id)->get();
@@ -255,20 +260,17 @@ public function generateNiaAjax()
         $postalCodes = PostalCode::where('sub_district_id', $user->sub_district_id)->get();
         
 
-        return view('affiliators.edit', compact('user', 'roles', 'selectedRoles', 'affiliator',
+        return view('affiliators.edit', compact('user', 'roles', 'selectedRoles', 'affiliator', 'externalRoles',
         'religions', 'provinces', 'cities', 'districts', 'subDistricts', 'postalCodes'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Affiliator $affiliator)
 {
     $validated = $request->validate([
         // --- data user ---
         'fullname' => 'required|string|max:255',
         'nickname' => 'nullable|string|max:100',
-        'gender' => 'required|in:1,2',
+        'gender' => 'nullable|in:1,2',
         'email' => 'required|email|unique:users,email,' . $affiliator->user_id,
         'birth_place' => 'nullable|string|max:100',
         'birth_date' => 'nullable|date_format:Y-m-d',
@@ -277,11 +279,11 @@ public function generateNiaAjax()
         'npwp' => 'nullable|string|max:30',
         'phone' => 'nullable|string|max:20',
         'address' => 'nullable|string|max:255',
-        'user_province_id' => 'required|exists:provinces,id',
-        'user_city_id' => 'required|exists:cities,id',
-        'user_district_id' => 'required|exists:districts,id',
-        'user_sub_district_id' => 'required|exists:sub_districts,id',
-        'user_postal_code_id' => 'required|exists:postal_codes,id',
+        'user_province_id' => 'nullable|exists:provinces,id',
+        'user_city_id' => 'nullable|exists:cities,id',
+        'user_district_id' => 'nullable|exists:districts,id',
+        'user_sub_district_id' => 'nullable|exists:sub_districts,id',
+        'user_postal_code_id' => 'nullable|exists:postal_codes,id',
         'bank_id' => 'nullable|uuid|exists:banks,id',
         'account_number' => 'nullable|string|max:50',
         'account_holder' => 'nullable|string|max:50',
@@ -300,13 +302,17 @@ public function generateNiaAjax()
 
         // 🔹 Upload foto baru (hapus lama jika ada)
         if ($request->hasFile('photo')) {
-            if ($user->photo && Storage::disk('public')->exists('photos/' . $user->photo)) {
-                Storage::disk('public')->delete('photos/' . $user->photo);
+            $newPhotoPath = $request->file('photo')->storeAs(
+                'photos',
+                Str::uuid().'.'.$request->file('photo')->getClientOriginalExtension(),
+                'public'
+            );
+
+            if ($user->photo && Storage::disk('public')->exists($user->photo)) {
+                Storage::disk('public')->delete($user->photo);
             }
-            $file = $request->file('photo');
-            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('photos', $filename, 'public');
-            $validated['photo'] = $filename;
+
+            $validated['photo'] = $newPhotoPath;
         }
 
         // 🔹 Update user data
@@ -347,10 +353,6 @@ public function generateNiaAjax()
             }
         }
 
-        
-
-
-        // 🔹 Update data affiliator
         $affiliator->update([
             'nia' => $validated['nia'],
             'membership' => $validated['membership'] ?? null,
@@ -363,10 +365,6 @@ public function generateNiaAjax()
         ->route('affiliators.show', $affiliator->id)
         ->with('success', 'Data affiliator berhasil diperbarui.');
 }
-
-    /**
-     * Remove the specified resource from storage.
-     */
 
       public function destroy(Affiliator $affiliator)
     {

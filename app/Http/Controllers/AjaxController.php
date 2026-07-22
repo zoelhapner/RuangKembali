@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AccountingAccount;
 use App\Models\Customer;
-use App\Models\Employee;
-use App\Models\Worker;
+use App\Models\Team;
+use App\Models\Partner;
 
 class AjaxController extends Controller
 {
@@ -28,7 +28,7 @@ class AjaxController extends Controller
         return response()->json($accounts);
     }
 
-    public function getCustomers()
+    public function getMembers()
     {
         $customers = Customer::with('user')
             ->get()
@@ -42,9 +42,9 @@ class AjaxController extends Controller
         return response()->json($customers);
     }
 
-    public function getEmployees()
+    public function getTeams()
     {
-        $employees = Employee::with('user')
+        $teams = Team::with('user')
             ->get()
             ->map(function ($emp) {
                 return [
@@ -53,12 +53,12 @@ class AjaxController extends Controller
                 ];
             });
 
-        return response()->json($employees);
+        return response()->json($teams);
     }
 
-    public function getWorkers()
+    public function getPartners()
     {
-        $workers = Worker::with('user')
+        $partners = Partner::with('user')
             ->get()
             ->map(function ($work) {
                 return [
@@ -67,6 +67,6 @@ class AjaxController extends Controller
                 ];
             });
 
-        return response()->json($workers);
+        return response()->json($partners);
     }
 }

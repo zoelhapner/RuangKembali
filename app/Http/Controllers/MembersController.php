@@ -29,7 +29,7 @@ class MembersController extends Controller
 
         $query = Customer::with(['user.roles']);
 
-        if ($auth->can('lihat data customer') && !$auth->can('lihat daftar customer')) {
+        if ($auth->can('lihat data customer') && !$auth->can('lihat daftar member')) {
             $query->where('user_id', $auth->id);
         }
 
@@ -47,7 +47,7 @@ class MembersController extends Controller
                 ->addColumn('category', fn($row) => $this->readableCategory($row->category))
                 // ->addColumn('loyalty', fn($row) => $this->readableLoyaltyLevel($row->loyalty_level))
                 ->editColumn('fullname', function ($row) {
-                    $url = route('customers.show', $row->id);
+                    $url = route('members.show', $row->id);
                     $name = Str::title($row->user->fullname ?? '-');
                     return '<a href="'.$url.'">'.e($name).'</a>';
                 })
@@ -78,19 +78,19 @@ class MembersController extends Controller
                 })
                 ->addColumn('action', function ($customer) {
                     $buttons = '';
-                    if (auth()->user()->can('ubah data customer')) {
-                        $buttons .= '<a href="' . route('customers.edit', $customer->id) . '" class="btn btn-icon btn-sm btn-dark me-1" title="Ubah">
+                    if (auth()->user()->can('ubah data member')) {
+                        $buttons .= '<a href="' . route('members.edit', $customer->id) . '" class="btn btn-icon btn-sm btn-warning me-1" title="Ubah">
                                         <i class="ti ti-edit"></i>
                                     </a>';
                     }
-                    if (auth()->user()->can('lihat data customer')) {
-                        $buttons .= '<a href="' . route('customers.show', $customer->id) . '" class="btn btn-icon btn-sm btn-dark me-1" title="Lihat">
+                    if (auth()->user()->can('lihat data member')) {
+                        $buttons .= '<a href="' . route('members.show', $customer->id) . '" class="btn btn-icon btn-sm btn-primary me-1" title="Lihat">
                                         <i class="ti ti-eye"></i>
                                     </a>';
 
                     }
-                    if (auth()->user()->can('hapus data customer')) {
-                        $buttons .= '<button data-id="' . $customer->id . '" class="btn btn-icon btn-sm btn-dark delete-customer" title="Hapus">
+                    if (auth()->user()->can('hapus data member')) {
+                        $buttons .= '<button data-id="' . $customer->id . '" class="btn btn-icon btn-sm btn-danger delete-customer" title="Hapus">
                                         <i class="ti ti-trash"></i>
                                     </button>';
                     }
@@ -100,7 +100,7 @@ class MembersController extends Controller
                 ->make(true);
         }
 
-        return view('customers.index');
+        return view('members.index');
     }
 
     private function readableCategory($value)
@@ -132,7 +132,10 @@ class MembersController extends Controller
         $religions = Religion::all();
         $provinces = Province::all();
         $roles = Role::all();
-        return view('customers.create', compact('customer', 'user', 'roles', 'religions', 'provinces'));
+        $externalRoles = Role::where('role_group', 'Eksternal')
+            ->orderBy('name')
+            ->pluck('name');
+        return view('members.create', compact('customer', 'user', 'roles', 'religions', 'provinces', 'externalRoles'));
     }
 
     public function store(Request $request)
@@ -264,7 +267,7 @@ if ($request->hasFile('photo')) {
     });
 
     return redirect()
-        ->route('customers.index')
+        ->route('members.index')
         ->with('success', 'Data customer berhasil ditambahkan.' .
             (session('new_user_password') ? ' Akun user baru dibuat. Password: ' . session('new_user_password') : '')
         );
@@ -304,12 +307,12 @@ public static function generateNicAjax()
     ]);
 }
 
- public function show(Customer $customer)
+ public function show(Customer $member)
     {
-        $customer->load('user');
-        return view('sdm.customers.show', [
-            'user' => $customer->user,
-            'customer' => $customer
+        $member->load('user');
+        return view('sdm.members.show', [
+            'user' => $member->user,
+            'member' => $member
         ]);
     }
 
@@ -320,6 +323,9 @@ public function edit($id)
         $religions = Religion::all();
         $provinces = Province::all();
         $roles = Role::all();
+        $externalRoles = Role::where('role_group', 'Eksternal')
+            ->orderBy('name')
+            ->pluck('name');
         $selectedRoles = $user->roles->pluck('name')->toArray();
         $cities = City::where('province_id', $user->province_id)->get();
         $districts = District::where('city_id', $user->city_id)->get();
@@ -327,7 +333,7 @@ public function edit($id)
         $postalCodes = PostalCode::where('sub_district_id', $user->sub_district_id)->get();
         
 
-        return view('customers.edit', compact('user', 'roles', 'selectedRoles', 'customer',
+        return view('members.edit', compact('user', 'roles', 'selectedRoles', 'customer', 'externalRoles',
         'religions', 'provinces', 'cities', 'districts', 'subDistricts', 'postalCodes'));
     }
 
@@ -460,7 +466,7 @@ public function update(Request $request, Customer $customer)
     });
 
     return redirect()
-        ->route('customers.show', $customer->id)
+        ->route('members.show', $customer->id)
         ->with('success', 'Data customer berhasil diperbarui.');
 }
 
@@ -483,7 +489,7 @@ public function destroy(Customer $customer): JsonResponse
             $roles = $user->roles->pluck('name')->toArray();
 
             // Kalau hanya punya role "Customer"
-            if (count($roles) === 1 && in_array('Customer', $roles)) {
+            if (count($roles) === 1 && in_array('Member', $roles)) {
 
                 // Hapus juga foto user kalau ada
                 if ($user->photo && Storage::disk('public')->exists('photos/' . $user->photo)) {
@@ -495,7 +501,7 @@ public function destroy(Customer $customer): JsonResponse
 
             } else {
                 // Kalau user masih punya role lain, hapus hanya role Customer-nya
-                $user->removeRole('Customer');
+                $user->removeRole('Member');
             }
         }
     });

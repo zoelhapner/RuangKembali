@@ -7,9 +7,9 @@
             <div class="row align-items-center">
                 <div class="col-12 col-md-auto ms-auto d-print-none">
                     <div class="btn-list">
-                 @can('tambah data karyawan')       
+                 @can('tambah data tim')       
                   
-                        <a href="{{ route("teams.create") }}" class="btn btn-dark" >
+                        <a href="{{ route("teams.create") }}" class="btn btn-primary" >
                             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -35,7 +35,7 @@
                     <div class="card">
                         <div class="card-header">
                             <p class="text-center mb-4" style="font-size: 1.5rem; font-weight: 400; font-family: 'Poppins', sans-serif;">
-                                 Daftar Karyawan
+                                 Daftar Tim
                             </p>
                         </div>
                         <div class="table-responsive">
@@ -49,14 +49,14 @@
                                         {{-- <th>Status Perkawinan</th> --}}
                                         <th>Posisi/Peran</th>
                                         <th>Status Karyawan</th>
-                                        <th>Tanggal Mulai Kerja</th>
+                                        {{-- <th>Tanggal Mulai Kerja</th> --}}
                                         {{-- <th>Gaji Pokok</th>
                                         <th>Tunjangan</th>
                                         <th>Potongan</th>
                                         <th>Bonus</th>
                                         <th>THR</th> --}}
-                                        <th>Surat Perjanjian Kerja</th>
-                                        <th>Sertifikat Pelatihan</th>
+                                        {{-- <th>Surat Perjanjian Kerja</th>
+                                        <th>Sertifikat Pelatihan</th> --}}
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -67,7 +67,7 @@
             </div>
         </div>
     </div>
-@can('tambah data karyawan')
+@can('tambah data tim')
 <a href="{{ route('teams.create') }}"
    class="mobile-fab d-md-none">
 
@@ -114,19 +114,19 @@
                     // { data: 'marital_status', name: 'marital_status'},
                     { data: 'roles', name: 'roles' },   
                     { data: 'employment_status', name: 'employment_status', orderable: false, searchable: false},
-                    { data: 'start_date', name: 'start_date' },  
+                    // { data: 'start_date', name: 'start_date' },  
                     // { data: 'basic_salary', name: 'basic_salary' },
                     // { data: 'allowance', name: 'allowance' },  
                     // { data: 'deduction', name: 'deduction' },  
                     // { data: 'bonus', name: 'bonus' },  
                     // { data: 'thr', name: 'thr' },  
-                    { data: 'contract_letter_file', name: 'contract_letter_file' },
-                    { data: 'training_certificate', name: 'training_certificate' },  
+                    // { data: 'contract_letter_file', name: 'contract_letter_file' },
+                    // { data: 'training_certificate', name: 'training_certificate' },  
                     { data: 'action', name: 'action', orderable: false, searchable: false }  
                 ],
                 language: {
                     search: "",
-                    searchPlaceholder: "Cari karyawan...",
+                    searchPlaceholder: "Cari anggota...",
                     lengthMenu: "Tampilkan _MENU_ data",
                     info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
                     infoEmpty: "Tidak ada data",
@@ -148,8 +148,8 @@
             });
 
             // Delete user functionally
-            $('#tableEmployees').on('click', '.delete-employee', function () {
-            const employeeId = $(this).data('id');
+            $('#tableEmployees').on('click', '.delete-team', function () {
+            const teamId = $(this).data('id');
 
             Swal.fire({
             title: 'Yakin ingin menghapus?',
@@ -166,7 +166,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
 
-                        url: `/employees/${employeeId}`,
+                        url: `/teams/${teamId}`,
                         method: 'DELETE',
                         data: {
                             _token: '{{ csrf_token() }}',

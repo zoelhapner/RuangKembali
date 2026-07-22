@@ -5,11 +5,11 @@
     <div class="container-xl">
         <div class="row align-items-center">
             <div class="col d-flex align-items-center">
-                <a href="{{ route('employees.index') }}" class="btn btn-dark d-flex align-items-center" style="margin-left: 30px;">
+                <a href="{{ route('teams.index') }}" class="btn btn-primary d-flex align-items-center">
                     <i class="ti ti-arrow-left"></i>
                 </a>
                 
-                    <h2 class="page-title mb-0">Tambah Karyawan</h2>
+                    <h2 class="page-title mb-0">Tambah Tim</h2>
                 
             </div>
         </div>
@@ -21,7 +21,7 @@
     <div class="container-xl">
         <div class="card shadow-sm border-0">
             <div class="card-body px-5 py-4">
-                <form action="{{ route('employees.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('teams.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @if ($errors->any())
                                         <div class="alert alert-danger">
@@ -41,7 +41,7 @@
                                     <i class="ti ti-user" style="font-size: 64px; color:#aaa;"></i>
                                 </div>
                             <label for="photo"
-                                class="btn btn-sm btn-dark position-absolute bottom-0 end-0 translate-middle rounded-circle"
+                                class="btn btn-sm btn-primary position-absolute bottom-0 end-0 translate-middle rounded-circle"
                                 title="Ganti Foto">
                                 <i class="ti ti-camera"></i>
                             </label>
@@ -73,29 +73,29 @@
                                 @enderror
                             </div>
                             <div class="col-md-2">
-                                <label class="form-label required">Jenis Kelamin</label>
-                                <select name="gender" class="form-select select2" required>
+                                <label class="form-label">Jenis Kelamin</label>
+                                <select name="gender" class="form-select select2">
                                     <option value="">-- Pilih --</option>
                                     <option value="1" {{ old('gender') == '1' ? 'selected' : '' }}>Laki-laki</option>
                                     <option value="2" {{ old('gender') == '2' ? 'selected' : '' }}>Perempuan</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label required">Tempat Lahir</label>
+                                <label class="form-label">Tempat Lahir</label>
                                 <input type="text" name="birth_place" class="form-control @error('birth_place') is-invalid @enderror" value="{{ old('birth_place') }}">
                                 @error('birth_place')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label required">Tanggal Lahir</label>
-                                            <input type="date" name="birth_date" class="form-control" required
+                                <label class="form-label">Tanggal Lahir</label>
+                                            <input type="date" name="birth_date" class="form-control"
                                                 value="{{ old('birth_date') }}"
                                                 pattern="\d{4}-\d{2}-\d{2}" placeholder="YYYY-MM-DD">
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label required">Agama</label>
-                                <select name="religion_id" class="form-select select2" required>
+                                <label class="form-label">Agama</label>
+                                <select name="religion_id" class="form-select select2">
                                     <option value="">-- Pilih Agama --</option>
                                     @foreach($religions as $religion)
                                         <option value="{{ $religion->id }}" {{ old('religion_id') == $religion->id ? 'selected' : '' }}>
@@ -109,8 +109,9 @@
                             </div>
                             
                             <div class="col-md-4">
-                                <label class="form-label required">Nomor KTP</label>
-                                <input type="text" class="form-control @error('identity_number') is-invalid @enderror" name="identity_number" maxlength="16" inputmode="numeric" pattern="\d{16}" value="{{ old('identity_number') }}" required>
+                                <label class="form-label">Nomor KTP</label>
+                                <input type="text" class="form-control @error('identity_number') is-invalid @enderror" name="identity_number" maxlength="16" inputmode="numeric" pattern="[0-9]{16}"
+                                oninput="this.value=this.value.replace(/[^0-9]/g,'')" value="{{ old('identity_number') }}">
                                 @error('identity_number')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -154,8 +155,8 @@
                                 @enderror
                             </div>
                             <div class="col-12">
-                                <label class="form-label required">Alamat Lengkap</label>
-                                <textarea name="address" rows="2" class="form-control @error('address') is-invalid @enderror" required>{{ old('address') }}</textarea>
+                                <label class="form-label">Alamat Lengkap</label>
+                                <textarea name="address" rows="2" class="form-control @error('address') is-invalid @enderror">{{ old('address') }}</textarea>
                                 @error('address')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -163,10 +164,9 @@
                         </div>
                         <div class="row g-4 mt-2">
                             <div class="col-md-6">
-                                <label class="form-label required">Provinsi</label>
+                                <label class="form-label">Provinsi</label>
                                 <select name="province_id" id="province" 
-                                        class="form-select select2 @error('province_id') is-invalid @enderror" 
-                                        required>
+                                        class="form-select select2 @error('province_id') is-invalid @enderror">
                                     <option value="">-- Pilih Provinsi --</option>
                                     @foreach($provinces as $province)
                                         <option value="{{ $province->id }}" {{ old('province_id') == $province->id ? 'selected' : '' }}>
@@ -179,8 +179,8 @@
                                 @enderror
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label required">Kabupaten/Kota</label>
-                                <select name="city_id" id="city" class="form-select select2" required>
+                                <label class="form-label">Kabupaten/Kota</label>
+                                <select name="city_id" id="city" class="form-select select2">
                                     <option value="">-- Pilih Kota --</option>
                                     
                                 </select>
@@ -189,8 +189,8 @@
                                 @enderror
                             </div>
                             <div class="col-md-5">
-                                <label class="form-label required">Kecamatan</label>
-                                <select name="district_id" id="district" class="form-select select2" required>
+                                <label class="form-label">Kecamatan</label>
+                                <select name="district_id" id="district" class="form-select select2">
                                     <option value="">-- Pilih Kecamatan --</option>
                                     
                                 </select>
@@ -199,8 +199,8 @@
                                 @enderror
                             </div>
                             <div class="col-md-5">
-                                <label class="form-label required">Kelurahan</label>
-                                <select name="sub_district_id" id="sub_district" class="form-select select2" required>
+                                <label class="form-label">Kelurahan</label>
+                                <select name="sub_district_id" id="sub_district" class="form-select select2">
                                     <option value="">-- Pilih Kelurahan --</option>
                                     
                                 </select>
@@ -209,8 +209,8 @@
                                 @enderror
                             </div>
                             <div class="col-md-2">
-                                <label class="form-label required">Kode Pos</label>
-                                <select name="postal_code_id" id="postal_code" class="form-select select2" required>
+                                <label class="form-label">Kode Pos</label>
+                                <select name="postal_code_id" id="postal_code" class="form-select select2">
                                     <option value="">-- Pilih Kode Pos --</option>
                                     
                                 </select>
@@ -260,8 +260,8 @@
                                 @enderror
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label required">Status Karyawan</label>
-                                <select name="employment_status" class="form-select" value="{{ old('employment_status') }}" required>
+                                <label class="form-label">Status Team</label>
+                                <select name="employment_status" class="form-select select2" value="{{ old('employment_status') }}">
                                     <option value="">-- Pilih Status --</option>
                                     <option value="Tetap" {{ old('employment_status') == 'Tetap' ? 'selected' : '' }}>Tetap</option>
                                     <option value="Kontrak" {{ old('employment_status') == 'Kontrak' ? 'selected' : '' }}>Kontrak</option>
@@ -269,7 +269,7 @@
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                            <label class="form-label">Tanggal Mulai Kerja :</label>
+                                            <label class="form-label">Tanggal Bergabung :</label>
                                             <input type="date" name="start_date" class="form-control" 
                                                 value="{{ old('start_date') }}"
                                                 pattern="\d{4}-\d{2}-\d{2}" placeholder="YYYY-MM-DD">
@@ -295,8 +295,8 @@
                                 <h3 class="fw-semibold mb-3 border-bottom pb-2">📎 Dokumen Karyawan</h3>   
                                 <div class="row g-4">
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label required">Upload Surat Perjanjian Kerja (PDF)</label>
-                                        <input type="file" name="contract_letter_file" class="form-control" accept="application/pdf" required>
+                                        <label class="form-label">Upload Surat Perjanjian Kerja (PDF)</label>
+                                        <input type="file" name="contract_letter_file" class="form-control" accept="application/pdf">
                                         @error('contract_letter_file')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
@@ -327,7 +327,7 @@
                         <div class="row g-4">
                             <div class="col-md">
                                 <label class="form-label">Gaji Pokok</label>
-                                <input type="number" id="basic_salary" name="basic_salary" class="form-control @error('basic_salary') is-invalid @enderror" value="{{ old('basic_salary') }}" required>
+                                <input type="number" id="basic_salary" name="basic_salary" class="form-control @error('basic_salary') is-invalid @enderror" value="{{ old('basic_salary') }}">
                                 @error('basic_salary')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -353,7 +353,7 @@
 
                     {{-- SUBMIT --}}
                     <div class="text-end mt-5">
-                        <button type="submit" class="btn btn-dark px-4">
+                        <button type="submit" class="btn btn-primary px-4">
                             <i class="ti ti-device-floppy me-1"></i> Simpan Data
                         </button>
                     </div>
@@ -377,17 +377,35 @@
         });
     </script>
 
-    <script>
-document.addEventListener('DOMContentLoaded', function() {
-    fetch('{{ route('employees.generateNik') }}')
-        .then(response => response.json())
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('{{ route('teams.generateNik') }}')
+        .then(async response => {
+            if (!response.ok) {
+                const text = await response.text();
+                throw new Error(
+                    `Status: ${response.status}\n` +
+                    `Status Text: ${response.statusText}\n\n` +
+                    text
+                );
+            }
+
+            return response.json();
+        })
         .then(data => {
             document.getElementById('nik').value = data.nik;
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+            console.error(error);
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: error.message
+            });
+        });
 });
 </script>
-
 
     <script>
         document.getElementById('photo').addEventListener('change', function (event) {
@@ -482,7 +500,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <script>
     $(document).ready(function () {
-    // 🟢 Ambil nilai lama (old) dari Blade
     let oldProvince  = "{{ old('province_id') }}";
     let oldCity      = "{{ old('city_id') }}";
     let oldDistrict  = "{{ old('district_id') }}";
@@ -500,17 +517,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, 200); // tunggu 200ms
 }
-
-
-    console.log({
-    oldProvince,
-    oldCity,
-    oldDistrict,
-    oldSub,
-    oldPostal
-});
-
-
     // 🔹 Event saat provinsi berubah
     $('#province').on('change', function () {
         loadCities(this.value);

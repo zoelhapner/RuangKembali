@@ -580,6 +580,11 @@ z-index: 1035;
     font-weight: 100 !important;
     color:#000 !important;
 }
+.card-header.bg-secondary{
+    background:#c3bbb0 !important;
+    font-weight: 100 !important;
+    color:#000 !important;
+}
 .btn-primary:hover{
     background:#c3bbb0 !important;
 }
@@ -588,6 +593,10 @@ z-index: 1035;
 .btn-success{
     background:#544a1e !important;
     border-color:#544a1e !important;
+    color:#111;
+}
+.badge.bg-primary{
+    background:#dccba8 !important;
     color:#111;
 }
 .badge.bg-success{

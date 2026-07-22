@@ -22,7 +22,7 @@
                     <div class="btn-list">
 
                         <a href="{{ route('trial.export', request()->all()) }}"
-                           class="btn btn-dark"
+                           class="btn btn-primary"
                            target="_blank">
 
                             <i class="ti ti-file-export"></i>
@@ -69,7 +69,7 @@
                 </div>
                 
                 <div class="col-md-2">
-                    <button type="submit" class="btn btn-dark text-white w-100">
+                    <button type="submit" class="btn btn-primary text-black w-100">
                         <i class="ti ti-filter"></i> Filter
                     </button>
                 </div>

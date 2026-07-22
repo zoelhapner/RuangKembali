@@ -5,7 +5,7 @@
     <div class="container-xl">
         <div class="row align-items-center">
             <div class="col d-flex align-items-center">
-                <a href="{{ route('journals.index') }}" class="btn btn-dark d-flex align-items-center">
+                <a href="{{ route('journals.index') }}" class="btn btn-primary d-flex align-items-center">
                     <i class="ti ti-arrow-left"></i>
                 </a>      
                     <h2 class="page-title mb-0">Edit Jurnal</h2> 
@@ -72,7 +72,7 @@
 
                             <h4>Detail Akun</h4>
                             <div class="table-responsive mb-4">
-                                <table class="table table-bordered">
+                                <table class="table table-bordered jurnal-table">
                                     <thead>
                                         <tr>
                                             <th style="width:20%">Akun</th>
@@ -115,12 +115,12 @@
                                                                 data-selected="{{ $detail->person ?? '' }}">
                                                             <option value="">-- Pilih User --</option>
                                                             @php
-                                                                if ($detail->person_type === 'employee') {
-                                                                    $users = $employees;
-                                                                } elseif ($detail->person_type === 'customer') {
-                                                                    $users = $customers;
-                                                                } elseif ($detail->person_type === 'worker') {
-                                                                    $users = $workers;
+                                                                if ($detail->person_type === 'team') {
+                                                                    $users = $teams;
+                                                                } elseif ($detail->person_type === 'member') {
+                                                                    $users = $members;
+                                                                } elseif ($detail->person_type === 'partner') {
+                                                                    $users = $partners;
                                                                 } else {
                                                                     $users = collect();
                                                                 }
@@ -157,7 +157,7 @@
                                                             <input type="hidden" name="details[{{ $i }}][credit]" value="{{ $detail->credit }}">
                                                         @endif
                                                     </td>
-                                                    <td><button type="button" class="btn btn-sm btn-dark remove-row" title="Hapus">
+                                                    <td><button type="button" class="btn btn-sm btn-primary remove-row" title="Hapus">
                                                                 <i class="ti ti-trash"></i>
                                                         </button>
                                                     </td>
@@ -168,7 +168,7 @@
 
                                     <tfoot>
                                         <tr>
-                                            <td colspan="6"><button type="button" id="add-row" class="btn btn-sm btn-dark text-white">Tambah Baris</button></td>
+                                            <td colspan="6"><button type="button" id="add-row" class="btn btn-sm btn-primary text-black">Tambah Baris</button></td>
                                         </tr>
                                         <tr>
                                             <th colspan="3">Subtotal</th>
@@ -194,39 +194,75 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="enclosure" class="form-label">Lampiran (PDF / Gambar)</label>
-                                <input type="file" name="enclosure" class="form-control">
-
-                                @if($journal->enclosure)
-                                <div id="enclosure-preview" class="mt-3">
-                                    <div class="position-relative border rounded p-2 d-inline-block">
-
-                                        <button type="button"
-                                                class="btn btn-sm btn-danger position-absolute top-0 end-0"
-                                                id="remove-enclosure"
-                                                title="Hapus lampiran">
-                                            <i class="ti ti-x"></i>
-                                        </button>
-
-                                        @if(Str::endsWith($journal->enclosure, ['.jpg', '.jpeg', '.png']))
-                                            <img src="{{ asset('storage/'.$journal->enclosure) }}"
-                                                alt="Lampiran"
-                                                width="200">
-                                        @elseif(Str::endsWith($journal->enclosure, ['.pdf']))
-                                            <a href="{{ asset('storage/'.$journal->enclosure) }}"
-                                            target="_blank">
-                                                <i class="ti ti-file-type-pdf"></i> Lihat PDF
-                                            </a>
-                                        @endif
-
-                                        <input type="hidden" name="remove_enclosure" id="remove_enclosure" value="0">
-                                    </div>
-                                </div>
-                                @endif
+                                <label class="form-label">Tambah Lampiran</label>
+                                <input type="file" name="enclosure[]" class="form-control" multiple accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.xls,.xlsx">
+                                @error('enclosure.*')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
+                            @if($journal->enclosures->isNotEmpty())
+                                <div class="row mt-3">
+                                    @foreach($journal->enclosures as $enclosure)
+                                        @php
+                                            $ext = strtolower(pathinfo($enclosure->file_name, PATHINFO_EXTENSION));
+                                        @endphp
+                                        <div class="col-md-4 mb-3">
+                                            <div class="card">
+                                                <div class="card-body text-center position-relative">
+                                                        <input
+                                                            type="checkbox"
+                                                            name="remove_enclosures[]"
+                                                            value="{{ $enclosure->id }}"
+                                                            class="remove-checkbox d-none">
 
+                                                        <button
+                                                            type="button"
+                                                            class="btn btn-sm btn-danger position-absolute top-0 end-0 remove-enclosure">
+                                                            <i class="ti ti-x"></i>
+                                                        </button>
+                                                    @if(in_array($ext,['jpg','jpeg','png','gif','webp']))
+                                                        <img
+                                                            src="{{ asset('storage/'.$enclosure->file_name) }}"
+                                                            class="img-fluid rounded"
+                                                            style="height:180px;object-fit:cover">
+                                                    @elseif($ext=='pdf')
+                                                        <i class="ti ti-file-type-pdf text-danger"
+                                                        style="font-size:60px"></i>
+                                                        <p class="mt-2">
+                                                            {{ basename($enclosure->file_name) }}
+                                                        </p>
+                                                    @elseif(in_array($ext,['doc','docx']))
+                                                        <i class="ti ti-file-type-doc text-primary"
+                                                        style="font-size:60px"></i>
+
+                                                        <p class="mt-2">
+                                                            {{ basename($enclosure->file_name) }}
+                                                        </p>
+
+                                                    @elseif(in_array($ext,['xls','xlsx']))
+
+                                                        <i class="ti ti-file-type-xls text-success"
+                                                        style="font-size:60px"></i>
+
+                                                        <p class="mt-2">
+                                                            {{ basename($enclosure->file_name) }}
+                                                        </p>
+
+                                                    @endif
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    @endforeach
+
+                                </div>
+
+                            @endif
                             <div class="text-end">
-                                <button type="submit" class="btn btn-dark text-white">Simpan Perubahan</button>
+                                <button type="submit" class="btn btn-primary text-black">Simpan Perubahan</button>
                             </div>
                             
                             {{-- @if(!auth()->user()->hasRole('Super-Admin'))
@@ -320,10 +356,10 @@ $(document).ready(function () {
         if (!personType) return;
 
         let urlMap = {
-            employee: '/get-employees',
-            customer: '/get-customers',
-            worker: '/get-workers',
-            license: '/get-licenses'
+            team: '/get-teams',
+            member: '/get-members',
+            mitra: '/get-partners',
+            vendor: '/get-vendors'
         };
 
         if (!urlMap[personType]) return;
@@ -427,7 +463,7 @@ $(document).ready(function () {
                 <td><input type="text" name="details[${rowCount}][debit]" class="form-control debit-input"></td>
                 <td><input type="text" name="details[${rowCount}][credit]" class="form-control credit-input"></td>
                 <td>
-                    <button type="button" class="btn btn-sm btn-dark remove-row">
+                    <button type="button" class="btn btn-sm btn-primary remove-row">
                         <i class="ti ti-trash"></i>
                     </button>
                 </td>
@@ -544,7 +580,9 @@ $(document).ready(function () {
     });
 
     calculateSubtotals();
-    $(document).on('click', '#remove-enclosure', function () {
+    $(document).on('click', '.remove-enclosure', function () {
+
+        const $card = $(this).closest('.card');
 
         Swal.fire({
             title: 'Hapus lampiran?',
@@ -556,10 +594,11 @@ $(document).ready(function () {
         }).then((result) => {
 
             if (result.isConfirmed) {
-                $('#remove_enclosure').val('1');
 
-                // langsung sembunyikan preview
-                $('#enclosure-preview').hide();
+                $card.find('.remove-checkbox').prop('checked', true);
+
+                $card.fadeOut();
+
             }
 
         });

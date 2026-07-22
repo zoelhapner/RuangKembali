@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAccountingJournalRequest;
 use App\Http\Requests\UpdateAccountingJournalRequest;
+use App\Models\AccountingJournalEnclosure;
 use App\Models\AccountingJournal;
 use App\Models\AccountingJournalDetail;
 use App\Models\AccountingAccount;
 use App\Models\AccountingPeriod;
 use App\Models\License;
 use App\Models\Customer;
-use App\Models\Employee;
-use App\Models\Worker;
+use App\Models\Team;
+use App\Models\Partner;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,19 +64,19 @@ class AccountingJournalController extends Controller
                 $buttons = '';
 
                 if (auth()->user()->can('ubah jurnal')) {
-                    $buttons .= '<a href="' . route('journals.edit', $journal->id) . '" class="btn btn-sm btn-dark me-1">
+                    $buttons .= '<a href="' . route('journals.edit', $journal->id) . '" class="btn btn-sm btn-warning me-1">
                                     <i class="ti ti-edit"></i>
                                 </a>';
                 }
 
                 if (auth()->user()->can('lihat jurnal')) {
-                    $buttons .= '<a href="' . route('journals.show', $journal->id) . '" class="btn btn-sm btn-dark me-1">
+                    $buttons .= '<a href="' . route('journals.show', $journal->id) . '" class="btn btn-sm btn-primary me-1">
                                     <i class="ti ti-eye"></i>
                                 </a>';
                 }
 
                 if (auth()->user()->can('hapus jurnal')) {
-                    $buttons .= '<button data-id="' . $journal->id . '" class="btn btn-sm btn-dark delete-journal">
+                    $buttons .= '<button data-id="' . $journal->id . '" class="btn btn-sm btn-danger delete-journal">
                                     <i class="ti ti-trash"></i>
                                 </button>';
                 }
@@ -101,9 +102,10 @@ public function create()
         ->orderBy('account_code')
         ->get();
 
-    $employees = User::select('id', 'fullname as name')->get();
-    $customers = User::select('id', 'fullname as name')->get();
-    $workers = User::select('id', 'fullname as name')->get();
+    $teams = User::select('id', 'fullname as name')->get();
+    $members = User::select('id', 'fullname as name')->get();
+    $vendors = User::select('id', 'fullname as name')->get();
+    $partners = User::select('id', 'fullname as name')->get();
 
     $journalCode = $this->generateNextJournalCode();
     $lastClosedDate = DB::table('accounting_periods')
@@ -113,9 +115,10 @@ public function create()
 
     return view('journals.create', [
         'accounts'       => $accounts,
-        'employees'      => $employees,
-        'customers'      => $customers,
-        'workers'        => $workers,
+        'team'      => $teams,
+        'member'      => $members,
+        'vendor'        => $vendors,
+        'mitra'        => $partners,
         'journalCode'    => $journalCode,
         'lastClosedDate' => $lastClosedDate,
     ]);
@@ -184,30 +187,32 @@ public function store(StoreAccountingJournalRequest $request)
         return back()->withErrors('Debit dan Credit harus balance.');
     }
 
-    // Upload file
-    $enclosurePath = null;
-    if ($request->hasFile('enclosure')) {
-        $file = $request->file('enclosure');
-        $enclosurePath = $file->storeAs(
-            'attachments',
-            Str::uuid().'.'.$file->getClientOriginalExtension(),
-            'public'
-        );
-    }
-
     // ✅ Pakai auto generate (tidak dari request)
     $journalCode = $this->generateNextJournalCode();
 
-    // Simpan jurnal
+DB::transaction(function () use ($request, $licenseId, $user, $journalCode) {
     $journal = AccountingJournal::create([
         'license_id'       => $licenseId,
         'journal_code'     => $journalCode,
         'transaction_date' => $request->transaction_date,
         'description'      => $request->description,
         'created_by'       => $user->id,
-        'enclosure'        => $enclosurePath,
     ]);
+    if ($request->hasFile('enclosure')) {
+        foreach ($request->file('enclosure') as $file) {
 
+            $path = $file->storeAs(
+                'attachments',
+                Str::uuid().'.'.$file->getClientOriginalExtension(),
+                'public'
+            );
+
+            AccountingJournalEnclosure::create([
+                'journal_id' => $journal->id,
+                'file_name'  => $path,
+            ]);
+        }
+    }
     foreach ($request->details as $detail) {
         AccountingJournalDetail::create([
             'journal_id'  => $journal->id,
@@ -218,7 +223,7 @@ public function store(StoreAccountingJournalRequest $request)
             'description' => $detail['description'] ?? null,
         ]);
     }
-
+});
     return redirect()->route('journals.index')
         ->with('success', 'Jurnal berhasil dibuat.');
 }
@@ -258,21 +263,21 @@ public function edit(AccountingJournal $journal)
         ->orderBy('account_code')
         ->get();
 
-    $employees = Employee::with('user')
+    $teams = Team::with('user')
         ->get()
         ->map(fn($emp) => [
             'id'   => $emp->id,
             'name' => $emp->user?->fullname ?? '-',
         ]);
 
-    $customers = Customer::with('user')
+    $members = Customer::with('user')
         ->get()
         ->map(fn($cus) => [
             'id'   => $cus->id,
             'name' => $cus->user?->fullname ?? '-',
         ]);
 
-    $workers = Worker::with('user')
+    $partners = Partner::with('user')
         ->get()
         ->map(fn($work) => [
             'id'   => $work->id,
@@ -281,7 +286,7 @@ public function edit(AccountingJournal $journal)
 
     $journal->load(['details.account']);
 
-    return view('journals.edit', compact('journal', 'accounts', 'employees', 'customers', 'workers'));
+    return view('journals.edit', compact('journal', 'accounts', 'teams', 'members', 'partners'));
 }
 
 
@@ -300,33 +305,32 @@ public function update(UpdateAccountingJournalRequest $request, AccountingJourna
         ]);
     }
 
-    $enclosurePath = $journal->enclosure;
-    if ($request->remove_enclosure == '1') {
-
-        if ($journal->enclosure && Storage::disk('public')->exists($journal->enclosure)) {
-            Storage::disk('public')->delete($journal->enclosure);
+    if ($request->filled('remove_enclosures')) {
+        $files = AccountingJournalEnclosure::whereIn(
+            'id',
+            $request->remove_enclosures
+        )->get();
+        foreach ($files as $file) {
+            Storage::disk('public')->delete($file->file_name);
+            $file->delete();
         }
-
-        $enclosurePath = null;
     }
     if ($request->hasFile('enclosure')) {
-        if ($journal->enclosure && Storage::disk('public')->exists($journal->enclosure)) {
-            Storage::disk('public')->delete($journal->enclosure);
+        foreach ($request->file('enclosure') as $file) {
+            $path = $file->storeAs(
+                'attachments',
+                Str::uuid().'.'.$file->getClientOriginalExtension(),
+                'public'
+            );
+            $journal->enclosures()->create([
+                'file_name' => $path,
+            ]);
         }
-
-        $file = $request->file('enclosure');
-
-        $enclosurePath = $file->storeAs(
-            'attachments',
-            Str::uuid().'.'.$file->getClientOriginalExtension(),
-            'public'
-        );
     }
 
     $journal->update([
         'transaction_date' => $request->transaction_date,
         'description' => $request->description,
-        'enclosure' => $enclosurePath,
     ]);
 
     // 🔹 Reset detail
@@ -798,7 +802,6 @@ public function exportTrial(Request $request)
     $startDate = $request->start_date ?? now()->startOfMonth()->toDateString();
     $endDate   = $request->end_date ?? now()->endOfMonth()->toDateString();
 
-    // 🔹 Filter lisensi sesuai role → sama seperti trialBalance()
     if ($user->hasRole('Super-Admin')) {
         $licenses = License::all();
     } elseif ($user->hasRole('Pemilik Lisensi')) {
@@ -807,15 +810,25 @@ public function exportTrial(Request $request)
         $licenses = $user->employee?->licenses ?? collect();
     }
 
-   $activeLicenseId = $request->get('license_id') ?? session('active_license_id');
+    $activeLicenseId = $request->get('license_id') ?? session('active_license_id');
 
-    // 🔹 Ambil data yang sama seperti di view trial balance
-    $groupedAccounts = $this->getGroupedAccounts($startDate, $endDate, $activeLicenseId);
-  
-    $totalDebit  = collect($groupedAccounts)->sum(fn($cat) => collect($cat)->sum(fn($sub) => $sub['subtotalDebit']));
-    $totalCredit = collect($groupedAccounts)->sum(fn($cat) => collect($cat)->sum(fn($sub) => $sub['subtotalCredit']));
+    $groupedAccounts = $this->buildGroupedAccounts(
+        function ($q) use ($startDate, $endDate, $activeLicenseId) {
 
-    // 🔹 Generate PDF
+            $q->whereBetween('transaction_date', [$startDate, $endDate]);
+
+            if ($activeLicenseId) {
+                $q->where('license_id', $activeLicenseId);
+            }
+        }
+    );
+
+    $totalDebit = collect($groupedAccounts)
+        ->sum(fn($cat) => collect($cat)->sum(fn($sub) => $sub['subtotalDebit']));
+
+    $totalCredit = collect($groupedAccounts)
+        ->sum(fn($cat) => collect($cat)->sum(fn($sub) => $sub['subtotalCredit']));
+
     $pdf = Pdf::loadView('journals.trialbalance-pdf', [
         'groupedAccounts' => $groupedAccounts,
         'startDate'       => $startDate,
@@ -824,7 +837,6 @@ public function exportTrial(Request $request)
         'activeLicenseId' => $activeLicenseId,
         'totalDebit'      => $totalDebit,
         'totalCredit'     => $totalCredit,
-        'request'         => $request,
     ]);
 
     return $pdf->stream('trial-balance.pdf');
@@ -835,7 +847,7 @@ public function print(AccountingJournal $journal)
     $pdf = Pdf::loadView('journals.print', compact('journal'))
         ->setPaper('a4', 'landscape'); // bisa juga landscape
 
-    return $pdf->stream('Jurnal-Harian'.-$journal->journal_code.'.pdf');
+    return $pdf->stream('Jurnal-Harian'.$journal->journal_code.'.pdf');
 }
 
 public function balanceSheet(Request $request)

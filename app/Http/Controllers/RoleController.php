@@ -107,11 +107,11 @@ class RoleController extends Controller
             'role_group' => 'required|in:Internal,Eksternal',
             'external_model' => 'nullable|string'
         ]);
-        if ($request->role_group === 'Eksternal' && !$request->external_model) {
-            return back()
-                ->withErrors(['external_model' => 'External model wajib dipilih untuk role Eksternal'])
-                ->withInput();
-        }
+        // if ($request->role_group === 'Eksternal' && !$request->external_model) {
+        //     return back()
+        //         ->withErrors(['external_model' => 'External model wajib dipilih untuk role Eksternal'])
+        //         ->withInput();
+        // }
 
         $role = Role::create([
             'name' => $request->name,

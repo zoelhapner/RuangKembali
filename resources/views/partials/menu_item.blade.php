@@ -101,11 +101,12 @@
                     <ul class="nav nav-sm flex-column ms-4">
                         @foreach($filteredChildren as $child)
                             @php
-                            $url = trim($child['url'], '/');
+                                $current = trim(request()->path(), '/');
+                                $url     = trim($child['url'], '/');
 
-                            $childActive = $child['type'] === 'route'
-                                ? request()->routeIs($child['url'])
-                                : trim(request()->path(), '/') === $url;
+                                $childActive =
+                                    $current === $url ||
+                                    preg_match('#^'.preg_quote($url, '#').'/(create|\d+(/edit)?|\d+)$#', $current);
                             @endphp
 
                             <li class="nav-item">

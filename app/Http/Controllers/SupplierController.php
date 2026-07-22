@@ -65,7 +65,7 @@ class SupplierController extends Controller
                 })
                 
                 ->editColumn('fullname', function ($row) {
-                    $url = route('suppliers.show', $row->id);
+                    $url = route('vendors.show', $row->id);
                     $name = Str::title($row->user->fullname ?? '-');
                     return '<a href="'.$url.'">'.e($name).'</a>';
                 })
@@ -73,12 +73,12 @@ class SupplierController extends Controller
                 ->addColumn('action', function ($supplier) {
                     $buttons = '';
                     if (auth()->user()->can('ubah data supplier')) {
-                        $buttons .= '<a href="' . route('suppliers.edit', $supplier->id) . '" class="btn btn-icon btn-sm btn-dark me-1" title="Ubah">
+                        $buttons .= '<a href="' . route('vendors.edit', $supplier->id) . '" class="btn btn-icon btn-sm btn-dark me-1" title="Ubah">
                                         <i class="ti ti-edit"></i>
                                     </a>';
                     }
                     if (auth()->user()->can('lihat data supplier')) {
-                        $buttons .= '<a href="' . route('suppliers.show', $supplier->id) . '" class="btn btn-icon btn-sm btn-dark me-1" title="Lihat">
+                        $buttons .= '<a href="' . route('vendors.show', $supplier->id) . '" class="btn btn-icon btn-sm btn-dark me-1" title="Lihat">
                                         <i class="ti ti-eye"></i>
                                     </a>';
 
@@ -94,7 +94,7 @@ class SupplierController extends Controller
                 ->make(true);
         }
 
-        return view('suppliers.index');
+        return view('vendors.index');
     }
 
     /**
@@ -106,7 +106,7 @@ class SupplierController extends Controller
         $religions = Religion::all();
         $provinces = Province::all();
         $roles = Role::all();
-        return view('suppliers.create', compact('user', 'roles', 'religions', 'provinces'));
+        return view('vendors.create', compact('user', 'roles', 'religions', 'provinces'));
     }
 
     public function store(Request $request)
@@ -234,7 +234,7 @@ class SupplierController extends Controller
     });
 
     return redirect()
-        ->route('suppliers.index')
+        ->route('vendors.index')
         ->with('success', 'Data supplier berhasil ditambahkan.' .
             (session('new_user_password') ? ' Akun user baru dibuat. Password: ' . session('new_user_password') : '')
         );
@@ -257,7 +257,7 @@ public function generateSupplierIdAjax()
     {
         $supplier->load('user');
         // $productColors = $product->colors->pluck('id')->toArray();
-        return view('suppliers.show', [
+        return view('vendors.show', [
             'user' => $supplier->user,
             'supplier' => $supplier,
             'products' => $supplier->products()
@@ -271,10 +271,6 @@ public function generateSupplierIdAjax()
             'types' => ProductType::all(),
         ]);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         $supplier = Supplier::with(['user.roles', 'user.bank'])->findOrFail($id);
@@ -288,13 +284,9 @@ public function generateSupplierIdAjax()
         $subDistricts = SubDistrict::where('district_id', $user->district_id)->get();
         $postalCodes = PostalCode::where('sub_district_id', $user->sub_district_id)->get();
         
-        return view('suppliers.edit', compact('user', 'roles', 'selectedRoles', 'supplier',
+        return view('vendors.edit', compact('user', 'roles', 'selectedRoles', 'supplier',
         'religions', 'provinces', 'cities', 'districts', 'subDistricts', 'postalCodes'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Supplier $supplier)
 {
     $validated = $request->validate([
@@ -421,7 +413,7 @@ public function generateSupplierIdAjax()
     });
 
     return redirect()
-        ->route('suppliers.show', $supplier->id)
+        ->route('vendors.show', $supplier->id)
         ->with('success', 'Data supplier berhasil diperbarui.');
 }
 
@@ -506,7 +498,7 @@ public function datatableProducts(Request $request, Supplier $supplier)
             return '
             <div class="label-wrapper"
                 data-pivot="'.$row->pivot_id.'"
-                data-url="'.route('supplier-product.update-label').'">
+                data-url="'.route('vendor-product.update-label').'">
 
                 <span class="label-text">
                     '.$row->name.' '.$badge.' 
@@ -537,13 +529,13 @@ public function datatableProducts(Request $request, Supplier $supplier)
             return '
                 <button 
                     class="btn btn-icon btn-sm btn-dark btn-duplicate"
-                    data-url="'.route('suppliers.duplicateProduct', [$supplier->id, $row->id]).'"
+                    data-url="'.route('vendors.duplicateProduct', [$supplier->id, $row->id]).'"
                 >
                     <i class="ti ti-copy"></i>
                 </button>
                 <button 
                         data-pivot="'.$row->pivot_id.'"
-                        data-url="' . route('supplier-product.destroy', $row->pivot_id) . '" 
+                        data-url="' . route('vendor-product.destroy', $row->pivot_id) . '" 
                         class="btn btn-icon btn-sm btn-dark btn-delete">
                         <i class="ti ti-trash"></i>
                 </button>
@@ -556,7 +548,7 @@ public function datatableProducts(Request $request, Supplier $supplier)
                 data-product="'.$row->id.'"
                 data-supplier="'.$supplier->id.'"
                 data-pivot="'.$row->pivot_id.'"
-                data-url="'.route('supplier-product.update-price').'">
+                data-url="'.route('vendor-product.update-price').'">
 
                 <span class="price-text">
                     <span class="price-label"

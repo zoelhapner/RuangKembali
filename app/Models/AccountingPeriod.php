@@ -19,6 +19,7 @@ class AccountingPeriod extends Model
         'is_closed',
         'closed_by',
         'closed_at',
+        'year'
     ];
 
      protected $casts = [

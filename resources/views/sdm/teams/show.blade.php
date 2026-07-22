@@ -5,7 +5,7 @@
 
     <div class="row align-items-center" style="padding-bottom:20px">
         <div class="col d-flex align-items-center">
-            <a href="{{ route('employees.index') }}" class="btn btn-dark d-flex align-items-center">
+            <a href="{{ route('teams.index') }}" class="btn btn-primary d-flex align-items-center">
                 <i class="ti ti-arrow-left"></i>
             </a>
                 <h2 class="page-title">Detail Karyawan</h2>
@@ -44,7 +44,7 @@
             <div class="card mb-4 shadow-sm">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h3 class="card-title mb-0">Informasi Personal</h3>
-                    <a href="{{ route('employees.edit', $team->id) }}" class="btn btn-outline-dark btn-sm" data-bs-toggle="tooltip" title="Ubah Detail">
+                    <a href="{{ route('teams.edit', $team->id) }}" class="btn btn-outline-dark btn-sm" data-bs-toggle="tooltip" title="Ubah Detail">
                         <i class="ti ti-edit"></i>
                     </a>
                 </div>
@@ -180,7 +180,7 @@
 
                         <div class="col-md-4 mt-3">
                             <div class="text-muted small">Gaji Pokok</div>
-                            <div class="fw-bold">Rp {{ number_format($team->salary, 0, ',', '.') }}</div>
+                            <div class="fw-bold">Rp {{ number_format($team->basic_salary, 0, ',', '.') }}</div>
                         </div>
 
                         <div class="col-md-4 mt-3">

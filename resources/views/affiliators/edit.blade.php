@@ -5,7 +5,7 @@
     <div class="container-xl">
         <div class="row align-items-center">
             <div class="col d-flex align-items-center">
-                <a href="{{ route('affiliators.index') }}" class="btn btn-dark d-flex align-items-center" style="margin-left: 30px;">
+                <a href="{{ route('affiliators.index') }}" class="btn btn-primary d-flex align-items-center" style="margin-left: 30px;">
                     <i class="ti ti-arrow-left"></i>
                 </a>
                 
@@ -37,7 +37,7 @@
                     <div class="text-center mb-5">
                         <div class="position-relative d-inline-block">
                             @if ($user->photo)
-                                <img id="previewImage" src="{{ asset('storage/photos/'.$user->photo) }}" alt="Profile" 
+                                <img id="previewImage" src="{{ asset('storage/'.$user->photo) }}" alt="Profile" 
                                     class="rounded-3 shadow-sm border" width="150" height="150"
                                     style="object-fit: cover;">
                             @else
@@ -48,7 +48,7 @@
                                 </div>
                             @endif
                             <label for="photo"
-                                class="btn btn-sm btn-dark position-absolute bottom-0 end-0 translate-middle rounded-circle"
+                                class="btn btn-sm btn-primary position-absolute bottom-0 end-0 translate-middle rounded-circle"
                                 title="Ganti Foto">
                                 <i class="ti ti-camera"></i>
                             </label>
@@ -81,8 +81,8 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-2">
-                                    <label class="form-label required">Jenis Kelamin</label>
-                                    <select name="gender" class="form-select" value="{{ old('gender') }}" required>
+                                    <label class="form-label">Jenis Kelamin</label>
+                                    <select name="gender" class="form-select" value="{{ old('gender') }}">
                                         <option value="">-- Pilih --</option>
                                         <option value="1" {{ old('gender', $user->gender) == 1 ? 'selected' : '' }}>Laki-laki</option>
                                         <option value="2" {{ old('gender', $user->gender) == 2 ? 'selected' : '' }}>Perempuan</option>
@@ -96,14 +96,14 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label required">Tanggal Lahir</label>
-                                                <input type="date" name="birth_date" class="form-control" required
+                                    <label class="form-label">Tanggal Lahir</label>
+                                                <input type="date" name="birth_date" class="form-control"
                                                     value="{{ old('birth_date', $user->birth_date) }}"
                                                     pattern="\d{4}-\d{2}-\d{2}" placeholder="YYYY-MM-DD">
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label required">Agama</label>
-                                    <select name="religion_id" class="form-select select2" required>
+                                    <label class="form-label">Agama</label>
+                                    <select name="religion_id" class="form-select select2">
                                         <option value="">-- Pilih Agama --</option>
                                         @foreach($religions as $religion)
                                             <option value="{{ $religion->id }}" {{ old('religion_id', $user->religion_id) == $religion->id ? 'selected' : '' }}>
@@ -137,15 +137,15 @@
                             <h3 class="fw-semibold mb-3 border-bottom pb-2">📞 Kontak & Alamat</h3>
                             <div class="row g-4">
                                 <div class="col-md-6">
-                                    <label class="form-label">Nomor Telepon</label>
-                                    <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone', $user->phone) }}">
+                                    <label class="form-label required">Nomor Telepon</label>
+                                    <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone', $user->phone) }}" required>
                                     @error('phone')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Email</label>
-                                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email', $user->email) }}">
+                                    <label class="form-label required">Email</label>
+                                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email', $user->email) }}" required>
                                     @error('email')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -160,8 +160,8 @@
                             </div>
                             <div class="row g-4 mt-2">
                                 <div class="col-md-6">
-                                    <label class="required">Provinsi</label>
-                                        <select name="user_province_id" id="user_province" class="form-select select2" required>
+                                    <label class="form-label">Provinsi</label>
+                                        <select name="user_province_id" id="user_province" class="form-select select2">
                                             <option value="">-- Pilih Provinsi --</option>
                                             @foreach($provinces as $province)
                                                 <option value="{{ $province->id }}"
@@ -172,8 +172,8 @@
                                         </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="required">Kabupaten/Kota</label>
-                                                <select name="user_city_id" id="user_city" class="form-select select2" required>
+                                    <label class="form-label">Kabupaten/Kota</label>
+                                                <select name="user_city_id" id="user_city" class="form-select select2">
                                                     <option value="">-- Pilih Kota --</option>
                                                     @foreach($cities as $city)
                                                         <option value="{{ $city->id }}"
@@ -184,8 +184,8 @@
                                                 </select>
                                 </div>
                                 <div class="col-md-5">
-                                    <label class="required">Kecamatan</label>
-                                                <select name="user_district_id" id="user_district" class="form-select select2" required>
+                                    <label class="form-label">Kecamatan</label>
+                                                <select name="user_district_id" id="user_district" class="form-select select2">
                                                     <option value="">-- Pilih Kecamatan --</option>
                                                     @foreach($districts as $district)
                                                         <option value="{{ $district->id }}"
@@ -196,8 +196,8 @@
                                                 </select>
                                 </div>
                                 <div class="col-md-5">
-                                    <label class="required">Kelurahan</label>
-                                                <select name="user_sub_district_id" id="user_sub_district" class="form-select select2" required>
+                                    <label class="form-label">Kelurahan</label>
+                                                <select name="user_sub_district_id" id="user_sub_district" class="form-select select2">
                                                     <option value="">-- Pilih kelurahan --</option>
                                                     @foreach($subDistricts as $sub_district)
                                                         <option value="{{ $sub_district->id }}"
@@ -208,8 +208,8 @@
                                                 </select>
                                 </div>
                                 <div class="col-md-2">
-                                    <label class="required">Kode Pos</label>
-                                                <select name="user_postal_code_id" id="user_postal_code" class="form-select select2" required>
+                                    <label class="form-label">Kode Pos</label>
+                                                <select name="user_postal_code_id" id="user_postal_code" class="form-select select2">
                                                     <option value="">-- Pilih kelurahan --</option>
                                                     @foreach($postalCodes as $postal_code)
                                                         <option value="{{ $postal_code->id }}"
@@ -228,7 +228,7 @@
                             <div class="row g-4">
                                 <div class="col-md-4">
                                     <label class="form-label" for="bank_id">Nama Bank</label>
-                                        <select id="bank_id" name="bank_id" class="form-select"
+                                        <select id="bank_id" name="bank_id" class="form-select select2"
                                         value="{{ old('bank_id', auth()->user()->bank_id) }}">
                                             <option value="">Pilih Bank</option>
                                         </select>
@@ -252,7 +252,7 @@
                     
 
                     <div class="section-block mb-5">
-                        <h3 class="fw-semibold mb-3 border-bottom pb-2">Data Pelanggan</h3>
+                        <h3 class="fw-semibold mb-3 border-bottom pb-2">Data Affiliator</h3>
                         <div class="row g-4">
                             <div class="col-md-4">
                                 <label class="form-label required">Nomor Identitas affiliator (nia)</label>
@@ -264,7 +264,7 @@
 
                             <div class="col-md-4">
                                 <label class="form-label">Kategori</label>
-                                <select name="membership" class="form-select">
+                                <select name="membership" class="form-select select2">
                                     <option value="">-- Pilih --</option>
                                     <option value="1" {{ old('membership', $affiliator->membership) == 1 ? 'selected' : '' }}>Putih</option>
                                     <option value="2" {{ old('membership', $affiliator->membership) == 2 ? 'selected' : '' }}>Biru</option>
@@ -283,23 +283,23 @@
                             
                             <div class="col-md-10">
                                 <label class="form-label required" for="role">Role:</label>
-                                        <select class="form-control select2" name="role[]" multiple required>
-                                            @foreach (config('eksternal_roles.roles') as $role)
-                                                <option value="{{ $role }}" 
-                                                    {{ in_array($role, $selectedRoles ?? []) ? 'selected' : '' }}>
-                                                    {{ ucfirst($role) }}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                    <select class="form-control select2" name="role[]" multiple required>
+
+                                        @foreach ($externalRoles as $role)
+
+                                            <option value="{{ $role }}"
+                                                {{ in_array($role, $selectedRoles ?? []) ? 'selected' : '' }}>
+                                                {{ $role }}
+                                            </option>
+
+                                        @endforeach
+
+                                    </select>
                             </div>
                         </div>
                     </div>
-
-
-
-                    {{-- SUBMIT --}}
                     <div class="text-end mt-5">
-                        <button type="submit" class="btn btn-dark px-4">
+                        <button type="submit" class="btn btn-primary px-4">
                             <i class="ti ti-device-floppy me-1"></i> Simpan Data
                         </button>
                     </div>
@@ -311,17 +311,16 @@
 </div>
 @endsection
 
-                                    @push('js')
-                                        <script>
-                                            $(document).ready(function() {
-                                                $('.select2').select2({
-                                                    placeholder: "-- Pilih --",
-                                                    width: '100%'
-                                                });
-                                            });
-                                        </script>
+@push('js')
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                width: '100%'
+            });
+        });
+    </script>
 
-                                        <script>
+    <script>
         document.getElementById('photo').addEventListener('change', function (event) {
         const input = event.target;
         const file = input.files[0];
@@ -346,7 +345,7 @@
             };
             reader.readAsDataURL(file);
         }
-    });
+        });
     </script>
 
 <script>
@@ -431,8 +430,4 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 });
 </script>
-                                    @endpush
-
-                                    
-
-
+@endpush
