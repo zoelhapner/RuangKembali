@@ -14,17 +14,17 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('fullname');
-            $table->string('nickname');
-            $table->unsignedtinyInteger('gender');
+            $table->string('nickname')->nullable();
+            $table->unsignedtinyInteger('gender')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('birth_place');
-	        $table->string('identity_number');
-            $table->string('birth_date', 10);
+            $table->string('birth_place')->nullable();
+	        $table->string('identity_number')->nullable();
+            $table->string('birth_date', 10)->nullable();
             $table->unsignedBigInteger('religion_id')->nullable();
             $table->foreign('religion_id')->references('id')->on('religions')->onDelete('cascade');
-            $table->longText('address');
+            $table->longText('address')->nullable();
             $table->unsignedBigInteger('province_id')->nullable();
             $table->foreign('province_id')->references('id')->on('provinces')->onDelete('cascade');
             $table->unsignedBigInteger('city_id')->nullable();

@@ -17,7 +17,7 @@
                                     <line x1="12" y1="5" x2="12" y2="19"/>
                                     <line x1="5" y1="12" x2="19" y2="12"/>
                                 </svg>
-                                Tambah Data Arsitek
+                                Tambah Data Mitra
                             </a>
                         @endcan
                     </div>
@@ -34,15 +34,15 @@
                     <div class="card">
                         <div class="card-header">
                             <p class="text-center mb-4" style="font-size: 1.5rem; font-weight: 400; font-family: 'Poppins', sans-serif;">
-                                 Daftar Arsitek
+                                 Daftar Mitra
                             </p>
                         </div>
                         <div class="table-responsive">
-                            <table id="tableArchitects" class="table card-table table-vcenter text-nowrap" >
+                            <table id="tablePartners" class="table card-table table-vcenter text-nowrap" >
                                 <thead>
                                     <tr>
                                         <th width="5%">No</th>
-                                        <th>ID architect</th>
+                                        <th>ID Mitra</th>
                                         <th>Nama Pengguna</th>
                                         <th>Email Pengguna</th>
                                         <th>Nama Arsitek</th>
@@ -86,7 +86,7 @@
     <script>
         $(function() {
             const isMobile = window.innerWidth < 576;
-            const table = $('#tableArchitects').DataTable({
+            const table = $('#tablePartners').DataTable({
                 scrollY: '500px',
                 scrollX: true,
                 scrollCollapse: true,
@@ -109,7 +109,7 @@
                 ],
                 language: {
                     search: "",
-                    searchPlaceholder: "Cari arsitek...",
+                    searchPlaceholder: "Cari mitra...",
                     lengthMenu: "Tampilkan _MENU_ data",
                     info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
                     infoEmpty: "Tidak ada data",
@@ -149,7 +149,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
 
-                        url: `/architects/${architectId}`,
+                        url: `/partners/${architectId}`,
                         method: 'DELETE',
                         data: {
                             _token: '{{ csrf_token() }}',
