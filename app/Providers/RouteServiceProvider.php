@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\ROle;
+use App\Models\Role;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 

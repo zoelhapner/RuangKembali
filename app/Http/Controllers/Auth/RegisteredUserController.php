@@ -43,15 +43,15 @@ class RegisteredUserController extends Controller
                 'phone' => $request->phone,
                 'password' => Hash::make($request->password),
             ]);
-
-            $user->assignRole('Member');
+            $memberRole = Role::findByName('Member');
+            $user->assignRole($memberRole);
 
             Customer::create([
                 'user_id' => $user->id,
                 ...Customer::getDefaultAttributes($user),
             ]);
 
-            $user->active_role = $user->roles()->first()->id;
+            $user->active_role = $memberRole->id;
             $user->save();
 
             return $user;

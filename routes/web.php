@@ -72,7 +72,7 @@ Route::put('/affiliators/profile', [DashboardController::class, 'update'])->name
 
 
 
-Route::middleware(['auth', 'permission:lihat daftar tim|lihat data tim'])->group(function () {
+Route::middleware(['auth', 'permission:lihat daftar tim|lihat data tim', 'activerole:Tim'])->group(function () {
     Route::resource('/teams', TeamController::class)->whereUuid('team');
 });
 

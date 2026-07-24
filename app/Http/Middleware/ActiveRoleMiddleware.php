@@ -25,7 +25,7 @@ class ActiveRoleMiddleware
     //     return $next($request);
     // }
 
-public function handle($request, Closure $next, $roleNames)
+public function handle(Request $request, Closure $next, ...$roleNames): Response
 {
     if (!auth()->check()) {
         abort(403, 'Unauthorized.');
@@ -33,24 +33,24 @@ public function handle($request, Closure $next, $roleNames)
 
     $user = auth()->user();
 
-    // SUPER ROLES selalu boleh
+    // Super role selalu boleh
     if ($user->hasAnyRole([
         'Super-Admin',
-        'Direktur',
-        'Manager Administrasi',
-        'Manager Teknik'
+        'Tim',
     ])) {
         return $next($request);
     }
 
-    if (!$user->activeRole) {
+    $activeRole = strtolower(optional($user->activeRole)->name);
+
+    if (!$activeRole) {
         abort(403, 'Tidak ada active role yang dipilih.');
     }
 
     $allowed = collect($roleNames)
-        ->map(fn($r) => strtolower(trim($r)));
+        ->map(fn ($role) => strtolower(trim($role)));
 
-    if (!$allowed->contains(strtolower($user->activeRole->name))) {
+    if (!$allowed->contains($activeRole)) {
         abort(403, 'Role aktif tidak sesuai.');
     }
 

@@ -163,9 +163,9 @@
             <div class="carousel-item active">
                 <img src="{{ asset('images/hero-dekstop.jpeg') }}">
             </div>
-            <div class="carousel-item">
+            {{-- <div class="carousel-item">
                 <img src="{{ asset('images/coba-hero.jpeg') }}">
-            </div>
+            </div> --}}
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-caption">
