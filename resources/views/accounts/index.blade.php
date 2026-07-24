@@ -65,35 +65,37 @@
 @push('js')
 <script>
 $(document).ready(function () {
+    let isMobile = window.innerWidth < 576;
     let table = $('#accountsTable').DataTable({
         processing: true,
         serverSide: true,
+        responsive: false,
         ajax: "{{ route('accounts.index') }}",
         columns: [
             { data: 'fullname', name: 'fullname' },
             { data: 'role_dropdown', name: 'role', orderable: false, searchable: false },
         ],
-                language: {
-                    search: "",
-                    searchPlaceholder: "Cari akun...",
-                    lengthMenu: "Tampilkan _MENU_ data",
-                    info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
-                    infoEmpty: "Tidak ada data",
-                    infoFiltered: "(difilter dari _MAX_ total data)",
-                    zeroRecords: "Data tidak ditemukan",
-                    paginate: {
-                        first: "Awal",
-                        last: "Akhir",
-                        next: "›",
-                        previous: "‹"
-                    }
-                },
+        language: {
+            search: "",
+            searchPlaceholder: "Cari akun...",
+            lengthMenu: "Tampilkan _MENU_ data",
+            info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
+            infoEmpty: "Tidak ada data",
+            infoFiltered: "(difilter dari _MAX_ total data)",
+            zeroRecords: "Data tidak ditemukan",
+            paginate: {
+                first: "Awal",
+                last: "Akhir",
+                next: "›",
+                previous: "‹"
+            }
+        },
 
-                initComplete: function () {
-                    const input = $('.dt-search input');
-                    input.removeClass('form-control-sm')
-                        .addClass('form-control');
-                }
+        initComplete: function () {
+            const input = $('.dt-search input');
+            input.removeClass('form-control-sm')
+                .addClass('form-control');
+        }
     });
 
     // Saat dropdown role berubah

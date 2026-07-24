@@ -24,22 +24,9 @@ class DashboardController extends Controller
 
     $requiredCustomerFields = [
         'fullname',
-        'gender',
-        'birth_place',
-        'birth_date',
-        'religion_id',
-        'identity_number',
         'phone',
-        'address',
-        'province_id',
-        'city_id',
-        'district_id',
-        'sub_district_id',
-        'postal_code_id',
-        'photo',
     ];
 
-    // 🔍 Daftar field penting untuk affiliator (kalau user juga punya role affiliator)
     $requiredAffiliatorFields = [
         'bank_id',
         'account_number',

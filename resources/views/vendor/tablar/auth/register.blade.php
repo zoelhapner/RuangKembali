@@ -185,9 +185,9 @@ label {
         }
 
         .auth-wrapper {
-            min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
             align-items: center;
             position: relative;
         }
@@ -202,8 +202,8 @@ label {
         .logo-left {
             display: flex;
             position: absolute;
-            left: 30%;
-            top: 50%;
+            left: 50%;
+            top: 24px;
             transform: translateX(-50%, -50%);
             justify-content: center;
             align-items: center;
@@ -217,11 +217,10 @@ label {
 
         .register-panel {
             width: 100%;
-            max-width: 100%;
-            margin-right: 0;
+            max-width: 360px;
+            margin: 0;
             padding: 28px 22px;
             border-radius: 18px;
-            margin-top: 70px;
             background: rgba(255,255,255,0.96);
             backdrop-filter: blur(10px);
         }

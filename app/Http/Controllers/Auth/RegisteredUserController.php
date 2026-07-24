@@ -4,20 +4,19 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Customer;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Spatie\Permission\Models\Role;
 
 class RegisteredUserController extends Controller
 {
-    /**
-     * Display the registration view.
-     */
     public function create(): View
     {
         return view('auth.register');
@@ -36,20 +35,31 @@ class RegisteredUserController extends Controller
             'phone' => ['required'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+        $user = DB::transaction(function () use ($request) {
 
-        $user = User::create([
-            'fullname' => $request->fullname,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'password' => Hash::make($request->password),
-        ]);
+            $user = User::create([
+                'fullname' => $request->fullname,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'password' => Hash::make($request->password),
+            ]);
 
-        $user->assignRole('Member');
+            $user->assignRole('Member');
+
+            Customer::create([
+                'user_id' => $user->id,
+                ...Customer::getDefaultAttributes($user),
+            ]);
+
+            $user->active_role = $user->roles()->first()->id;
+            $user->save();
+
+            return $user;
+        });
 
         event(new Registered($user));
-
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect()->route('dashboard');
     }
 }

@@ -7,7 +7,7 @@
             <div class="col-lg-8 col-md-10">
                 <div class="card border-0 shadow rounded-4 overflow-hidden">
                     <div class="card-body px-4 pb-4">
-                        <form action="{{ route('customer.update') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('members.update') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 

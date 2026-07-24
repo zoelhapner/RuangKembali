@@ -42,7 +42,8 @@
         "files": [
             "app/helpers.php",
             "app/Helpers/TerbilangHelper.php",
-            "app/Helpers/NumberHelper.php"
+            "app/Helpers/NumberHelper.php",
+            "app/Helpers/ActiveRole.php"
         ]
     },
     "autoload-dev": {

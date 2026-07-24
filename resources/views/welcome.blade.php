@@ -96,7 +96,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (min-width: 576px) {
     .hero {
         background:
             linear-gradient(
@@ -143,6 +143,17 @@
         font-size: 11px;
         bottom: 18px;
         padding: 0 18px;
+    }
+    .carousel,
+    .carousel-inner,
+    .carousel-item{
+        height:100%;
+    }
+
+    .carousel-item img{
+        width:100%;
+        height:100%;
+        object-fit:cover;
     }
 }
 </style>

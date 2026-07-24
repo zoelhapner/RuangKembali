@@ -2,7 +2,7 @@
 @section('title', 'Ruang Kembali')
 @section('content')
 <style>
-    body {
+        body {
         background: url('{{ asset('images/coba-hero.jpeg') }}') no-repeat center center fixed;
         background-size: cover;
         font-family: 'Poppins', sans-serif !important;
@@ -14,12 +14,7 @@
         font-family: 'Poppins', sans-serif !important;
         font-weight: 400 !important;
     }
-        ::placeholder {
-    font-family: 'Poppins', sans-serif !important;
-    font-weight: 400 !important;
-    font-style: italic;
-    font-size: 12px;
-}
+
     .auth-wrapper {
         min-height: 100vh;
         display: flex;
@@ -36,18 +31,16 @@
 
     .logo-left {
         position: absolute;
-        left: 30%;
+        left: 10%;
         top: 50%;
-        transform: translateY(-50%, -50%);
-        z-index: 2;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        transform: translateY(-30%);
+        color: #fff;
+        text-align: left;
     }
 
     .logo-left img {
-        width: clamp(280px, 28vw, 460px);
-        height: auto;
+        width: 20%;
+        margin-bottom: 10px;
     }
 
     .login-panel {
@@ -74,7 +67,7 @@
         padding: 0.75rem 1rem;
     }
 
-    .btn-login{
+    .btn-login {
         /* background: linear-gradient(180deg,#E7D7AE,#D2B57C); */
         background:#DCCBA8;
         border: none;
@@ -85,7 +78,7 @@
         transition:.3s;
     }
 
-    .btn-login:hover{
+    .btn-login:hover {
         background:#c3bbb0;
         transform:translateY(-2px);
         box-shadow:0 10px 20px rgba(0,0,0,.15);
@@ -138,14 +131,13 @@
             background-position: center;
         }
 
-        .auth-wrapper {
-
-            justify-content: center;
-            align-items: center;
-
-            flex-direction: column;
-
-            padding: 130px 20px 24px;
+        .auth-wrapper{
+            min-height:100dvh;      /* lebih baik daripada 100vh di mobile */
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:20px;
+            position:relative;
         }
 
         .overlay-dark {
@@ -184,7 +176,7 @@
 
         .login-panel {
             width: 100%;
-            max-width: 390px;
+            max-width: 360px;
             padding: 28px 22px;
             border-radius: 18px;
             background: rgba(255,255,255,0.96);

@@ -39,23 +39,7 @@
 
     @stack('scripts')
     @yield('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
 
-const eventButton = document.querySelector('.menu-link');
-
-eventButton.addEventListener('click', function(e){
-
-    if(window.innerWidth <= 768){
-
-        e.preventDefault();
-
-        this.parentElement.classList.toggle('open');
-    }
-
-});
-        });
-    </script>
 </body>
 
 </html>
