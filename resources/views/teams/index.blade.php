@@ -39,16 +39,16 @@
                             </p>
                         </div>
                         <div class="table-responsive">
-                            <table id="tableEmployees" class="table card-table table-vcenter text-nowrap">
+                            <table id="tableTeams" class="table card-table table-vcenter text-nowrap">
                                 <thead>
                                     <tr>
                                         <th class="w-1">No.</th>
                                         <th>NIK</th>
-                                        <th>Nama Karyawan</th>
+                                        <th>Nama Tim</th>
                                         <th>Email</th>
                                         {{-- <th>Status Perkawinan</th> --}}
                                         <th>Posisi/Peran</th>
-                                        <th>Status Karyawan</th>
+                                        <th>Status Tim</th>
                                         {{-- <th>Tanggal Mulai Kerja</th> --}}
                                         {{-- <th>Gaji Pokok</th>
                                         <th>Tunjangan</th>
@@ -95,7 +95,7 @@
     <script>
         $(function() {
             const isMobile = window.innerWidth < 576;
-            const table = $('#tableEmployees').DataTable({
+            const table = $('#tableTeams').DataTable({
                 scrollY: '500px',
                 scrollX: true,
                 scrollCollapse: true,
@@ -148,7 +148,7 @@
             });
 
             // Delete user functionally
-            $('#tableEmployees').on('click', '.delete-team', function () {
+            $('#tableTeams').on('click', '.delete-team', function () {
             const teamId = $(this).data('id');
 
             Swal.fire({

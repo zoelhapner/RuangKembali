@@ -29,7 +29,7 @@ class TeamController extends Controller
 
         $query = Team::with(['user.roles']);
 
-        if ($auth->can('lihat data karyawan') && !$auth->can('lihat daftar karyawan')) {
+        if ($auth->can('lihat data tim') && !$auth->can('lihat daftar tim')) {
             $query->where('user_id', $auth->id);
         }
 
@@ -89,7 +89,7 @@ class TeamController extends Controller
 
                     }
                     if (auth()->user()->can('hapus data tim')) {
-                        $buttons .= '<button data-id="' . $team->id . '" class="btn btn-icon btn-sm btn-danger delete-employee" title="Hapus">
+                        $buttons .= '<button data-id="' . $team->id . '" class="btn btn-icon btn-sm btn-danger delete-team" title="Hapus">
                                         <i class="ti ti-trash"></i>
                                     </button>';
                     }
@@ -475,7 +475,7 @@ public static function generateNikAjax()
     {
         if ($team) {
             $team->delete();
-            return response()->json(['status' => 'success', 'message' => 'Employee deleted successfully']);
+            return response()->json(['status' => 'success', 'message' => 'Data team berhasil dihapus']);
         }
 
         return response()->json(['status' => 'failed', 'message' => 'Unable to delete']);

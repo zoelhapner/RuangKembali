@@ -29,7 +29,7 @@ class MembersController extends Controller
 
         $query = Customer::with(['user.roles']);
 
-        if ($auth->can('lihat data customer') && !$auth->can('lihat daftar member')) {
+        if ($auth->can('lihat data member') && !$auth->can('lihat daftar member')) {
             $query->where('user_id', $auth->id);
         }
 
@@ -90,7 +90,7 @@ class MembersController extends Controller
 
                     }
                     if (auth()->user()->can('hapus data member')) {
-                        $buttons .= '<button data-id="' . $customer->id . '" class="btn btn-icon btn-sm btn-danger delete-customer" title="Hapus">
+                        $buttons .= '<button data-id="' . $customer->id . '" class="btn btn-icon btn-sm btn-danger delete-member" title="Hapus">
                                         <i class="ti ti-trash"></i>
                                     </button>';
                     }
@@ -118,7 +118,7 @@ class MembersController extends Controller
     {
         return match ((int) $value) {
             1 => 'Lead',
-            2 => 'New Customer',
+            2 => 'New Member',
             3 => 'Silver',
             4 => 'Gold',
             5 => 'Platinum',
@@ -508,7 +508,7 @@ public function destroy(Customer $customer): JsonResponse
 
     return response()->json([
         'status' => 'success',
-        'message' => 'Data customer berhasil dihapus.'
+        'message' => 'Data member berhasil dihapus.'
     ]);
 }
 

@@ -79,7 +79,7 @@ class RegisterController extends Controller
         ]);
 
         // Assign role default
-        $user->assignRole('Customer');
+        $user->assignRole('Member');
         DB::transaction(function () use ($user) {
             Customer::create([
                 'user_id' => $user->id,

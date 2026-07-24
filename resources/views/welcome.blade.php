@@ -96,10 +96,8 @@
     }
 }
 
-@media (max-width: 576px) {
-
+@media (max-width: 768px) {
     .hero {
-
         background:
             linear-gradient(
                 to bottom,
@@ -107,94 +105,58 @@
                 rgba(0,0,0,0.35)
             ),
             url('{{ asset("hero-mobile.jpeg") }}');
-
         background-size: cover;
         background-repeat: no-repeat;
-
-        /* geser background */
         background-position: 85% top;
+        margin-top:150px;
+        height:calc(100vh - 150px);
     }
-
     .hero-caption{
         left:24px;
         right:24px;
         bottom:90px;
     }
-
     .hero-caption h3{
         font-size:28px;
         line-height:1.2;
     }
-
     .brand-logo {
-
         width: 120px;
-
         margin-top: -25px;
     }
-
     .button-group {
-
         display: flex;
-
         flex-direction: column;
-
         align-items: center;
-
         width: 100%;
-
         gap: 16px;
     }
-
     .btn-hero {
-
         width: 100%;
-
         max-width: 270px;
-
         min-width: unset;
-
         padding: 13px 20px;
-
         font-size: 15px;
-
         border-radius: 12px;
     }
-
     .footer-text {
-
         font-size: 11px;
-
         bottom: 18px;
-
         padding: 0 18px;
     }
 }
 </style>
 <section class="hero">
-
-    <div id="heroSlider"
-         class="carousel slide carousel-fade"
-         data-bs-ride="carousel">
-
+    <div id="heroSlider" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner">
-
             <div class="carousel-item active">
-
                 <img src="{{ asset('images/hero-dekstop.jpeg') }}">
-
             </div>
-
             <div class="carousel-item">
-
                 <img src="{{ asset('images/coba-hero.jpeg') }}">
-
             </div>
-
         </div>
-
         <div class="hero-overlay"></div>
-
         <div class="hero-caption">
 
             <h3>

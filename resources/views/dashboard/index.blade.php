@@ -4,7 +4,7 @@
 
 <div class="page-body">
     <div class="container-xl dashboard-container">
-        <div id="alertCarousel" class="position-relative">
+        {{-- <div id="alertCarousel" class="position-relative">
             <div class="overflow-hidden rounded-4 shadow-sm bg-white position-relative">
                 <div class="alert-wrapper d-flex">
                     @if($incompleteProfile)
@@ -38,7 +38,7 @@
                     <i class="ti ti-chevron-right fs-5"></i>
                 </button>
             </div>
-        </div>
+        </div> --}}
         <div class="pt-5 pb-7 text-center">
             <h2 class="fw-bold g-4">
                 Selamat Datang {{ auth()->user()->fullname ?? 'Admin Utama' }} di Sistem Ruang Kembali

@@ -9,7 +9,7 @@
                     <i class="ti ti-arrow-left"></i>
                 </a>
                 
-                    <h2 class="page-title mb-0">Tambah Customer</h2>
+                    <h2 class="page-title mb-0">Tambah Data Member</h2>
                 
             </div>
         </div>
@@ -249,17 +249,17 @@
 
                     {{-- ========== SECTION 4: DATA KEPEGAWAIAN ========== --}}
                     <div class="section-block mb-5">
-                        <h3 class="fw-semibold mb-3 border-bottom pb-2">💼 Data Pelanggan</h3>
+                        <h3 class="fw-semibold mb-3 border-bottom pb-2">💼 Data Member</h3>
                         <div class="row g-4">
                             <div class="col-md-4">
-                                <label class="form-label required">ID Customer</label>
+                                <label class="form-label required">ID Member</label>
                                 <input type="text" id="nic" name="nic" class="form-control" required readonly>
                                 @error('nic')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label">Kategori Customer</label>
+                                <label class="form-label">Kategori Member</label>
                                 <select name="category" class="form-select select2" value="{{ old('category') }}">
                                     <option value="">-- Pilih Status --</option>
                                     <option value="1" {{ old('category') == '1' ? 'selected' : '' }}>Individu</option>
@@ -274,7 +274,7 @@
                                 <select name="loyalty_level" class="form-select select2">
                                     <option value="">-- Pilih Status --</option>
                                     <option value="1" {{ old('loyalty_level') == '1' ? 'selected' : '' }}>Lead</option>
-                                    <option value="2" {{ old('loyalty_level') == '2' ? 'selected' : '' }}>New Customer</option>
+                                    <option value="2" {{ old('loyalty_level') == '2' ? 'selected' : '' }}>New Member</option>
                                     <option value="3" {{ old('loyalty_level') == '3' ? 'selected' : '' }}>Silver</option>
                                     <option value="4" {{ old('loyalty_level') == '4' ? 'selected' : '' }}>Gold</option>
                                     <option value="5" {{ old('loyalty_level') == '5' ? 'selected' : '' }}>Platinum</option>

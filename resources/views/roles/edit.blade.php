@@ -1,7 +1,4 @@
 @extends('tablar::page')
-
-@section('title', 'Edit Role - ' . $role->name)
-
 @section('content')
 <div class="container-xl" style="padding-top:80px">
     <div class="card shadow-sm border-0">
@@ -85,7 +82,7 @@
                 @endforeach
 
                 <div class="text-end mt-4">
-                    <button type="submit" class="btn btn-dark btn-md px-4">
+                    <button type="submit" class="btn btn-primary btn-md px-4">
                         <i class="ti ti-device-floppy me-1"></i> Simpan Perubahan
                     </button>
                 </div>

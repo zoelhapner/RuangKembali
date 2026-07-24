@@ -106,7 +106,7 @@ public static function generateNic()
     {
     return [
         1 => 'Lead',
-        2 => 'New Customer',
+        2 => 'New Member',
         3 => 'Silver',
         4 => 'Gold',
         5 => 'Platinum',

@@ -9,7 +9,7 @@
                     <i class="ti ti-arrow-left"></i>
                 </a>
                 
-                    <h2 class="page-title mb-0">Edit Data Customer</h2>
+                    <h2 class="page-title mb-0">Edit Data Member</h2>
                 
             </div>
         </div>
@@ -255,7 +255,7 @@
                         <h3 class="fw-semibold mb-3 border-bottom pb-2">Data Pelanggan</h3>
                         <div class="row g-4">
                             <div class="col-md-4">
-                                <label class="form-label required">Nomor Identitas Customer (NIC)</label>
+                                <label class="form-label required">Nomor Identitas Member (NIM)</label>
                                 <input type="text" id="nic" name="nic" class="form-control" value="{{ old('nic', $customer->nic) }}" readonly>
                                 @error('nic')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -276,7 +276,7 @@
                                 <label class="form-label">Loyalty Level</label>
                                 <select name="loyalty_level" class="form-select select2">
                                     <option value="1" {{ old('loyalty_level', $customer->loyalty_level) == 1 ? 'selected' : '' }}>Lead</option>
-                                    <option value="2" {{ old('loyalty_level', $customer->loyalty_level) == 2 ? 'selected' : '' }}>New Customer</option>
+                                    <option value="2" {{ old('loyalty_level', $customer->loyalty_level) == 2 ? 'selected' : '' }}>New Member</option>
                                     <option value="3" {{ old('loyalty_level', $customer->loyalty_level) == 3 ? 'selected' : '' }}>Silver</option>
                                     <option value="4" {{ old('loyalty_level', $customer->loyalty_level) == 4 ? 'selected' : '' }}>Gold</option>
                                     <option value="5" {{ old('loyalty_level', $customer->loyalty_level) == 5 ? 'selected' : '' }}>Platinum</option>
