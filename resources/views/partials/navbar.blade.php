@@ -8,7 +8,7 @@
             <a href="#">ARTIKEL</a>
             <a href="#">PRODUK</a>
             <div class="menu-dropdown">
-                <button class="menu-link">
+                <button type="button" class="menu-link">
                     EVENT
                     <i class="ti ti-chevron-down"></i>
                 </button>
@@ -233,11 +233,11 @@
 
 }
 
-.menu-dropdown:hover .mega-menu{
+/* .menu-dropdown:hover .mega-menu{
 
     display:block;
 
-}
+} */
 .mega-menu a{
 
     display:block;
@@ -267,47 +267,100 @@
 }
 @media (max-width:768px){
 
+.website-header{
+    top:15px;
+    z-index:9999;
+}
+
 .website-navbar{
 
     width:calc(100% - 24px);
-
-    margin:0 auto;
 
     height:64px;
 
     padding:0 16px;
 
+    border-radius:18px;
+
+}
+
+.website-logo{
+
+    flex:1;
+
+}
+
+.website-logo img{
+
+    height:34px;
+
+}
+
+.website-icons{
+
     display:flex;
 
     align-items:center;
+
+    gap:14px;
+
 }
-.website-logo{
-    flex:1;
+
+/* .mobile-menu-btn{
+
+    display:flex;
+
+    border:none;
+
+    background:none;
+
+    font-size:28px;
+
+    cursor:pointer;
+
+} */
+.mobile-menu-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    z-index:10002;
+        border:none;
+        cursor:pointer;
+    background:none;
 }
-.website-logo img{
-    height:34px;
-}
+
 .website-menu{
 
     position:fixed;
+
     top:0;
-    right:-100%;
 
-    width:280px;
-    height:100dvh;
+    right:-320px;
 
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
+    width:320px;
 
-    padding:80px 24px;
+    max-width:85%;
+
+    height:100vh;
 
     background:#fff;
-    overflow-y:auto;
 
-    transition:right .35s;
+    display:flex;
 
-    z-index:3;
+    flex-direction:column;
+
+    gap:0;  
+    align-items:stretch;   /* tambahkan */
+
+    justify-content:flex-start;
+    padding:90px 24px;
+
+    transition:.35s;
+     pointer-events:auto;
+    z-index:10001;
+
 }
 
 .website-menu.active{
@@ -323,35 +376,19 @@
 
     padding:18px 0;
 
-    border-bottom:1px solid #eee;
+    display:flex;
 
     justify-content:space-between;
 
-    font-size:16px;
+    border-bottom:1px solid #eee;
+
 }
 
-.website-icons{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    flex-shrink:0;
-    margin-left:auto;
-}
-.mobile-menu-btn{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border:none;
-    background:none;
-    font-size:28px;
-    padding:0;
-}
 .mobile-overlay{
 
     position:fixed;
 
     inset:0;
-
     background:rgba(0,0,0,.45);
 
     opacity:0;
@@ -360,17 +397,16 @@
 
     transition:.3s;
     pointer-events:none;
-    z-index:1;
+    z-index:10000;
+
 }
+
 .mobile-overlay.show{
+
     opacity:1;
+
     visibility:visible;
-    pointer-events:auto;
-}
-
-.menu-dropdown{
-
-    width:100%;
+     pointer-events:auto;
 }
 
 .mega-menu{
@@ -381,51 +417,65 @@
 
     width:100%;
 
+    background:#f5f5f5;
+
     transform:none;
 
     box-shadow:none;
-
-    background:#f8f8f8;
 
 }
 
 .menu-dropdown.open .mega-menu{
 
     display:block;
+
+}
+
+.menu-dropdown:hover .mega-menu{
+
+    display:none;
+
 }
 
 }
 </style>
 <script>
-const btn = document.getElementById('mobileMenuBtn');
-const menu = document.getElementById('websiteMenu');
-const overlay = document.getElementById('mobileOverlay');
-const eventMenu = document.querySelector('.menu-link');
+const menu = document.getElementById("websiteMenu");
 
-btn.addEventListener('click', function () {
-    menu.classList.toggle('active');
-    overlay.classList.toggle('show');
-});
+const btn = document.getElementById("mobileMenuBtn");
 
-overlay.addEventListener('click', function () {
-    menu.classList.remove('active');
-    overlay.classList.remove('show');
+const overlay = document.getElementById("mobileOverlay");
 
-    // tutup submenu ketika drawer ditutup
-    document.querySelectorAll('.menu-dropdown')
-        .forEach(item => item.classList.remove('open'));
-});
+btn.onclick = () => {
 
-if (eventMenu) {
-    eventMenu.addEventListener('click', function (e) {
+    menu.classList.toggle("active");
 
-        if (window.innerWidth <= 768) {
-            e.preventDefault();
-            this.parentElement.classList.toggle('open');
-        }
+    overlay.classList.toggle("show");
+
+};
+
+overlay.onclick = () => {
+
+    menu.classList.remove("active");
+
+    overlay.classList.remove("show");
+
+};
+
+document.querySelectorAll(".menu-link").forEach(btn=>{
+
+    btn.addEventListener("click",function(e){
+
+        if(window.innerWidth>768) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        this.closest(".menu-dropdown").classList.toggle("open");
 
     });
-}
+
+});
 window.addEventListener('resize', function () {
 
     if (window.innerWidth > 768) {
