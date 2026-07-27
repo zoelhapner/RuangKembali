@@ -2,61 +2,43 @@
 @section('content')
 <style>
 .hero{
-    position:relative;
-    margin-top:110px;
-    height:calc(100vh - 110px);
+    position: relative;
+    margin-top: 0;
+    height: 100vh;
+    overflow: hidden;
 }
 .hero-caption{
-
     position:absolute;
-
     left:12%;
-
     bottom:22%;
-
     z-index:3;
-
     color:#fff;
-
     text-align:left;
-
     display:block;
-
     padding:0;
-
 }
 
 .hero-caption h3{
-
     margin:0;
-
     font-family: "Montserrat", serif;
-    /* atau Playfair Display jika belum memakai Cormorant */
-
     font-size:38px;
-
     font-weight:400;
-
     line-height:1.05;
-
     letter-spacing:-0.5px;
-
     color:#fff;
-
     max-width:720px;
-
 }
 .carousel,
 .carousel-inner,
 .carousel-item{
-    height:100%;
+    height:100vh;
 }
 
 .carousel-item img{
     width:100%;
     height:100%;
     object-fit:cover;
-    object-position:center 20px;
+    object-position:center;
 }
 .carousel-control-prev,
 .carousel-control-next{
@@ -84,7 +66,15 @@
 
     margin:0 8px !important;
 }
-@media (max-width: 992px) {
+.website-header{
+    position: fixed;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    z-index:9999;
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
     .hero-content {
         gap: 40px;
     }
@@ -96,7 +86,7 @@
     }
 }
 
-@media (min-width: 576px) {
+@media (max-width:768px){
     .hero {
         background:
             linear-gradient(
@@ -108,13 +98,14 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-position: 85% top;
-        margin-top:150px;
-        height:calc(100vh - 150px);
+        margin-top:0;
+        height:100vh;
+        position:relative;
     }
     .hero-caption{
-        left:24px;
-        right:24px;
-        bottom:90px;
+        position: absolute;
+        z-index: 10;
+        color: #fff;
     }
     .hero-caption h3{
         font-size:28px;
@@ -144,6 +135,9 @@
         bottom: 18px;
         padding: 0 18px;
     }
+    .carousel{
+        display:none;
+    }
     .carousel,
     .carousel-inner,
     .carousel-item{
@@ -168,17 +162,8 @@
             </div> --}}
         </div>
         <div class="hero-overlay"></div>
-        <div class="hero-caption">
 
-            <h3>
-                Sebuah Ruang untuk Bertumbuh
-                <br>
-                Sebuah Ruang untuk Kembali
-            </h3>
-
-        </div>
-
-        <button class="carousel-control-prev"
+        {{-- <button class="carousel-control-prev"
                 data-bs-target="#heroSlider"
                 data-bs-slide="prev">
 
@@ -192,9 +177,9 @@
 
             <span class="carousel-control-next-icon"></span>
 
-        </button>
+        </button> --}}
 
-        <div class="carousel-indicators">
+        {{-- <div class="carousel-indicators">
 
             <button data-bs-target="#heroSlider"
                     data-bs-slide-to="0"
@@ -203,10 +188,18 @@
             <button data-bs-target="#heroSlider"
                     data-bs-slide-to="1"></button>
 
-        </div>
+        </div> --}}
 
     </div>
+            <div class="hero-caption">
 
+            <h3>
+                Sebuah Ruang untuk Bertumbuh
+                <br>
+                Sebuah Ruang untuk Kembali
+            </h3>
+
+        </div>
 </section>
 
 @endsection

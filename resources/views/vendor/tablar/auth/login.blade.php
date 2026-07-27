@@ -16,7 +16,8 @@
     }
 
     .auth-wrapper {
-        min-height: 100vh;
+        min-height:calc(100dvh - 90px);
+        padding-top:100px;
         display: flex;
         justify-content: flex-end;
         align-items: center;
@@ -29,20 +30,6 @@
         z-index: 1;
     }
 
-    .logo-left {
-        position: absolute;
-        left: 10%;
-        top: 50%;
-        transform: translateY(-30%);
-        color: #fff;
-        text-align: left;
-    }
-
-    .logo-left img {
-        width: 20%;
-        margin-bottom: 10px;
-    }
-
     .login-panel {
         z-index: 2;
         background: rgba(255, 255, 255, 0.95);
@@ -50,7 +37,7 @@
         padding: 40px;
         width: 50%;
         max-width: 400px;
-        margin-right: 5%;
+        margin: 5% 5%;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
 
@@ -83,7 +70,13 @@
         transform:translateY(-2px);
         box-shadow:0 10px 20px rgba(0,0,0,.15);
     }
-    .website-header{
+    .website-menu{
+        display:flex;
+        justify-content: space-between;
+        align-items:center;
+        gap:38px;
+    }
+    .website-icons{
         display:none;
     }
     @media (max-width: 1200px) {
@@ -99,21 +92,8 @@
             padding: 120px 24px 40px;
             gap: 28px;
         }
-        .logo-left {
-            position: absolute;
-            left: 50%;
-            top: 7%;
-            transform: translateX(-50%);
-            text-align: center;
-            z-index: 2;
-        }
-        .logo-left img {
-            width: clamp(180px, 28vw, 260px);
-            height: auto;
-            margin-bottom: 10px;
-        }
 
-        .login-panel {
+       .login-panel {
             width: 100%;
             max-width: 600px;
             margin-right: 0;
@@ -139,7 +119,8 @@
         }
 
         .auth-wrapper{
-            min-height:100dvh;      /* lebih baik daripada 100vh di mobile */
+            min-height:calc(100dvh - 90px);
+            padding-top:100px;     /* lebih baik daripada 100vh di mobile */
             display:flex;
             justify-content:center;
             align-items:center;
@@ -151,34 +132,6 @@
             position: absolute;
             inset: 0;
             z-index: 1;
-        }
-
-        /* tampilkan logo di mobile */
-        .logo-left {
-
-            display: block !important;
-
-            position: absolute;
-
-            left: 50%;
-            top: 6%;
-
-            transform: translateX(-50%);
-
-            text-align: center;
-
-            z-index: 2;
-        }
-
-        .logo-left img {
-
-            width: 180px;
-
-            max-width: 75vw;
-
-            height: auto;
-
-            margin-bottom: 0;
         }
 
         .login-panel {

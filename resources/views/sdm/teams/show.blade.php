@@ -8,7 +8,7 @@
             <a href="{{ route('teams.index') }}" class="btn btn-primary d-flex align-items-center">
                 <i class="ti ti-arrow-left"></i>
             </a>
-                <h2 class="page-title">Detail Karyawan</h2>
+                <h2 class="page-title">Detail Tim</h2>
         </div>
     </div>
     {{-- <div class="d-flex justify-content-between align-items-center mb-3">
@@ -161,7 +161,7 @@
         <div class="tab-pane fade" id="tab-hr" role="tabpanel">
             <div class="card shadow-sm">
                 <div class="card-header">
-                    <h3 class="card-title mb-0">Informasi Kepegawaian</h3>
+                    <h3 class="card-title mb-0">Informasi Tim</h3>
                 </div>
                 <div class="card-body">
                     <div class="row g-3">
@@ -170,7 +170,7 @@
                             <div class="fw-bold">{{ $team->nik }}</div>
                         </div>
                         <div class="col-md-4">
-                            <div class="text-muted small">Tanggal Gabung</div>
+                            <div class="text-muted small">Tanggal Bergabung</div>
                             <div class="fw-bold">{{ $team->start_date ?? '-' }}</div>
                         </div>
                         <div class="col-md-4">

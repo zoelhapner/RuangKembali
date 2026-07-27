@@ -132,7 +132,12 @@ label {
         transform:translateY(-2px);
         box-shadow:0 10px 20px rgba(0,0,0,.15);
     }
-    .website-header{
+    .website-menu{
+        display:flex;
+        align-items:center;
+        gap:38px;
+    }
+    .website-icons{
         display:none;
     }
     @media (max-width: 1200px) {

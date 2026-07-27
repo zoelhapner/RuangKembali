@@ -268,7 +268,7 @@ if ($request->hasFile('photo')) {
 
     return redirect()
         ->route('members.index')
-        ->with('success', 'Data customer berhasil ditambahkan.' .
+        ->with('success', 'Data member berhasil ditambahkan.' .
             (session('new_user_password') ? ' Akun user baru dibuat. Password: ' . session('new_user_password') : '')
         );
 }
@@ -467,7 +467,7 @@ public function update(Request $request, Customer $customer)
 
     return redirect()
         ->route('members.show', $customer->id)
-        ->with('success', 'Data customer berhasil diperbarui.');
+        ->with('success', 'Data member berhasil diperbarui.');
 }
 
 

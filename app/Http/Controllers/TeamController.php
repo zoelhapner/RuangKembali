@@ -274,7 +274,7 @@ if ($request->hasFile('training_certificate')) {
 
     return redirect()
         ->route('teams.index')
-        ->with('success', 'Data karyawan berhasil ditambahkan.' . 
+        ->with('success', 'Data tim berhasil ditambahkan.' . 
             (session('new_user_password') ? ' Akun user baru dibuat. Password: ' . session('new_user_password') : '')
         );
 }
@@ -468,7 +468,7 @@ public static function generateNikAjax()
 
     return redirect()
         ->route('teams.show', $team->id)
-        ->with('success', 'Data karyawan berhasil diperbarui.');
+        ->with('success', 'Data tim berhasil diperbarui.');
 }
 
     public function destroy(Team $team)
