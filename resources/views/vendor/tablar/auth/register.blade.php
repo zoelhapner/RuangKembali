@@ -195,8 +195,8 @@ label {
             min-height: 100dvh;
             display: flex;
             justify-content: center;
-            align-items: center;
-            position: relative;
+            align-items: flex-start;
+            padding:95px 0 30px;
         }
 
         .overlay-dark {
@@ -222,32 +222,33 @@ label {
             height: auto;
         }
 
-        .register-panel {
-            width: 100%;
-            max-width: 360px;
-            margin: 0;
-            padding: 22px 16px;
-            border-radius: 18px;
-            background: rgba(255,255,255,0.96);
-            backdrop-filter: blur(10px);
+        .register-panel{
+            width:calc(100% - 32px);
+            max-width:340px;
+            margin:24px auto;
+            padding:20px;
+            border-radius:20px;
         }
         .register-panel h3 {
             font-size: 20px;
             margin-bottom: 1.3rem;
             text-align: center;
         }
-        .form-control {
-            padding: 0.85rem 1rem;
-            font-size: 15px;
+        .form-control{
+            height:48px;
+            padding:0 14px;
+            font-size:14px;
         }
-        .input-group-text {
-            padding-left: 14px;
-            padding-right: 14px;
+
+        .input-group-text{
+            width:48px;
+            justify-content:center;
         }
-        .btn-register {
-            padding: 0.85rem;
-            border-radius: 12px;
-            font-size: 15px;
+        .btn-register{
+            height:50px;
+            border-radius:14px;
+            font-size:16px;
+            font-weight:600;
         }
         .small {
             font-size: 12px !important;
@@ -257,6 +258,9 @@ label {
         }
         .user-dropdown{
             display:none;
+        }
+        .text-center.text-muted{
+            margin-top:22px !important;
         }
     }
 </style>
