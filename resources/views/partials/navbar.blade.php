@@ -85,16 +85,16 @@
 
     box-shadow:0 15px 40px rgba(0,0,0,.15);
 
-    height:86px;
+    height:72px;
 
     display:flex;
     justify-content:space-between;
     align-items:center;
 
-    padding:0 40px;
+    padding:0 32px;
 }
 .website-logo img{
-    height:48px;
+    height:40px;
     display:block;
 }
 .website-menu{
@@ -106,9 +106,9 @@
 .menu-link{
     background:none;
     border:none;
- color:#111;
+    color:#111;
     text-decoration:none;
-    font-size:15px;
+    font-size:14px;
     font-weight:600;
     letter-spacing:.4px;
 

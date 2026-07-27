@@ -31,6 +31,8 @@ label {
         justify-content: flex-end;
         align-items: center;
         position: relative;
+        padding-top:95px;
+        padding-bottom:20px;
     }
 
     .overlay-dark {
@@ -39,33 +41,18 @@ label {
         z-index: 1;
     }
 
-    .logo-left {
-        position: absolute;
-        left: 10%;
-        top: 50%;
-        transform: translateY(-30%);
-        color: #fff;
-        text-align: left;
-    }
-
-    .logo-left img {
-        width: clamp(180px, 18vw, 260px);
-        height: auto;
-    }
-
     .register-panel {
 
         position: relative;
         z-index: 2;
 
         width: 100%;
-        max-width: 400px;
-
+        max-width: 380px;
         margin-right: clamp(30px, 5vw, 80px);
 
-        padding: 32px 30px;
+        padding: 22px 24px;
 
-        border-radius: 24px;
+        border-radius: 10px;
 
         background:
             linear-gradient(
@@ -84,28 +71,28 @@ label {
     }
 
     .register-panel h3 {
-        font-weight: 800;
-        font-size: 24px;
+        font-weight: 600;
+        font-size: 18px;
         line-height: 1.2;
-        margin-bottom: 1rem;
+        margin-bottom: 14px;
         color: #111;
         letter-spacing: -0.3px;
     }
     .mb-3 {
-        margin-bottom: 10px !important;
+        margin-bottom: 8px !important;
     }
 
     .form-label {
 
         font-weight: 400;
-
-        margin-bottom: 0.55rem;
+        font-size: 14px;
+        margin-bottom: 4px;
 
         color: #222;
     }
     .form-control {
         border-radius: 12px;
-        padding: 10px 10px;
+        padding: 0 12px;
         border: 1px solid #e5e7eb;
         font-size: 14px;
     }
@@ -122,7 +109,7 @@ label {
         border: none;
         color:#111;
         border-radius:10px;
-        padding:12px 20px;
+        padding:0;
         font-weight:600;
         transition:.3s;
     }
@@ -142,7 +129,6 @@ label {
     }
     @media (max-width: 1200px) {
         body {
-            background-attachment: scroll;
             background-position: center;
         }
 
@@ -152,21 +138,6 @@ label {
             padding: 120px 24px 40px;
             flex-direction: column;
             gap: 28px;
-        }
-
-        .logo-left {
-            position: absolute;
-            left: 50%;
-            top: 7%;
-            transform: translateX(-50%);
-            text-align: center;
-            z-index: 2;
-        }
-
-        .logo-left img {
-            width: clamp(180px, 28vw, 260px);
-            height: auto;
-            margin-bottom: 10px;
         }
         .register-panel {
             max-width: 600px;
@@ -192,7 +163,6 @@ label {
         body {
             background: url('{{ asset('LOGIN-mobile.jpeg') }}') no-repeat center center fixed;
             background-size: cover;
-            background-attachment: scroll;
             background-position: center;
         }
 
@@ -210,27 +180,10 @@ label {
             z-index: 1;
         }
 
-        /* tampilkan logo di mobile */
-        .logo-left {
-            display: flex;
-            position: absolute;
-            left: 50%;
-            top: 24px;
-            transform: translateX(-50%, -50%);
-            justify-content: center;
-            align-items: center;
-            z-index: 2;
-        }
-
-        .logo-left img {
-            width: clamp(280px, 28vw, 460px);
-            height: auto;
-        }
-
         .register-panel{
             width:calc(100% - 32px);
             max-width:340px;
-            margin:24px auto;
+            margin:0 auto;
             padding:20px;
             border-radius:20px;
         }
@@ -240,13 +193,14 @@ label {
             text-align: center;
         }
         .form-control{
-            height:48px;
-            padding:0 14px;
-            font-size:14px;
+            height:42px;
+            padding:0 12px;
+            font-size:13px;
         }
 
         .input-group-text{
-            width:48px;
+            height:42px;
+            width:42px;
             justify-content:center;
         }
         .btn-register{

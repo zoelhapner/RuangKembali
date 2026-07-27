@@ -81,7 +81,6 @@
     }
     @media (max-width: 1200px) {
         body {
-            background-attachment: scroll;
             background-position: center;
         }
 
@@ -113,8 +112,6 @@
 
             background: url('{{ asset('LOGIN-mobile.jpeg') }}') no-repeat center center fixed;
             background-size: cover;
-            background-attachment: scroll;
-
             background-position: center;
         }
 
