@@ -59,7 +59,7 @@ class DashboardController extends Controller
         $districts = District::where('city_id', $user->city_id)->get();
         $subDistricts = SubDistrict::where('district_id', $user->district_id)->get();
         $postalCodes = PostalCode::where('sub_district_id', $user->sub_district_id)->get();
-        return view('customers.profile', compact('user', 'religions', 'provinces', 'cities', 'districts', 'subDistricts', 'postalCodes'));
+        return view('members.profile', compact('user', 'religions', 'provinces', 'cities', 'districts', 'subDistricts', 'postalCodes'));
     }
 
     public function update(Request $request)

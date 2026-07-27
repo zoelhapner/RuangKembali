@@ -38,11 +38,12 @@
                 @php( $logout_url = $logout_url ? url($logout_url) : '' )
                 @php( $setting_url = $setting_url ? url($setting_url) : '' )
             @endif
-
-            
             <a href="{{ $profile_url }}" class="dropdown-item">
-                <i class="ti ti-users"></i> Edit Profil
+                <i class="ti ti-users"></i> Ubah Kata Kunci
             </a>
+            {{-- <a href="{{ $profile_url }}" class="dropdown-item">
+                <i class="ti ti-users"></i> Ubah Profil
+            </a> --}}
             <a class="dropdown-item"
                href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="ti ti-logout"></i>

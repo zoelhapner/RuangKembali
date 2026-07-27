@@ -31,15 +31,79 @@
 @extends('tablar::page')
 
 @section('content')
-<div class="container-fluid mt-3">
+<style>
+.profile-card{
+    border:none;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 12px 35px rgba(0,0,0,.08);
+}
+
+.profile-card .card-header{
+    background:#fff;
+    border-bottom:1px solid #f0f0f0;
+    padding:22px 28px;
+}
+
+.profile-card .card-header h3{
+    font-size:20px;
+    font-weight:600;
+    color:#111;
+}
+
+.profile-card .card-body{
+    padding:28px;
+}
+
+.form-label{
+    font-weight:500;
+    margin-bottom:.45rem;
+}
+
+.form-control{
+    height:48px;
+    border-radius:12px;
+    border:1px solid #e8e8e8;
+}
+
+.form-control:focus{
+    border-color:#d8c08f;
+    box-shadow:0 0 0 .18rem rgba(220,203,168,.25);
+}
+
+.input-group-text{
+    border-radius:0 12px 12px 0;
+    background:#fff;
+}
+
+.btn-save{
+    background:#DCCBA8;
+    color:#111;
+    border:none;
+    border-radius:12px;
+    height:46px;
+    padding:0 30px;
+    font-weight:600;
+}
+
+.btn-save:hover{
+    background:#ccb88d;
+}
+</style>
+<div class="container-fluid" style="padding-top:90px;">
     <div class="row">
         <!-- Form Update Profil -->
-        <div class="col-lg-6 mb-4">
+        <div class="col-xl-7 col-lg-8">
             <div class="card shadow-sm border-0">
-                <div class="card-header bg-dark text-white">
-                    <h3 class="card-title mb-0">
-                        <i class="ti ti-user me-2"></i> Informasi Profil
+                <div class="card-header bg-primary text-white">
+                    <h3>
+                        <i class="ti ti-user-circle me-2"></i>
+                        Informasi Profil
                     </h3>
+
+                    <small class="text-muted">
+                        Kelola informasi akun dan keamanan Anda
+                    </small>
                 </div>
                 <div class="card-body">
                     {{-- <form id="send-verification" method="post" action="{{ route('verification.send') }}">
@@ -165,7 +229,10 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="btn btn-dark text-white">Simpan</button>
+                        <button class="btn btn-save">
+                            <i class="ti ti-device-floppy me-1"></i>
+                            Simpan Perubahan
+                        </button>
 
                         @if (session('status') === 'profile-updated')
                             <div class="alert alert-success mt-3">

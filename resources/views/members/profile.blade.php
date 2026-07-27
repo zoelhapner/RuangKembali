@@ -2,12 +2,12 @@
 
 @section('content')
 
-    <div class="container py-5">
+    <div class="container-fluid" style="padding-top:90px;">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10">
                 <div class="card border-0 shadow rounded-4 overflow-hidden">
                     <div class="card-body px-4 pb-4">
-                        <form action="{{ route('members.update') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('members.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
@@ -32,7 +32,7 @@
                                     @endif
 
                                     <label for="photo"
-                                        class="btn btn-sm btn-dark position-absolute bottom-0 end-0 translate-middle rounded-circle"
+                                        class="btn btn-sm btn-primary position-absolute bottom-0 end-0 translate-middle rounded-circle"
                                         title="Ganti Foto">
                                         <i class="ti ti-camera"></i>
                                     </label>
@@ -206,8 +206,8 @@
 
                             {{-- Tombol Aksi --}}
                             <div class="text-center mt-4">
-                                <button type="submit" class="btn btn-dark px-4">
-                                    <i class="ti ti-check me-1"></i> Simpan & Kirim
+                                <button type="submit" class="btn btn-primary px-4">
+                                    <i class="ti ti-device-floppy me-1"></i> Simpan & Kirim
                                 </button>
                                 <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary px-4 ms-2">
                                     <i class="ti ti-arrow-left me-1"></i> Kembali
