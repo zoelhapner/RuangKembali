@@ -132,6 +132,9 @@ label {
         transform:translateY(-2px);
         box-shadow:0 10px 20px rgba(0,0,0,.15);
     }
+    .website-header{
+        display:none;
+    }
     @media (max-width: 1200px) {
         body {
             background-attachment: scroll;
@@ -171,6 +174,9 @@ label {
             margin-bottom: 1.3rem;
             text-align: center;
         }
+        .website-header{
+            display:block;
+        }
     }
 
     /* MOBILE */
@@ -179,8 +185,9 @@ label {
             margin-left: 0 !important;
         }
         body {
+            background: url('{{ asset('LOGIN-mobile.jpeg') }}') no-repeat center center fixed;
+            background-size: cover;
             background-attachment: scroll;
-
             background-position: center;
         }
 
@@ -252,6 +259,12 @@ label {
         .small {
 
             font-size: 12px !important;
+        }
+        .website-header{
+            display:block;
+        }
+        .user-dropdown{
+            display:none;
         }
     }
 </style>
