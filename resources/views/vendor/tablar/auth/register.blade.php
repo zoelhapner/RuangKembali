@@ -226,13 +226,13 @@ label {
             width: 100%;
             max-width: 360px;
             margin: 0;
-            padding: 28px 22px;
+            padding: 22px 16px;
             border-radius: 18px;
             background: rgba(255,255,255,0.96);
             backdrop-filter: blur(10px);
         }
         .register-panel h3 {
-            font-size: 24px;
+            font-size: 20px;
             margin-bottom: 1.3rem;
             text-align: center;
         }
@@ -240,24 +240,16 @@ label {
             padding: 0.85rem 1rem;
             font-size: 15px;
         }
-
         .input-group-text {
-
             padding-left: 14px;
             padding-right: 14px;
         }
-
         .btn-register {
-
             padding: 0.85rem;
-
             border-radius: 12px;
-
             font-size: 15px;
         }
-
         .small {
-
             font-size: 12px !important;
         }
         .website-header{

@@ -1,5 +1,8 @@
 <header class="website-header">
     <div class="website-navbar">
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="ti ti-menu-2"></i>
+        </button>
         <a href="/" class="website-logo">
             <img src="{{ asset('images/logo-landscape.png') }}" alt="Ruang Kembali">
         </a>
@@ -58,14 +61,10 @@
                     @endguest
                 </div>
             </div>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="ti ti-menu-2"></i>
-            </button>
         </div>
     </div>
-
+    <div class="mobile-overlay" id="mobileOverlay"></div>
 </header>
-<div class="mobile-overlay" id="mobileOverlay"></div>
 <style>
 .website-header{
     position:fixed;
@@ -293,71 +292,157 @@
 @media (max-width:768px){
 
     .website-navbar{
+
         display:grid;
-        grid-template-columns:auto 1fr auto;
+        grid-template-columns:44px 1fr 44px;
+
         align-items:center;
-        padding:0 12px;
-        gap:10px;
-        height:64px;
-        overflow:visible;
+
+        height:68px;
+
+        padding:0 16px;
     }
+
     .website-logo{
-        flex:none;
+
+        justify-self:center;
     }
 
     .website-logo img{
-        height:22px;
+
+        height:32px;
+    }
+
+    .mobile-menu-btn{
+
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        width:44px;
+        height:44px;
+
+        border:none;
+        background:none;
+
+        font-size:28px;
+
+        cursor:pointer;
+    }
+
+    .website-icons{
+
+        justify-self:end;
+    }
+
+    .website-icons>a{
+
+        display:none;
     }
     .website-menu{
+        position:fixed;
+        top:0;
+        left:-340px;
+
+        width:340px;
+        max-width:85%;
+        align-items:stretch;
+        height:100vh;
+
+        background:#fff;
+
+        padding:90px 24px 30px;
+
         display:flex;
-        overflow-x:auto;
-        white-space:nowrap;
-        gap:10px;
-        justify-content:flex-start;
-        scrollbar-width:none;
-        -ms-overflow-style:none;
+        flex-direction:column;
+
+        overflow-y:auto;
+
+        transition:left .35s ease;
+
+        box-shadow:8px 0 30px rgba(0,0,0,.15);
+
+        z-index:10001;
     }
 
-    .website-menu::-webkit-scrollbar{
-        display:none;
-    }
-
-    .website-icons > a,
-    .mobile-menu-btn{
-        display:none;
+    .website-menu.active{
+        left:0;
     }
     .website-menu a,
     .menu-link{
-        font-size:11px;
+        display:flex;
+        justify-content:space-between;
+
+        width:100%;
+        padding:16px 0;
+
+        font-size:14px;
+        font-weight:600;
+        text-align:left;
+
+        border-bottom:1px solid #f1f1f1;
     }
-    .menu-dropdown{
-        position:relative;
+
+    .menu-link{
+        background:none;
+        border:none;
     }
+    .mobile-overlay{
 
-    .mega-menu{
-        position:fixed;
-        top:78px;
-        left:50%;
-        transform:translateX(-50%);
-        width:240px;
+    position:fixed;
 
-        background:#fff;
-        border-radius:12px;
+    inset:0;
 
-        display:none;
+    background:rgba(0,0,0,.45);
 
-        box-shadow:0 10px 30px rgba(0,0,0,.2);
+    opacity:0;
+    visibility:hidden;
 
-        z-index:99999;
-    }
-    .menu-dropdown.open .mega-menu{
+    transition:.3s;
 
-        display:block;
+    z-index:10000;
+}
 
-    }
-    .user-dropdown{
-        display:block;
-    }
+.mobile-overlay.show{
+
+    opacity:1;
+    visibility:visible;
+}
+.mega-menu{
+    display:none;
+    position:static;
+    left:auto;
+    top:auto;
+    transform:none;
+    margin:10px 0 12px 16px;
+    width:calc(100% - 16px);
+    padding:8px 0;
+    background:#f8f8f8;
+
+    border-radius:0 10px 10px 0;
+
+    padding:8px 0;
+    overflow:hidden;
+
+    box-shadow:none;
+}
+
+.menu-dropdown.open .mega-menu{
+    display:block;
+}
+
+.mega-menu a{
+    display:block;
+
+    padding:12px 18px;
+
+    margin:0;
+
+    font-size:13px;
+    color:#555;
+
+    border:none;
+}
 }
 </style>
 <script>
@@ -365,12 +450,17 @@ const menu = document.getElementById("websiteMenu");
 const btn = document.getElementById("mobileMenuBtn");
 const overlay = document.getElementById("mobileOverlay");
 btn.onclick = () => {
-    menu.classList.toggle("active");
-    overlay.classList.toggle("show");
+
+    menu.classList.add("active");
+    overlay.classList.add("show");
+
 };
+
 overlay.onclick = () => {
+
     menu.classList.remove("active");
     overlay.classList.remove("show");
+
 };
 document.querySelectorAll(".menu-link").forEach(button => {
     button.addEventListener("click", function(e){
