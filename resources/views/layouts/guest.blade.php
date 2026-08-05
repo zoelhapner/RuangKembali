@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset('logo.png') }}" type="image/png">
 
-    <title>{{ $title ?? 'Antosa Architect' }}</title>
+    <title>{{ $title ?? 'Ruang Kembali' }}</title>
 
     <!-- Fonts & Styles -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@
         {{-- Logo --}}
         <div class="d-flex align-items-center">
             <a href="/" class="text-decoration-none d-flex align-items-center">
-                <img src="{{ asset('logo.png') }}" alt="Antosa Architect" width="40" class="me-2">
+                <img src="{{ asset('logo.png') }}" alt="Ruang Kembali" width="40" class="me-2">
                 <span class="fw-semibold text-dark">Antosa Architect</span>
             </a>
         </div>
@@ -69,7 +69,7 @@
     <div class="container py-5">
         <div class="text-center mb-4">
             @guest
-                <img src="{{ asset('logo.png') }}" alt="Antosa Architect" width="80" class="mb-3">
+                <img src="{{ asset('LOGO_RuKa_ONLY_tab_browser.png') }}" alt="Ruang Kembali" width="80" class="mb-3">
             @endguest
         </div>
 

@@ -15,7 +15,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\MembersController;
 use App\Http\Controllers\AffiliatorController;
-use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProjectLevelController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ContractorController;
@@ -76,12 +76,13 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])
-        ->name('dashboard');
+    // Route::get('/dashboard', [DashboardController::class, 'index'])
+    //     ->name('dashboard');
 
     // Route lain yang wajib email terverifikasi
 });
-
+Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
 Route::get('/home', function () {
     return redirect()->route('dashboard');
 })->name('home');
@@ -292,15 +293,15 @@ Route::get('/warehouse/search-product', [SupplierCatalogController::class, 'sear
 Route::post('/warehouse/products/store', [SupplierCatalogController::class, 'storeSupplierProduct'])
     ->name('warehouse.products.store');
 
-Route::middleware(['auth', 'permission:lihat daftar proyek|lihat data proyek'])->group(function () {
+Route::middleware(['auth', 'permission:lihat daftar event|lihat data event'])->group(function () {
 
-    Route::get('/projects/{project}/continue', 
-    [ProjectController::class, 'continue'])
-    ->name('projects.continue');
+    Route::get('/events/{event}/continue', 
+    [EventController::class, 'continue'])
+    ->name('events.continue');
 
-    Route::resource('/projects', ProjectController::class)->except(['edit, update, show']);
-    Route::get('prjects/{project}/pdf', [ProjectController::class, 'pdf'])
-    ->name('projects.pdf');
+    Route::resource('/events', EventController::class)->except(['edit, update, show']);
+    Route::get('events/{event}/pdf', [EventController::class, 'pdf'])
+    ->name('events.pdf');
 });
 
 Route::resource('design-packages', DesignPackageController::class)
@@ -596,19 +597,19 @@ Route::post('/projects/{project}/sync-tasks',
 
 Route::post(
     '/projects/{project}/final',
-    [\App\Http\Controllers\FinalProjectController::class, 'store']
+    [\App\Http\Controllers\FinalEventController::class, 'store']
 )->name('projects.finals.store');
 Route::delete(
     '/projects/{project}/final',
-    [\App\Http\Controllers\FinalProjectController::class, 'destroy']
+    [\App\Http\Controllers\FinalEventController::class, 'destroy']
 )->name('projects.finals.destroy');
 Route::post(
     '/projects/{project}/finalBuild',
-    [\App\Http\Controllers\FinalBuildProjectController::class, 'store']
+    [\App\Http\Controllers\FinalBuildEventController::class, 'store']
 )->name('projects.finals-build.store');
 Route::delete(
     '/projects/{project}/finalBuild',
-    [\App\Http\Controllers\FinalBuildProjectController::class, 'destroy']
+    [\App\Http\Controllers\FinalBuildEventController::class, 'destroy']
 )->name('projects.finals-build.destroy');
 });
 
@@ -676,29 +677,29 @@ Route::delete('/daily/documentation/{id}',
 Route::delete('/reports/{id}', [BuildDailyController::class, 'destroy']);
 Route::get('/reports/next-date/{project}', [BuildDailyController::class,'nextDate']);
 Route::get('/projects/{project}/invoice-panel',
-[ProjectController::class,'invoicePanel'])
+[EventController::class,'invoicePanel'])
 ->name('projects.invoice.panel');
 Route::get(
     '/projects/items/{item}/tambahan',
-    [ProjectController::class, 'loadTambahan']
+    [EventController::class, 'loadTambahan']
 );
 Route::post(
     '/projects/{project}/sync-build',
-    [ProjectController::class, 'syncBuildProcess']
+    [EventController::class, 'syncBuildProcess']
 )->name('projects.sync-build');
 Route::post(
     '/projects/{project}/sync-build-plan',
-    [ProjectController::class,'syncBuildPlan']
+    [EventController::class,'syncBuildPlan']
 )->name('projects.sync-build-plan');
 Route::post(
     '/project/{project}/build-plan/data',
-    [ProjectController::class,'data']
+    [EventController::class,'data']
 )
 ->name('build-plan.data');
 
 Route::get(
     '/projects/{project}/build-process-partial',
-    [ProjectController::class, 'buildProcessPartial']
+    [EventController::class, 'buildProcessPartial']
 )->name('projects.build-process.partial');
 Route::get('/projects/{project}/export-pdf', 
     [BuildWeeklyController::class, 'exportPdf'])

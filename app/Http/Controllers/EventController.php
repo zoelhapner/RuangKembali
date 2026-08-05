@@ -34,7 +34,7 @@ use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 use DB;
 
-class ProjectController extends Controller
+class EventController extends Controller
 {
        public function index(Request $request)
 {

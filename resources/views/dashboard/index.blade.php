@@ -69,7 +69,7 @@
 
                         @if(!$attendanceToday)
 
-                            {{-- BELUM HADIR --}}
+          
                             <div class="text-center py-2">
 
                                 <div class="mb-2 text-secondary">
