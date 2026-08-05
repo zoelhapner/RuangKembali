@@ -131,7 +131,13 @@
                                         </tfoot>
                                     </table>
 
-                                    <div id="balance-status" class="mt-2 fw-bold text-danger">❌ Tidak Seimbang</div>
+                                    @php
+                                        $isBalanced = $journal->details->sum('debit') == $journal->details->sum('credit');
+                                    @endphp
+                                    <div id="balance-status" 
+                                        class="mt-2 fw-bold {{ $isBalanced ? 'text-success' : 'text-danger' }}">
+                                        {{ $isBalanced ? '✅ Seimbang' : '❌ Tidak Seimbang' }}
+                                    </div>
 
                                 <div class="col-md-4 mb-3">
                                     <label for="description">Keterangan</label>
@@ -372,24 +378,42 @@ $(document).ready(function () {
             String(value).replace(/\./g, '')
         ) || 0;
     }
-
     function calculateSubtotals() {
-        let totalDebit = 0, totalCredit = 0;
+        let totalDebit = 0;
+        let totalCredit = 0;
 
-        $('#detail-rows tr').each(function() {
-            totalDebit  += parseRupiah($(this).find('.debit-input').val())
-            totalCredit += parseRupiah($(this).find('.credit-input').val())
+        $('#detail-rows tr').each(function () {
+            totalDebit += parseRupiah($(this).find('.debit-input').val());
+            totalCredit += parseRupiah($(this).find('.credit-input').val());
         });
 
         $('#subtotal-debit').text(totalDebit.toLocaleString('id-ID'));
         $('#subtotal-credit').text(totalCredit.toLocaleString('id-ID'));
 
-        if (totalDebit === totalCredit && totalDebit > 0) {
-            $('#balance-status').text('✅ Seimbang').css('color', 'green');
-        } else {
-            $('#balance-status').text('❌ Tidak Seimbang').css('color', 'red');
-        }
+        const isBalanced = totalDebit === totalCredit;
+
+        $('#balance-status')
+            .text(isBalanced ? '✅ Seimbang' : '❌ Tidak Seimbang')
+            .toggleClass('text-success', isBalanced)
+            .toggleClass('text-danger', !isBalanced);
     }
+    // function calculateSubtotals() {
+    //     let totalDebit = 0, totalCredit = 0;
+
+    //     $('#detail-rows tr').each(function() {
+    //         totalDebit  += parseRupiah($(this).find('.debit-input').val())
+    //         totalCredit += parseRupiah($(this).find('.credit-input').val())
+    //     });
+
+    //     $('#subtotal-debit').text(totalDebit.toLocaleString('id-ID'));
+    //     $('#subtotal-credit').text(totalCredit.toLocaleString('id-ID'));
+
+    //     if (totalDebit === totalCredit && totalDebit > 0) {
+    //         $('#balance-status').text('✅ Seimbang').css('color', 'green');
+    //     } else {
+    //         $('#balance-status').text('❌ Tidak Seimbang').css('color', 'red');
+    //     }
+    // }
 
     $(document).on('input', '.debit-input, .credit-input', function () {
 

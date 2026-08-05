@@ -38,28 +38,53 @@ use App\Http\Controllers\RabPackageController;
 use App\Http\Controllers\RabController;
 use App\Http\Controllers\JobCategoryController;
 use App\Http\Controllers\InvoiceBuildController;
-use App\Http\Controllers\BuildProcessItemController;
-use App\Http\Controllers\BuildDailyController;
-use App\Http\Controllers\BuildWeeklyController;
-use App\Http\Controllers\BuildWeeklyPlanController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\Api\JournalApiController;
 use App\Http\Controllers\JournalExportController;
 use App\Http\Controllers\KasController;
-
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 require __DIR__.'/auth.php';
-// Auth::routes();
+
+Route::middleware('auth')->group(function () {
+
+    Route::get('/email/verify', function () {
+        return view('auth.verify-email');
+    })->name('verification.notice');
+
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+
+        $request->fulfill();
+
+        return redirect()->route('dashboard');
+
+    })->middleware('signed')->name('verification.verify');
+
+    Route::post('/email/verification-notification', function (Request $request) {
+
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('success', 'Link verifikasi telah dikirim ulang.');
+
+    })->middleware('throttle:6,1')->name('verification.send');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
+
+    // Route lain yang wajib email terverifikasi
+});
+
 Route::get('/home', function () {
-    return redirect('/dashboard');
+    return redirect()->route('dashboard');
 })->name('home');
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
 
 Route::middleware(['auth', 'role:Super-Admin'])->group(function () {
     Route::resource('/menus', MenuController::class);
@@ -276,18 +301,6 @@ Route::middleware(['auth', 'permission:lihat daftar proyek|lihat data proyek'])-
     Route::resource('/projects', ProjectController::class)->except(['edit, update, show']);
     Route::get('prjects/{project}/pdf', [ProjectController::class, 'pdf'])
     ->name('projects.pdf');
-});
-
-Route::middleware(['auth', 'permission:lihat data tenaga'])->group(function () {
-    Route::post('/labor_costs/{id}/duplicate', [\App\Http\Controllers\LaborCostController::class, 'duplicate'])
-        ->name('labor_costs.duplicate');
-    Route::resource('/labor_costs', \App\Http\Controllers\LaborCostController::class);
-});
-
-Route::middleware(['auth', 'permission:lihat data alat'])->group(function () {
-    Route::post('/tools/{id}/duplicate', [\App\Http\Controllers\EquipmentCostController::class, 'duplicate'])
-        ->name('tools.duplicate');
-    Route::resource('/equipment_costs', \App\Http\Controllers\EquipmentCostController::class);
 });
 
 Route::resource('design-packages', DesignPackageController::class)

@@ -91,7 +91,7 @@ class AccountingJournalController extends Controller
     return view('journals.index');
 }
 
-public function create()
+public function create(AccountingJournal $journal)
 {
     $licenseId = config('app.license_id');
 
@@ -114,6 +114,7 @@ public function create()
         ->max('end_date');
 
     return view('journals.create', [
+        'journal'        => $journal,
         'accounts'       => $accounts,
         'team'      => $teams,
         'member'      => $members,
