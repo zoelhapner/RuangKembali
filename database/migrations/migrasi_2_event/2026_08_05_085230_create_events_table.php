@@ -12,7 +12,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
 
             // Jika sistem multi tenant
-            $table->uuid('license_id')->nullable()->index();
+            // $table->uuid('license_id')->nullable()->index();
 
             // Informasi utama
             $table->string('event_code', 30)->unique();

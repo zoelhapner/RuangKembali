@@ -14,7 +14,7 @@ use App\Models\City;
 use App\Models\District;
 use App\Models\SubDistrict;
 use App\Models\PostalCode;
-use App\Models\Project;
+use App\Models\Event;
 use App\Models\ProjectLevel;
 use App\Models\ProjectTask;
 use App\Models\JobCategory;
@@ -54,8 +54,8 @@ class EventController extends Controller
 
     // Jika ada hak akses untuk membatasi data
 if (
-    $auth->can('lihat data proyek') &&
-    !$auth->can('lihat daftar proyek')
+    $auth->can('lihat data event') &&
+    !$auth->can('lihat daftar event')
 ) {
     $query->where(function ($q) use ($auth) {
         $q->whereHas('customer', function ($qq) use ($auth) {

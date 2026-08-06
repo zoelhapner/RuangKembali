@@ -39,7 +39,7 @@
                 </button>
             </div>
         </div> --}}
-        <div class="pt-5 pb-7 text-center">
+        <div class="pt-2 pb-7 text-center">
             <h2 class="fw-bold g-4">
                 Selamat Datang {{ auth()->user()->fullname ?? 'Admin Utama' }} di Sistem Ruang Kembali
             </h2>
