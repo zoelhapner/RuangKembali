@@ -80,56 +80,38 @@ if (
         return DataTables::of($query)
         ->addIndexColumn()
 
-        ->addColumn('province_name', fn($row) => $row->province->name ?? '-')
-        ->addColumn('city_name', fn($row) => $row->city->name ?? '-')
-        ->addColumn('district_name', fn($row) => $row->district->name ?? '-')
-        ->addColumn('sub_district_name', fn($row) => $row->subDistrict->name ?? '-')
-        ->addColumn('postal_code', fn($row) => $row->postalCode->postal_code ?? '-')
-        ->addColumn('customer', fn($row) => $row->customer?->user?->fullname ?? '-')
-        ->addColumn('employee', fn($row) => $row->employee?->user?->fullname ?? '-')
-        ->addColumn('affiliator', fn($row) => $row->affiliator?->user?->fullname ?? '-')
-        ->addColumn('event_type', fn($row) => $this->readableEventType($row->event_type))
-        ->addColumn('start_date', fn($row) => $row->start_date ? Carbon::parse($row->start_date)->format('d/m/Y') : '-')
+        ->addColumn('schedule', function ($row) {
+            return $row->start_at->format('d M Y H:i') .
+                '<br><small>s/d ' .
+                $row->end_at->format('d M Y H:i') .
+                '</small>';
+        })
 
-        ->addColumn('event_status', function ($row) use ($statusLabel) {
+        ->addColumn('registration', function ($row) {
+            return optional($row->registration_open)->format('d M') .
+                ' - ' .
+                optional($row->registration_close)->format('d M Y');
+        })
 
-            $label = $statusLabel[$row->event_status] ?? 'Tidak Diketahui';
+        ->editColumn('price', function ($row) {
+            return $row->price == 0
+                ? '<span class="badge bg-success">Gratis</span>'
+                : 'Rp ' . number_format($row->price, 0, ',', '.');
+        })
 
-            $color = match ($row->event_status) {
-                1 => 'info',
-                2 => 'danger',
-                3 => 'warning',
-                4 => 'success',
-                default => 'secondary'
+        ->editColumn('quota', function ($row) {
+            return $row->remaining_quota . ' / ' . $row->quota;
+        })
+
+        ->editColumn('status', function ($row) {
+            return match ($row->status_label) {
+                'Coming Soon' => '<span class="badge bg-secondary">Coming Soon</span>',
+                'Pendaftaran' => '<span class="badge bg-success">Pendaftaran</span>',
+                'Sold Out' => '<span class="badge bg-danger">Sold Out</span>',
+                'Sedang Berlangsung' => '<span class="badge bg-warning">Berlangsung</span>',
+                'Selesai' => '<span class="badge bg-dark">Selesai</span>',
             };
-
-            return '<span class="badge bg-' . $color . '">' . $label . '</span>';
         })
-
-        ->addColumn('current_level', function ($row) {
-            $current = $row->levels
-                ->where('is_completed', false)
-                ->sortBy('level_order')
-                ->first();
-
-            // Jika semua selesai
-            if (!$current) {
-                return '<span class="badge bg-success">Selesai</span>';
-            }
-
-            $url = route('events.continue', $row->id);
-
-            return '<a href="'.$url.'" class="badge bg-primary" style="cursor:pointer;">
-                        '.$current->level_name.'
-                    </a>';
-        })
-        ->editColumn('event_name', function ($row) {
-                    $url = route('events.continue', $row->id);
-                    $name = Str::title($row->event_name ?? '-');
-                    return '<a href="'.$url.'">'.e($name).'</a>';
-                })
-
-        // Tombol Aksi
         ->addColumn('action', function ($event) {
             $buttons = '';
             if (auth()->user()->can('hapus data proyek')) {
@@ -140,7 +122,7 @@ if (
             return $buttons;
         })
 
-        ->rawColumns(['current_level', 'action', 'event_status', 'event_name'])
+        ->rawColumns(['action', 'schedule', 'price', 'status'])
         ->make(true);
     }
 
