@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProjectRequest;
+use App\Http\Requests\EventRequest;
 use App\Models\Employee;
 use App\Models\Customer;
 use App\Models\Affiliator;
@@ -15,8 +15,8 @@ use App\Models\District;
 use App\Models\SubDistrict;
 use App\Models\PostalCode;
 use App\Models\Event;
-use App\Models\ProjectLevel;
-use App\Models\ProjectTask;
+use App\Models\EventLevel;
+use App\Models\EventTask;
 use App\Models\JobCategory;
 use App\Models\RabProcess;
 use App\Models\RabProcessCategory;
@@ -25,7 +25,7 @@ use App\Models\BuildProcessItem;
 use App\Models\BuildPlans;
 use App\Models\WeeklyReport;
 use App\Models\User;
-use App\Services\ProjectNotifier;
+use App\Services\EventNotifier;
 use App\Services\BuildPlanSyncService;
 use App\Services\BuildProcessSyncService;
 use Illuminate\Http\Request;
@@ -40,7 +40,7 @@ class EventController extends Controller
 {
     $auth = auth()->user();
 
-    $query = Project::with([
+    $query = Event::with([
         'customer.user:id,fullname',
         'employee.user:id,fullname',
         'affiliator.user:id,fullname',
@@ -49,7 +49,7 @@ class EventController extends Controller
         'district:id,name',
         'subDistrict:id,name',
         'postalCode:id,postal_code',
-        'levels:id,project_id,level_order,level_name,is_completed'
+        'levels:id,event_id,level_order,level_name,is_completed'
     ]);
 
     // Jika ada hak akses untuk membatasi data
@@ -68,7 +68,7 @@ if (
 }
 
     if ($request->ajax()) {
-        $projects = $query->get();
+        $events = $query->get();
 
         $statusLabel = [
             1 => 'Proses',
@@ -88,14 +88,14 @@ if (
         ->addColumn('customer', fn($row) => $row->customer?->user?->fullname ?? '-')
         ->addColumn('employee', fn($row) => $row->employee?->user?->fullname ?? '-')
         ->addColumn('affiliator', fn($row) => $row->affiliator?->user?->fullname ?? '-')
-        ->addColumn('project_type', fn($row) => $this->readableProjectType($row->project_type))
+        ->addColumn('event_type', fn($row) => $this->readableEventType($row->event_type))
         ->addColumn('start_date', fn($row) => $row->start_date ? Carbon::parse($row->start_date)->format('d/m/Y') : '-')
 
-        ->addColumn('project_status', function ($row) use ($statusLabel) {
+        ->addColumn('event_status', function ($row) use ($statusLabel) {
 
-            $label = $statusLabel[$row->project_status] ?? 'Tidak Diketahui';
+            $label = $statusLabel[$row->event_status] ?? 'Tidak Diketahui';
 
-            $color = match ($row->project_status) {
+            $color = match ($row->event_status) {
                 1 => 'info',
                 2 => 'danger',
                 3 => 'warning',
@@ -117,37 +117,37 @@ if (
                 return '<span class="badge bg-success">Selesai</span>';
             }
 
-            $url = route('projects.continue', $row->id);
+            $url = route('events.continue', $row->id);
 
             return '<a href="'.$url.'" class="badge bg-primary" style="cursor:pointer;">
                         '.$current->level_name.'
                     </a>';
         })
-        ->editColumn('project_name', function ($row) {
-                    $url = route('projects.continue', $row->id);
-                    $name = Str::title($row->project_name ?? '-');
+        ->editColumn('event_name', function ($row) {
+                    $url = route('events.continue', $row->id);
+                    $name = Str::title($row->event_name ?? '-');
                     return '<a href="'.$url.'">'.e($name).'</a>';
                 })
 
         // Tombol Aksi
-        ->addColumn('action', function ($project) {
+        ->addColumn('action', function ($event) {
             $buttons = '';
             if (auth()->user()->can('hapus data proyek')) {
-                $buttons .= '<button data-id="' . $project->id . '" 
-                            class="btn btn-icon btn-sm btn-dark delete-projects">
+                $buttons .= '<button data-id="' . $event->id . '" 
+                            class="btn btn-icon btn-sm btn-dark delete-events">
                             <i class="ti ti-trash"></i></button>';
             }
             return $buttons;
         })
 
-        ->rawColumns(['current_level', 'action', 'project_status', 'project_name'])
+        ->rawColumns(['current_level', 'action', 'event_status', 'event_name'])
         ->make(true);
     }
 
-    return view('projects.index');
+    return view('events.index');
 }
 
-    private function readableProjectType($value)
+    private function readableEventType($value)
     {
         return match ((int) $value) {
             1 => 'Desain',
@@ -159,16 +159,16 @@ if (
 
 public function create(Request $request)
 {
-    $project = null;
-    if ($request->has('project_id')) {
-        $project = $this->loadBaseProject($request->project_id);
+    $event = null;
+    if ($request->has('event_id')) {
+        $event = $this->loadBaseEvent($request->event_id);
     }
-    $activeStep  = $this->getCurrentStep($project);
-    $projectType = $project?->project_type;
-    if ($project) {
-        $extra = $this->resolveExtraRelations($activeStep, $projectType);
+    $activeStep  = $this->getCurrentStep($event);
+    $eventType = $event?->event_type;
+    if ($event) {
+        $extra = $this->resolveExtraRelations($activeStep, $eventType);
         if (!empty($extra)) {
-            $project->load($extra);
+            $event->load($extra);
         }
     }
     // ━━━ Phase 3: Siapkan data view — conditional per section ━━━
@@ -194,46 +194,46 @@ public function create(Request $request)
         'groupedPlans'   => collect(),
     ];
     $viewData = array_merge($defaults, compact(
-        'project', 'activeStep', 'canEdit'
+        'event', 'activeStep', 'canEdit'
     ));
     // ── Survey data (step >= 3) ──
-    if ($activeStep >= 3 && $project) {
-        $surveyData = $this->resolveSurveyData($project, $activeStep);
+    if ($activeStep >= 3 && $event) {
+        $surveyData = $this->resolveSurveyData($event, $activeStep);
         $viewData   = array_merge($viewData, $surveyData);
         // Mungkin activeStep berubah jadi 4
         $activeStep = $viewData['activeStep'];
     }
     // ── Timeline (butuh activeStep final) ──
-    $viewData['timelineSteps'] = $this->buildTimelineSteps($project, $activeStep);
+    $viewData['timelineSteps'] = $this->buildTimelineSteps($event, $activeStep);
     // ── Invoice data (step >= 6) ──
-    if ($activeStep >= 6 && $project) {
-        $viewData = array_merge($viewData, $this->resolveInvoiceData($project));
+    if ($activeStep >= 6 && $event) {
+        $viewData = array_merge($viewData, $this->resolveInvoiceData($event));
     }
 
-    if ($projectType == 3 && $activeStep >= 8 && $project) {
-        $viewData = array_merge($viewData, $this->resolveBuildData($project));
+    if ($eventType == 3 && $activeStep >= 8 && $event) {
+        $viewData = array_merge($viewData, $this->resolveBuildData($event));
     }
     // ── Build plans (type 3, step >= 8) ──
-    if ($projectType == 3 && $activeStep >= 8 && $project) {
-        $viewData = array_merge($viewData, $this->resolveBuildPlanData($project));
+    if ($eventType == 3 && $activeStep >= 8 && $event) {
+        $viewData = array_merge($viewData, $this->resolveBuildPlanData($event));
     }
-    return view('projects.create', array_merge(
-        $this->formData($project, $activeStep, $projectType),
+    return view('events.create', array_merge(
+        $this->formData($event, $activeStep, $eventType),
         $viewData
     ));
 }
-private function loadBaseProject($projectId)
+private function loadBaseEvent($eventId)
 {
-    return Project::with([
+    return Event::with([
         'customer.user',
         'employee',
         'levels.employees',
         'planning',
         'invoices',                           
-        'rab:id,project_id,job_duration',     
-    ])->findOrFail($projectId);
+        'rab:id,event_id,job_duration',     
+    ])->findOrFail($eventId);
 }
-private function resolveExtraRelations(int $activeStep, ?int $projectType): array
+private function resolveExtraRelations(int $activeStep, ?int $eventType): array
 {
     $relations = [];
 
@@ -248,16 +248,16 @@ private function resolveExtraRelations(int $activeStep, ?int $projectType): arra
     if ($activeStep >= 5) {
         $relations[] = 'offer.items';
 
-        if ($projectType == 2) {
+        if ($eventType == 2) {
             $relations[] = 'offer.rab.items.category';
         }
     }
 
-    if ($projectType == 2 && $activeStep >= 7) {
+    if ($eventType == 2 && $activeStep >= 7) {
         $relations[] = 'rab.categories.uraians.items.category';
     }
 
-    if ($projectType == 3 && $activeStep >= 8) {
+    if ($eventType == 3 && $activeStep >= 8) {
         $relations = array_merge($relations, [
             'buildItems.jobCategory',
             'buildItems.weeklyProgresses',
@@ -270,9 +270,9 @@ private function resolveExtraRelations(int $activeStep, ?int $projectType): arra
 
     return $relations;
 }
-private function resolveSurveyData($project, int $activeStep): array
+private function resolveSurveyData($event, int $activeStep): array
 {
-    $surveyInvoice = $project->invoices
+    $surveyInvoice = $event->invoices
         ->where('invoice_type', 'survey')
         ->sortByDesc('created_at')
         ->first();
@@ -280,10 +280,10 @@ private function resolveSurveyData($project, int $activeStep): array
     $surveyApproved = $surveyInvoice?->status === 'approved';
     $surveyWaiting  = $surveyInvoice?->status === 'waiting_approval';
     $surveyRejected = $surveyInvoice?->status === 'rejected';
-    $isFreeSurvey   = !$surveyInvoice && $project->levels->firstWhere('level_order', 3)?->is_started;
+    $isFreeSurvey   = !$surveyInvoice && $event->levels->firstWhere('level_order', 3)?->is_started;
 
     if (
-        $project->planning
+        $event->planning
         && ($isFreeSurvey || $surveyApproved)
         && $activeStep == 3
     ) {
@@ -295,48 +295,48 @@ private function resolveSurveyData($project, int $activeStep): array
         'surveyRejected', 'isFreeSurvey', 'activeStep'
     );
 }
-private function resolveInvoiceData($project): array
+private function resolveInvoiceData($event): array
 {
-    $invoiceDp = $project->invoices
+    $invoiceDp = $event->invoices
         ->where('invoice_type', Invoice::TYPE_DP)
         ->first();
 
-    $invoiceRab = $project->invoices
+    $invoiceRab = $event->invoices
         ->where('invoice_type', Invoice::TYPE_RAB)
         ->first();
 
-    $invoiceBuild = InvoiceBuild::where('project_id', $project->id)
+    $invoiceBuild = InvoiceBuild::where('event_id', $event->id)
         ->where('invoice_type', InvoiceBuild::TYPE_BUILD)
         ->first();
 
     return compact('invoiceDp', 'invoiceRab', 'invoiceBuild');
 }
-private function resolveBuildData($project): array
+private function resolveBuildData($event): array
 {
-    $weeks = $project->rab?->job_duration ?? 0;
+    $weeks = $event->rab?->job_duration ?? 0;
 
     // ✅ Pakai relasi yang sudah di-eager-load (bukan query baru)
-    $usedDates = $project->dailyReports
+    $usedDates = $event->dailyReports
         ->pluck('tanggal')
         ->map(fn($d) => Carbon::parse($d)->format('Y-m-d'))
         ->toArray();
 
     // Hitung next date
-    $nextDate = Carbon::parse($project->start_date);
+    $nextDate = Carbon::parse($event->start_date);
     while (
         in_array($nextDate->format('Y-m-d'), $usedDates)
-        && $nextDate->lte($project->end_date)
+        && $nextDate->lte($event->end_date)
     ) {
         $nextDate->addDay();
     }
 
     // ✅ Pakai relasi yang sudah di-eager-load
-    $reports = $project->dailyReports
+    $reports = $event->dailyReports
         ->sortBy('tanggal')
         ->groupBy('minggu');
 
     // ✅ Pakai relasi yang sudah di-eager-load (bukan BuildProcessItem::query())
-    $buildItems = $project->buildItems;
+    $buildItems = $event->buildItems;
     $buildItems->each(function ($item) {
         $item->progress_map = $item->weeklyProgresses->keyBy('week_no');
         $item->tambahan->each(function ($sub) {
@@ -366,95 +366,95 @@ private function resolveBuildData($project): array
                     }),
             ];
         });
-    $weeklyReports = WeeklyReport::where('project_id', $project->id)
+    $weeklyReports = WeeklyReport::where('event_id', $event->id)
         ->get()
         ->keyBy('minggu');
     return compact('weeks', 'usedDates', 'nextDate', 'reports', 'buildItems', 'groupedItems', 'weeklyReports');
 }
 
-    public function store(ProjectRequest $request)
+    public function store(EventRequest $request)
 {
     abort_if(auth()->user()->cannot('lihat daftar proyek'), 403);
 
-    $project = DB::transaction(function () use ($request) {
+    $event = DB::transaction(function () use ($request) {
 
-        $project = Project::create($request->validated());
+        $event = Event::create($request->validated());
 
-        $project->generateLevels();
+        $event->generateLevels();
 
-        return $project;
+        return $event;
     });
 
-    $project->load(['employee.user', 'customer.user']);
+    $event->load(['employee.user', 'customer.user']);
 
-    $event = 'project_created';
-    $cfg   = config("project_events.project_created");
+    $event = 'event_created';
+    $cfg   = config("event_events.event_created");
 
     if (!$cfg) {
-        throw new \Exception("Config project_events.$event not found");
+        throw new \Exception("Config event_events.$event not found");
     }
 
-    ProjectNotifier::notifyUsers(
+    EventNotifier::notifyUsers(
         [auth()->user()],
-        ProjectNotifier::makePayload($project, [
+        EventNotifier::makePayload($event, [
             'type'    => $event,
             'role'    => 'created_self',
             'title'   => $cfg['title'],
             'message' => $cfg['message']['created_self'],
-            'url'     => route('projects.create', ['project_id' => $project->id]),
+            'url'     => route('events.create', ['event_id' => $event->id]),
         ])
     );
 
-    if ($project->employee?->user && $project->employee->user->id !== auth()->id()) {
-        ProjectNotifier::notifyUsers(
-            [$project->employee->user],
-            ProjectNotifier::makePayload($project, [
+    if ($event->employee?->user && $event->employee->user->id !== auth()->id()) {
+        EventNotifier::notifyUsers(
+            [$event->employee->user],
+            EventNotifier::makePayload($event, [
                 'type'    => $event,
                 'role'    => 'assigned',
                 'title'   => $cfg['title'],
                 'message' => $cfg['message']['assigned'],
-                'url'     => route('projects.create', ['project_id' => $project->id]),
+                'url'     => route('events.create', ['event_id' => $event->id]),
             ])
         );
     }
 
     $directors = User::role('Direktur')->get();
 
-    ProjectNotifier::notifyUsers(
+    EventNotifier::notifyUsers(
         $directors,
-        ProjectNotifier::makePayload($project, [
+        EventNotifier::makePayload($event, [
             'type'    => $event,
             'role'    => 'director',
             'title'   => $cfg['title'],
             'message' => $cfg['message']['director'],
-            'url'     => route('projects.create', ['project_id' => $project->id]),
+            'url'     => route('events.create', ['event_id' => $event->id]),
         ]),
         exceptUserId: auth()->id()
     );
 
-    if ($project->customer?->user) {
-        ProjectNotifier::notifyUsers(
-            [$project->customer->user],
-            ProjectNotifier::makePayload($project, [
+    if ($event->customer?->user) {
+        EventNotifier::notifyUsers(
+            [$event->customer->user],
+            EventNotifier::makePayload($event, [
                 'type'    => $event,
                 'role'    => 'customer',
                 'title'   => $cfg['title'],
                 'message' => $cfg['message']['customer'],
-                'url'     => route('projects.create', ['project_id' => $project->id]),
+                'url'     => route('events.create', ['event_id' => $event->id]),
             ])
         );
     }
 
         return redirect()
-            ->route('projects.create', ['project_id' => $project->id])
-            ->with('success', 'Project berhasil dibuat.');
+            ->route('events.create', ['event_id' => $event->id])
+            ->with('success', 'Event berhasil dibuat.');
 }
 
-    private function getCurrentStep($project)
+    private function getCurrentStep($event)
     {
-        if (!$project) return 1;
+        if (!$event) return 1;
 
-        $current = $project->levels
+        $current = $event->levels
             ->where('is_completed', false)
             ->sortBy('level_order')
             ->first();
@@ -462,9 +462,9 @@ private function resolveBuildData($project): array
         return $current ? $current->level_order + 1 : 9;
     }
 
-    public function continue(Project $project, Request $request)
+    public function continue(Event $event, Request $request)
 {
-    $project->load([
+    $event->load([
         'customer.user',
         'employee',
         'levels.employees',
@@ -482,25 +482,25 @@ private function resolveBuildData($project): array
         'dailyReports.materials'
     ]);
 
-    $activeStep = $this->computeActiveStep($project);
+    $activeStep = $this->computeActiveStep($event);
 
-    return redirect()->route('projects.create', [
-        'project_id' => $project->id,
+    return redirect()->route('events.create', [
+        'event_id' => $event->id,
         'step'       => $activeStep
     ]);
 }
 
-private function computeActiveStep($project, $request = null)
+private function computeActiveStep($event, $request = null)
 {
     if ($request && $request->filled('step')) {
         return (int) $request->step;
     }
 
-    if (!$project) {
+    if (!$event) {
         return 1;
     }
 
-    $current = $project->levels
+    $current = $event->levels
         ->where('is_completed', false)
         ->sortBy('level_order')
         ->first();
@@ -511,7 +511,7 @@ private function computeActiveStep($project, $request = null)
 private function stepKeyMap()
 {
     return [
-        0 => 'project',
+        0 => 'event',
         1 => 'form-konsultasi',
         2 => 'detail-konsultasi',
         3 => 'planning',
@@ -525,34 +525,34 @@ private function stepKeyMap()
     ];
 }
 
-public function update(Request $request, Project $project)
+public function update(Request $request, Event $event)
 {
     abort_if(auth()->user()->cannot('lihat daftar proyek'), 403);
     
-    $project->update($request->all());
+    $event->update($request->all());
 
     return back()->with('success', 'Data proyek berhasil diperbarui!');
 }
-public function show(Project $project)
+public function show(Event $event)
 {
-    return redirect()->route('projects.create', ['project_id' => $project->id]);
+    return redirect()->route('events.create', ['event_id' => $event->id]);
 }
-     public function destroy(Project $project) 
+     public function destroy(Event $event) 
     {
-        if ($project) {
-            $project->delete();
-            return response()->json(['status' => 'success', 'message' => 'Project deleted successfully']);
+        if ($event) {
+            $event->delete();
+            return response()->json(['status' => 'success', 'message' => 'Event deleted successfully']);
         }
 
         return response()->json(['status' => 'failed', 'message' => 'Unable to delete']);
     }
-private function buildTimelineSteps($project, int $activeStep): \Illuminate\Support\Collection
+private function buildTimelineSteps($event, int $activeStep): \Illuminate\Support\Collection
 {
-    if (!$project) {
+    if (!$event) {
         return collect([]);
     }
     $map = $this->stepKeyMap();
-    return $project->levels
+    return $event->levels
         ->sortBy('level_order')
         ->map(function ($level) use ($activeStep, $map) {
             $order = $level->level_order + 1;
@@ -565,10 +565,10 @@ private function buildTimelineSteps($project, int $activeStep): \Illuminate\Supp
         })
         ->values();
 }
-private function formData($project = null, int $activeStep = 1, ?int $projectType = null, array $merge = []): array
+private function formData($event = null, int $activeStep = 1, ?int $eventType = null, array $merge = []): array
 {
     $data = [
-        'projectStatus' => [
+        'eventStatus' => [
             1 => 'Proses',
             2 => 'Revisi',
             3 => 'Butuh Persetujuan',
@@ -583,49 +583,49 @@ private function formData($project = null, int $activeStep = 1, ?int $projectTyp
         $data['provinces']   = Province::all();
     }
 
-    if ($projectType == 3 && $activeStep >= 8) {
+    if ($eventType == 3 && $activeStep >= 8) {
         $data['workers'] = Worker::with('user:id,fullname')->get(['id', 'user_id']);
     }
     // ── Design packages — hanya type 1, saat step penawaran ──
-    if ($projectType == 1 && $activeStep >= 5) {
+    if ($eventType == 1 && $activeStep >= 5) {
         $data['designPackages'] = \App\Models\DesignPackage::orderBy('name')
             ->orderBy('price_meter')->get();
     }
     // ── RAB packages — hanya type 2, saat step penawaran ──
-    if ($projectType == 2 && $activeStep >= 5) {
+    if ($eventType == 2 && $activeStep >= 5) {
         $data['rabPackages'] = \App\Models\RabPackage::orderBy('name')
             ->orderBy('price_meter')->get();
     }
     // ── Job categories — hanya type 3, saat step penawaran/build ──
-    if (in_array($projectType, [2, 3]) && $activeStep >= 5) {
+    if (in_array($eventType, [2, 3]) && $activeStep >= 5) {
         $data['jobCategories'] = JobCategory::orderBy('kode_urut')
             ->orderBy('nama_pekerjaan')->get();
     }
     // ── RAB processes & items — hanya jika edit form offer aktif ──
     // Ini bisa di-lazy-load via AJAX di masa depan
-    if ($activeStep >= 5 && $project?->customer_id) {
+    if ($activeStep >= 5 && $event?->customer_id) {
 
-        $data['rabProcesses'] = RabProcess::whereHas('project', function ($q) use ($project) {
-            $q->where('customer_id', $project->customer_id);
+        $data['rabProcesses'] = RabProcess::whereHas('event', function ($q) use ($event) {
+            $q->where('customer_id', $event->customer_id);
         })->get();
 
         $data['categories'] = RabProcessCategory::with([
             'uraians.items.rab'
         ])
-        ->whereHas('rabProcess.project', function ($q) use ($project) {
-            $q->where('customer_id', $project->customer_id);
+        ->whereHas('rabProcess.event', function ($q) use ($event) {
+            $q->where('customer_id', $event->customer_id);
         })
         ->orderBy('order_no')
         ->get();
     }
     return array_merge($data, $merge);
 }
-    public function invoicePanel(Project $project)
+    public function invoicePanel(Event $event)
 {
-    $project->load('invoiceBuilds');
+    $event->load('invoiceBuilds');
 
-    return view('projects.partials.invoice_panel',
-    compact('project'));
+    return view('events.partials.invoice_panel',
+    compact('event'));
 }
 
 public function loadTambahan(BuildProcessItem $item)
@@ -640,20 +640,20 @@ public function loadTambahan(BuildProcessItem $item)
     )->get();
 
     return view(
-        'projects.partials.tambahan_rows',
+        'events.partials.tambahan_rows',
         [
             'item' => $item,
             'jobCategories' => $jobCategories,
-            'weekLabels' => $item->project->week_labels,
+            'weekLabels' => $item->event->week_labels,
         ]
     )->render();
 }
-public function syncBuildPlan(Project $project)
+public function syncBuildPlan(Event $event)
 {
-    app(BuildPlanSyncService::class)->syncFull($project);
-    app(BuildProcessSyncService::class)->syncFull($project);
+    app(BuildPlanSyncService::class)->syncFull($event);
+    app(BuildProcessSyncService::class)->syncFull($event);
 
-    $project->update([
+    $event->update([
         'need_sync_build' => false
     ]);
 
@@ -662,12 +662,12 @@ public function syncBuildPlan(Project $project)
         'Build Plan dan Build Process berhasil disinkronkan.'
     );
 }
-public function syncBuildProcess(Project $project)
+public function syncBuildProcess(Event $event)
 {
     app(BuildProcessSyncService::class)
-        ->syncFull($project);
+        ->syncFull($event);
 
-    $project->update([
+    $event->update([
         'need_sync_build' => false
     ]);
     return back()->with(
@@ -675,12 +675,12 @@ public function syncBuildProcess(Project $project)
         'Build process berhasil disinkronkan.'
     );
 }
-public function data(Project $project)
+public function data(Event $event)
 {
-    $weeks = $project->week_labels;
+    $weeks = $event->week_labels;
     $query = BuildPlans::query()
         ->with('weeks')
-        ->where('project_id',$project->id)
+        ->where('event_id',$event->id)
         ->ordered();
     $dataTable = DataTables::eloquent($query)
         ->addIndexColumn()
@@ -715,7 +715,7 @@ public function data(Project $project)
     $response=$dataTable->make(true);
 
     $plans = BuildPlans::with('weeks')
-        ->where('project_id',$project->id)
+        ->where('event_id',$event->id)
         ->get();
 
     $weekTotal=[];
@@ -749,11 +749,11 @@ public function data(Project $project)
 
 }
 
-private function resolveBuildPlanData($project): array
+private function resolveBuildPlanData($event): array
 {
     $canEdit = auth()->user()->can('lihat daftar proyek');
     $buildPlans = BuildPlans::query()
-        ->where('project_id', $project->id)
+        ->where('event_id', $event->id)
         ->with('weeks:id,build_plan_id,week_no,plan_percent')
         ->orderBy('category_order')
         ->orderBy('uraian_order')
@@ -787,10 +787,10 @@ private function resolveBuildPlanData($project): array
 
     return compact('buildPlans', 'groupedPlans', 'canEdit');
 }
-// Route: GET /projects/{project}/build-process-data
-public function buildProcessPartial(Project $project)
+// Route: GET /events/{event}/build-process-data
+public function buildProcessPartial(Event $event)
 {
-    $project->load([
+    $event->load([
         'city',
         'weeklyPlans',
         'buildItems.weeklyProgresses',
@@ -800,10 +800,10 @@ public function buildProcessPartial(Project $project)
         'dailyReports.materials',
     ]);
 
-    $buildData = $this->resolveBuildData($project);
+    $buildData = $this->resolveBuildData($event);
 
     $formData = $this->formData(
-        $project,
+        $event,
         8,
         3
     );
@@ -812,12 +812,12 @@ public function buildProcessPartial(Project $project)
     $isReadOnly = !$canEdit;
 
     return view(
-        'projects.steps.build-process',
+        'events.steps.build-process',
         array_merge(
             $buildData,
             $formData,
             compact(
-                'project',
+                'event',
                 'canEdit',
                 'isReadOnly'
             )
