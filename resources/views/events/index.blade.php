@@ -10,7 +10,7 @@
                 <div class="col-12 col-md-auto ms-auto d-print-none">
                     <div class="btn-list">
                 @can('tambah data event')       
-                        <a href="{{ route("events.create") }}" class="btn btn-dark" >
+                        <a href="{{ route("events.create") }}" class="btn btn-primary" >
                             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -112,24 +112,62 @@
                     }
                 },
                 columns: [
-                    { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-                    { data: 'event_code', name: 'event_code' },
-                    { data: 'event_category', name: 'event_category' },
-                    { data: 'event_name', name: 'event_name' },
-                    { data: 'event_type', name: 'event_type' },
-                    { data: 'price', name: 'price' },
-                    { data: 'quota', name: 'quota' },
-                    // { data: 'affiliator', name: 'affiliator.user.fullname' },
-                    { data: 'registration', name: 'registration' },
-                    { data: 'schedule', name: 'schedule' },
-                    // { data: 'province_name', name: 'province.name' },
-                    // { data: 'city_name', name: 'city.name'},
-                    // { data: 'district_name', name: 'district.name' },
-                    // { data: 'sub_district_name', name: 'sub_district_name' },
-                    // { data: 'postal_code', name: 'postal_code' },
-                    // { data: 'current_level', name: 'current_level' },
-                    { data: 'status', name: 'status' },
-                    { data: 'action', name: 'action', orderable: false, searchable: false }
+                    {
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'event_code',
+                        name: 'event_code'
+                    },
+                    {
+                        data: 'event_name',
+                        name: 'event_name'
+                    },
+                    {
+                        data: 'event_category',
+                        name: 'event_category'
+                    },
+                    {
+                        data: 'event_type',
+                        name: 'event_type'
+                    },
+                    {
+                        data: 'schedule',
+                        name: 'schedule',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'registration',
+                        name: 'registration',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'location',
+                        name: 'location'
+                    },
+                    {
+                        data: 'price',
+                        name: 'price'
+                    },
+                    {
+                        data: 'quota',
+                        name: 'quota'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    }
                 ],
                 language: {
                     search: "",

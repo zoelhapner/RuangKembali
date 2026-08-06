@@ -139,71 +139,13 @@ if (
         };
     }
 
-public function create(Request $request)
-{
-    $event = null;
-    if ($request->has('event_id')) {
-        $event = $this->loadBaseEvent($request->event_id);
-    }
-    $activeStep  = $this->getCurrentStep($event);
-    $eventType = $event?->event_type;
-    if ($event) {
-        $extra = $this->resolveExtraRelations($activeStep, $eventType);
-        if (!empty($extra)) {
-            $event->load($extra);
-        }
-    }
-    // ━━━ Phase 3: Siapkan data view — conditional per section ━━━
-    $canEdit = auth()->user()->can('lihat daftar proyek');
-    // Default values untuk variabel yang dipakai di Blade
-    // Ini mencegah "undefined variable" di view
-    $defaults = [
-        'surveyInvoice'  => null,
-        'surveyApproved' => false,
-        'surveyWaiting'  => false,
-        'surveyRejected' => false,
-        'isFreeSurvey'   => false,
-        'invoiceDp'      => null,
-        'invoiceRab'     => null,
-        'invoiceBuild'   => null,
-        'weeks'          => 0,
-        'usedDates'      => [],
-        'nextDate'       => now(),
-        'reports'        => collect(),
-        'buildItems'     => collect(),
-        'groupedItems'   => collect(),
-        'buildPlans'     => collect(),
-        'groupedPlans'   => collect(),
-    ];
-    $viewData = array_merge($defaults, compact(
-        'event', 'activeStep', 'canEdit'
-    ));
-    // ── Survey data (step >= 3) ──
-    if ($activeStep >= 3 && $event) {
-        $surveyData = $this->resolveSurveyData($event, $activeStep);
-        $viewData   = array_merge($viewData, $surveyData);
-        // Mungkin activeStep berubah jadi 4
-        $activeStep = $viewData['activeStep'];
-    }
-    // ── Timeline (butuh activeStep final) ──
-    $viewData['timelineSteps'] = $this->buildTimelineSteps($event, $activeStep);
-    // ── Invoice data (step >= 6) ──
-    if ($activeStep >= 6 && $event) {
-        $viewData = array_merge($viewData, $this->resolveInvoiceData($event));
-    }
+    public function create()
+    {
+        $parents = Menu::whereNull('parent_id')->get();
+        $permissions = Permission::all();
 
-    if ($eventType == 3 && $activeStep >= 8 && $event) {
-        $viewData = array_merge($viewData, $this->resolveBuildData($event));
+        return view('menus.create', compact('parents', 'permissions'));
     }
-    // ── Build plans (type 3, step >= 8) ──
-    if ($eventType == 3 && $activeStep >= 8 && $event) {
-        $viewData = array_merge($viewData, $this->resolveBuildPlanData($event));
-    }
-    return view('events.create', array_merge(
-        $this->formData($event, $activeStep, $eventType),
-        $viewData
-    ));
-}
 private function loadBaseEvent($eventId)
 {
     return Event::with([
