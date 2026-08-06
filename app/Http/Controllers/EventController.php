@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EventRequest;
+use App\Models\EventCategory;
 use App\Models\Employee;
 use App\Models\Customer;
 use App\Models\Affiliator;
@@ -79,7 +80,14 @@ if (
 
         return DataTables::of($query)
         ->addIndexColumn()
-
+        ->editColumn('event_name', function ($row) {
+            $url = route('events.show', $row->id);
+            $name = Str::title($row->event_name ?? '-');
+            return '<a href="'.$url.'">'.e($name).'</a>';
+        })
+        ->addColumn('event_category', function ($row) {
+            return $row->category?->name ?? '-';
+        })
         ->addColumn('schedule', function ($row) {
             return $row->start_at->format('d M Y H:i') .
                 '<br><small>s/d ' .
@@ -122,268 +130,135 @@ if (
             return $buttons;
         })
 
-        ->rawColumns(['action', 'schedule', 'price', 'status'])
+        ->rawColumns(['action', 'schedule', 'price', 'status', 'event_name'])
         ->make(true);
     }
 
     return view('events.index');
 }
 
-    private function readableEventType($value)
-    {
-        return match ((int) $value) {
-            1 => 'Desain',
-            2 => 'RAB',
-            3 => 'Build',
-            default => '-',
-        };
-    }
-
-    public function create()
-    {
-        $parents = Menu::whereNull('parent_id')->get();
-        $permissions = Permission::all();
-
-        return view('menus.create', compact('parents', 'permissions'));
-    }
-private function loadBaseEvent($eventId)
+public function create()
 {
-    return Event::with([
-        'customer.user',
-        'employee',
-        'levels.employees',
-        'planning',
-        'invoices',                           
-        'rab:id,event_id,job_duration',     
-    ])->findOrFail($eventId);
+    $categories = EventCategory::orderBy('name')->get();
+
+    $eventTypes = [
+        'free' => 'Gratis',
+        'paid' => 'Berbayar',
+    ];
+
+    $audiences = [
+        'public' => 'Umum',
+        'gender' => 'Berdasarkan Gender',
+        'age' => 'Berdasarkan Usia',
+    ];
+    $statuses = [
+        'coming_soon' => 'Coming Soon',
+        'registration_open' => 'Pendaftaran',
+        'sold_out' => 'Sold Out',
+        'ongoing' => 'Sedang Berlangsung',
+        'finished' => 'Selesai',
+        'cancelled' => 'Dibatalkan',
+    ];
+
+    return view('events.create', compact(
+        'categories',
+        'eventTypes',
+        'audiences',
+        'statuses'
+    ));
 }
-private function resolveExtraRelations(int $activeStep, ?int $eventType): array
-{
-    $relations = [];
 
-    if ($activeStep >= 2) {
-        $relations[] = 'consultation.items';
-    }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'event_category_id' => 'required|exists:event_categories,id',
+            'event_type' => 'required|in:free,paid',
+            'audience_type' => 'required|in:public,gender,age',
 
-    if ($activeStep >= 4) {
-        $relations[] = 'survey.items';
-    }
+            'registration_open' => 'nullable|date',
+            'registration_close' => 'nullable|date|after_or_equal:registration_open',
 
-    if ($activeStep >= 5) {
-        $relations[] = 'offer.items';
+            'start_at' => 'required|date',
+            'end_at' => 'required|date|after:start_at',
 
-        if ($eventType == 2) {
-            $relations[] = 'offer.rab.items.category';
-        }
-    }
+            'location' => 'nullable|string|max:255',
+            'price' => 'nullable|numeric|min:0',
+            'quota' => 'nullable|integer|min:1',
 
-    if ($eventType == 2 && $activeStep >= 7) {
-        $relations[] = 'rab.categories.uraians.items.category';
-    }
+            'poster' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
 
-    if ($eventType == 3 && $activeStep >= 8) {
-        $relations = array_merge($relations, [
-            'buildItems.jobCategory',
-            'buildItems.weeklyProgresses',
-            'buildItems.tambahan.weeklyProgresses',
-            'dailyReports.works.rabProcessItem',
-            'dailyReports.workers.worker.user',
-            'dailyReports.materials',
+            'description' => 'nullable|string',
+            'is_published' => 'required|boolean',
         ]);
-    }
 
-    return $relations;
-}
-private function resolveSurveyData($event, int $activeStep): array
-{
-    $surveyInvoice = $event->invoices
-        ->where('invoice_type', 'survey')
-        ->sortByDesc('created_at')
-        ->first();
+        DB::beginTransaction();
 
-    $surveyApproved = $surveyInvoice?->status === 'approved';
-    $surveyWaiting  = $surveyInvoice?->status === 'waiting_approval';
-    $surveyRejected = $surveyInvoice?->status === 'rejected';
-    $isFreeSurvey   = !$surveyInvoice && $event->levels->firstWhere('level_order', 3)?->is_started;
+        try {
 
-    if (
-        $event->planning
-        && ($isFreeSurvey || $surveyApproved)
-        && $activeStep == 3
-    ) {
-        $activeStep = 4;
-    }
+            $poster = null;
+            $thumbnail = null;
 
-    return compact(
-        'surveyInvoice', 'surveyApproved', 'surveyWaiting',
-        'surveyRejected', 'isFreeSurvey', 'activeStep'
-    );
-}
-private function resolveInvoiceData($event): array
-{
-    $invoiceDp = $event->invoices
-        ->where('invoice_type', Invoice::TYPE_DP)
-        ->first();
+            if ($request->hasFile('poster')) {
+                $poster = $request->file('poster')
+                    ->store('events/posters', 'public');
+            }
 
-    $invoiceRab = $event->invoices
-        ->where('invoice_type', Invoice::TYPE_RAB)
-        ->first();
+            if ($request->hasFile('thumbnail')) {
+                $thumbnail = $request->file('thumbnail')
+                    ->store('events/thumbnails', 'public');
+            }
 
-    $invoiceBuild = InvoiceBuild::where('event_id', $event->id)
-        ->where('invoice_type', InvoiceBuild::TYPE_BUILD)
-        ->first();
+            Event::create([
+                'license_id' => auth()->user()->license_id ?? null,
 
-    return compact('invoiceDp', 'invoiceRab', 'invoiceBuild');
-}
-private function resolveBuildData($event): array
-{
-    $weeks = $event->rab?->job_duration ?? 0;
+                'event_code' => $this->generateEventCode(),
 
-    // ✅ Pakai relasi yang sudah di-eager-load (bukan query baru)
-    $usedDates = $event->dailyReports
-        ->pluck('tanggal')
-        ->map(fn($d) => Carbon::parse($d)->format('Y-m-d'))
-        ->toArray();
+                'name' => $request->name,
+                'event_category_id' => $request->event_category_id,
+                'event_type' => $request->event_type,
+                'audience_type' => $request->audience_type,
 
-    // Hitung next date
-    $nextDate = Carbon::parse($event->start_date);
-    while (
-        in_array($nextDate->format('Y-m-d'), $usedDates)
-        && $nextDate->lte($event->end_date)
-    ) {
-        $nextDate->addDay();
-    }
+                'registration_open' => $request->registration_open,
+                'registration_close' => $request->registration_close,
 
-    // ✅ Pakai relasi yang sudah di-eager-load
-    $reports = $event->dailyReports
-        ->sortBy('tanggal')
-        ->groupBy('minggu');
+                'start_at' => $request->start_at,
+                'end_at' => $request->end_at,
 
-    // ✅ Pakai relasi yang sudah di-eager-load (bukan BuildProcessItem::query())
-    $buildItems = $event->buildItems;
-    $buildItems->each(function ($item) {
-        $item->progress_map = $item->weeklyProgresses->keyBy('week_no');
-        $item->tambahan->each(function ($sub) {
-            $sub->progress_map = $sub->weeklyProgresses->keyBy('week_no');
-        });
-    });
+                'location' => $request->location,
+                'price' => $request->price ?? 0,
+                'quota' => $request->quota,
 
-    $groupedItems = $buildItems
-        ->whereNull('parent_id')
-        ->sortBy([
-            ['category_order', 'asc'],
-            ['uraian_order', 'asc'],
-            ['item_order', 'asc'],
-        ])
-        ->groupBy('category_order')
-        ->map(function ($items) {
-            return [
-                'category_id'   => $items->first()->category_order,
-                'category_name' => $items->first()->category_name,
-                'uraians'       => $items
-                    ->groupBy('uraian_order')
-                    ->map(function ($rows) {
-                        return [
-                            'uraian_name' => $rows->first()->uraian_name,
-                            'items'       => $rows->sortBy('item_order')->values(),
-                        ];
-                    }),
-            ];
-        });
-    $weeklyReports = WeeklyReport::where('event_id', $event->id)
-        ->get()
-        ->keyBy('minggu');
-    return compact('weeks', 'usedDates', 'nextDate', 'reports', 'buildItems', 'groupedItems', 'weeklyReports');
-}
+                'poster' => $poster,
+                'thumbnail' => $thumbnail,
 
-    public function store(EventRequest $request)
-{
-    abort_if(auth()->user()->cannot('lihat daftar proyek'), 403);
+                'description' => $request->description,
+                'is_published' => $request->boolean('is_published'),
+            ]);
 
-    $event = DB::transaction(function () use ($request) {
+            DB::commit();
 
-        $event = Event::create($request->validated());
+            return redirect()
+                ->route('events.index')
+                ->with('success', 'Event berhasil ditambahkan.');
 
-        $event->generateLevels();
+        } catch (\Throwable $e) {
 
-        return $event;
-    });
+            DB::rollBack();
 
-    $event->load(['employee.user', 'customer.user']);
+            if ($poster) {
+                Storage::disk('public')->delete($poster);
+            }
 
-    $event = 'event_created';
-    $cfg   = config("event_events.event_created");
+            if ($thumbnail) {
+                Storage::disk('public')->delete($thumbnail);
+            }
 
-    if (!$cfg) {
-        throw new \Exception("Config event_events.$event not found");
-    }
-
-    EventNotifier::notifyUsers(
-        [auth()->user()],
-        EventNotifier::makePayload($event, [
-            'type'    => $event,
-            'role'    => 'created_self',
-            'title'   => $cfg['title'],
-            'message' => $cfg['message']['created_self'],
-            'url'     => route('events.create', ['event_id' => $event->id]),
-        ])
-    );
-
-    if ($event->employee?->user && $event->employee->user->id !== auth()->id()) {
-        EventNotifier::notifyUsers(
-            [$event->employee->user],
-            EventNotifier::makePayload($event, [
-                'type'    => $event,
-                'role'    => 'assigned',
-                'title'   => $cfg['title'],
-                'message' => $cfg['message']['assigned'],
-                'url'     => route('events.create', ['event_id' => $event->id]),
-            ])
-        );
-    }
-
-    $directors = User::role('Direktur')->get();
-
-    EventNotifier::notifyUsers(
-        $directors,
-        EventNotifier::makePayload($event, [
-            'type'    => $event,
-            'role'    => 'director',
-            'title'   => $cfg['title'],
-            'message' => $cfg['message']['director'],
-            'url'     => route('events.create', ['event_id' => $event->id]),
-        ]),
-        exceptUserId: auth()->id()
-    );
-
-    if ($event->customer?->user) {
-        EventNotifier::notifyUsers(
-            [$event->customer->user],
-            EventNotifier::makePayload($event, [
-                'type'    => $event,
-                'role'    => 'customer',
-                'title'   => $cfg['title'],
-                'message' => $cfg['message']['customer'],
-                'url'     => route('events.create', ['event_id' => $event->id]),
-            ])
-        );
-    }
-
-        return redirect()
-            ->route('events.create', ['event_id' => $event->id])
-            ->with('success', 'Event berhasil dibuat.');
-}
-
-    private function getCurrentStep($event)
-    {
-        if (!$event) return 1;
-
-        $current = $event->levels
-            ->where('is_completed', false)
-            ->sortBy('level_order')
-            ->first();
-
-        return $current ? $current->level_order + 1 : 9;
+            return back()
+                ->withInput()
+                ->with('error', $e->getMessage());
+        }
     }
 
     public function continue(Event $event, Request $request)

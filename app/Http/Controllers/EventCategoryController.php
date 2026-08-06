@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProductCategory;
+use App\Models\EventCategory;
 use Illuminate\Http\Request;
 
-class ProductCategoryController extends Controller
+class EventCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $product_category = ProductCategory::all();
-        return view('categories.index', compact('product_category'));
+        $eventcategory = EventCategory::all();
+        return view('categories.index', compact('eventcategory'));
     }
 
     /**
@@ -34,7 +34,7 @@ class ProductCategoryController extends Controller
             'is_active' => 'required|boolean',
         ]);
 
-        ProductCategory::create([
+        EventCategory::create([
             'name' => $request->name,
             'is_active' => $request->is_active,
         ]);
@@ -54,7 +54,7 @@ class ProductCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ProductCategory $product_category)
+    public function edit(EventCategory $product_category)
     {
         return view('categories.edit', compact('product_category'));
     }
@@ -63,7 +63,7 @@ class ProductCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ProductCategory $product_category)
+    public function update(Request $request, EventCategory $product_category)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -83,7 +83,7 @@ class ProductCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProductCategory $product_category)
+    public function destroy(EventCategory $product_category)
     {
         $product_category->delete();
 

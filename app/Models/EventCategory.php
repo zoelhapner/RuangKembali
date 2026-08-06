@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class EventCategory extends Model
 {
-    use HasUuids, SoftDeletes;
+    use HasUuids;
 
     protected $fillable = [
         'license_id',

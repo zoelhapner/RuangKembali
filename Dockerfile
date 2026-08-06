@@ -56,5 +56,4 @@ EXPOSE 8080
 CMD sh -c "\
 php artisan optimize || true && \
 php artisan storage:link || true && \
-php artisan migrate --path=database/migrations/migrasi_2_event --force && \
 php artisan serve --host=0.0.0.0 --port=${PORT:-8080}"
