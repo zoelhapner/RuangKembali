@@ -51,28 +51,28 @@ Route::get('/', function () {
 
 require __DIR__.'/auth.php';
 
-Route::middleware('auth')->group(function () {
+// Route::middleware('auth')->group(function () {
 
-    Route::get('/email/verify', function () {
-        return view('auth.verify-email');
-    })->name('verification.notice');
+//     Route::get('/email/verify', function () {
+//         return view('auth.verify-email');
+//     })->name('verification.notice');
 
-    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+//     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
 
-        $request->fulfill();
+//         $request->fulfill();
 
-        return redirect()->route('dashboard');
+//         return redirect()->route('dashboard');
 
-    })->middleware('signed')->name('verification.verify');
+//     })->middleware('signed')->name('verification.verify');
 
-    Route::post('/email/verification-notification', function (Request $request) {
+//     Route::post('/email/verification-notification', function (Request $request) {
 
-        $request->user()->sendEmailVerificationNotification();
+//         $request->user()->sendEmailVerificationNotification();
 
-        return back()->with('success', 'Link verifikasi telah dikirim ulang.');
+//         return back()->with('success', 'Link verifikasi telah dikirim ulang.');
 
-    })->middleware('throttle:6,1')->name('verification.send');
-});
+//     })->middleware('throttle:6,1')->name('verification.send');
+// });
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
