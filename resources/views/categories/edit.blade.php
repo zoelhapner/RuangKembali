@@ -10,7 +10,7 @@
                 <div class="col-12 col-md-auto ms-auto d-print-none">
                     <div class="btn-list">
                   
-                        <a href=" {{ route("product_categories.index") }} " class="btn btn-primary d-none d-sm-inline-block" >
+                        <a href=" {{ route("event_categories.index") }} " class="btn btn-primary d-none d-sm-inline-block" >
                             Kembali
                         </a>
                         
@@ -33,14 +33,14 @@
                         </div>
 
                         <div class="card-body">
-                            <form action="{{ route('product_categories.update', $product_category->id) }}" method="POST"  style="font-size: 1.5rem; font-weight: 400; font-family: 'Poppins', sans-serif;">
+                            <form action="{{ route('event_categories.update', $event_category->id) }}" method="POST"  style="font-size: 1.5rem; font-weight: 400; font-family: 'Poppins', sans-serif;">
                                 @csrf
                                 @method('PUT')
 
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Nama Lengkap</label>
-                                        <input type="text" name="name" class="form-control" value="{{ old('name', $product_category->name) }}" required>
+                                        <input type="text" name="name" class="form-control" value="{{ old('name', $event_category->name) }}" required>
                                     </div>
 
                                     
@@ -62,15 +62,15 @@
                                         <label class="form-label">Jenis Kelamin</label>
                                         <select name="gender" class="form-select">
                                             <option value="">-- Pilih kelamin --</option>
-                                            <option value="1" {{ $product_category->gender == 1 ? 'selected' : '' }}>Laki - Laki</option>
-                                            <option value="2" {{ $product_category->gender == 2 ? 'selected' : '' }}>Perempuan</option>
+                                            <option value="1" {{ $event_category->gender == 1 ? 'selected' : '' }}>Laki - Laki</option>
+                                            <option value="2" {{ $event_category->gender == 2 ? 'selected' : '' }}>Perempuan</option>
                                         </select>
                                     </div>
 
                                     <div class="col-md-6 mb-3">
                                                 <label>Tanggal Lahir *</label>
                                                 <input type="date" name="birth_date" class="form-control" required
-                                                    value="{{ old('birth_date', $product_category->birth_date) }}"
+                                                    value="{{ old('birth_date', $event_category->birth_date) }}"
                                                     pattern="\d{4}-\d{2}-\d{2}" placeholder="YYYY-MM-DD">
                                     </div>
                                 </div>
@@ -78,12 +78,12 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Pekerjaan</label>
-                                        <input type="text" name="job" class="form-control" value="{{ old('job', $product_category->job) }}">
+                                        <input type="text" name="job" class="form-control" value="{{ old('job', $event_category->job) }}">
                                     </div>
 
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Telepon Kantor</label>
-                                        <input type="number" name="job_phone" class="form-control" value="{{ old('job_phone', $product_category->job_phone) }}">
+                                        <input type="number" name="job_phone" class="form-control" value="{{ old('job_phone', $event_category->job_phone) }}">
                                     </div>
                                 </div>
 
@@ -92,25 +92,25 @@
                                             <label for="last_education_level" class="form-label">Jenjang Pendidikan <code>*</code></label>
                                             <select name="last_education_level" class="form-select" required>
                                                 <option value="">-- Pilih Jenjang --</option>
-                                                <option value="SD" {{ $product_category->last_education_level == 'SD' ? 'selected' : '' }}>SD</option>
-                                                <option value="SMP" {{ $product_category->last_education_level == 'SMP' ? 'selected' : '' }}>SMP</option>
-                                                <option value="SMA" {{ $product_category->last_education_level == 'SMA' ? 'selected' : '' }}>SMA</option>
-                                                <option value="D3" {{ $product_category->last_education_level == 'D3' ? 'selected' : '' }}>D3</option>
-                                                <option value="S1" {{ $product_category->last_education_level == 'S1' ? 'selected' : '' }}>S1</option>
-                                                <option value="S2" {{ $product_category->last_education_level == 'S2' ? 'selected' : '' }}>S2</option>
-                                                <option value="S3" {{ $product_category->last_education_level == 'S3' ? 'selected' : '' }}>S3</option>
+                                                <option value="SD" {{ $event_category->last_education_level == 'SD' ? 'selected' : '' }}>SD</option>
+                                                <option value="SMP" {{ $event_category->last_education_level == 'SMP' ? 'selected' : '' }}>SMP</option>
+                                                <option value="SMA" {{ $event_category->last_education_level == 'SMA' ? 'selected' : '' }}>SMA</option>
+                                                <option value="D3" {{ $event_category->last_education_level == 'D3' ? 'selected' : '' }}>D3</option>
+                                                <option value="S1" {{ $event_category->last_education_level == 'S1' ? 'selected' : '' }}>S1</option>
+                                                <option value="S2" {{ $event_category->last_education_level == 'S2' ? 'selected' : '' }}>S2</option>
+                                                <option value="S3" {{ $event_category->last_education_level == 'S3' ? 'selected' : '' }}>S3</option>
                                             </select>
                                     </div>
 
                                     <div class="col-md-6 mb-3">
                                                 <label class="form-label">Nama Sekolah</label>
-                                                <input type="text" name="institution_name" class="form-control" value="{{ old('institution_name', $product_category->institution_name) }}">
+                                                <input type="text" name="institution_name" class="form-control" value="{{ old('institution_name', $event_category->institution_name) }}">
                                     </div>
                                 </div> --}}
 
 
                         <div class="d-flex justify-content-between">
-                            <a href="{{ route('product_categories.index') }}" class="btn btn-secondary">Batal</a>
+                            <a href="{{ route('event_categories.index') }}" class="btn btn-secondary">Batal</a>
                             <button type="submit" class="btn btn-success">Simpan Perubahan</button>
                         </div>
                     </form>

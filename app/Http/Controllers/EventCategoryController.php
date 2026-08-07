@@ -54,9 +54,9 @@ class EventCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(EventCategory $product_category)
+    public function edit(EventCategory $event_category)
     {
-        return view('categories.edit', compact('product_category'));
+        return view('categories.edit', compact('event_category'));
     }
 
 

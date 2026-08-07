@@ -82,6 +82,10 @@ class Event extends Model
 
     public function getRemainingQuotaAttribute()
     {
+        if (is_null($this->quota)) {
+            return null;
+        }
+
         return max(
             0,
             $this->quota - $this->registrations()->count()
@@ -90,70 +94,86 @@ class Event extends Model
 
     public function getIsRegistrationOpenAttribute()
     {
-        $today = now();
+        if (!$this->registration_open || !$this->registration_close) {
+            return false;
+        }
 
-        return $this->registration_open <= $today &&
-               $this->registration_close >= $today;
+        $now = now();
+
+        return $now->between(
+            $this->registration_open->startOfDay(),
+            $this->registration_close->endOfDay()
+        );
     }
 
     public function getIsFullAttribute()
     {
+        if (is_null($this->quota)) {
+            return false;
+        }
+
         return $this->remaining_quota <= 0;
     }
-    public function scopePublished($query)
-{
-    return $query->where('is_published', true);
-}
 
-public function scopeUpcoming($query)
-{
-    return $query->where('start_at', '>', now());
-}
+    public function getStatusLabelAttribute()
+    {
+        $now = now();
 
-public function scopeOngoing($query)
-{
-    return $query
-        ->where('start_at', '<=', now())
-        ->where('end_at', '>=', now());
-}
+        if ($this->start_at && $now->lt($this->start_at)) {
 
-public function scopeFinished($query)
-{
-    return $query->where('end_at', '<', now());
-}
+            if (
+                $this->registration_open &&
+                $now->gte($this->registration_open->startOfDay()) &&
+                $this->registration_close &&
+                $now->lte($this->registration_close->endOfDay())
+            ) {
+                return $this->is_full
+                    ? 'Sold Out'
+                    : 'Pendaftaran';
+            }
 
-public function scopeByStatus($query, $status)
-{
-    return $query->where('status', $status);
-}
-public function getStatusLabelAttribute()
-{
-    $now = now();
+            return 'Coming Soon';
+        }
 
-    if ($now < $this->registration_open) {
+        if (
+            $this->start_at &&
+            $this->end_at &&
+            $now->between($this->start_at, $this->end_at)
+        ) {
+            return 'Sedang Berlangsung';
+        }
+
+        if ($this->end_at && $now->gt($this->end_at)) {
+            return 'Selesai';
+        }
+
         return 'Coming Soon';
     }
 
-    if (
-        $now >= $this->registration_open &&
-        $now <= $this->registration_close
-    ) {
-        return $this->is_full
-            ? 'Sold Out'
-            : 'Pendaftaran';
+    public function scopePublished($query)
+    {
+        return $query->where('is_published', true);
     }
 
-    if (
-        $now >= $this->start_at &&
-        $now <= $this->end_at
-    ) {
-        return 'Sedang Berlangsung';
+    public function scopeUpcoming($query)
+    {
+        return $query->where('start_at', '>', now());
     }
 
-    if ($now > $this->end_at) {
-        return 'Selesai';
+    public function scopeOngoing($query)
+    {
+        return $query
+            ->where('start_at', '<=', now())
+            ->where('end_at', '>=', now());
     }
 
-    return 'Coming Soon';
-}
+    public function scopeFinished($query)
+    {
+        return $query->where('end_at', '<', now());
+    }
+
+    public function scopeByStatus($query, $status)
+    {
+        return $query->where('status', $status);
+    }
 }

@@ -11,33 +11,9 @@ class EventCategory extends Model
     use HasUuids;
 
     protected $fillable = [
-        'license_id',
-        'event_code',
         'name',
-        'event_category_id',
-        'event_type',
-        'audience_type',
-        'registration_open',
-        'registration_close',
-        'start_at',
-        'end_at',
-        'location',
-        'price',
-        'quota',
-        'poster',
-        'thumbnail',
+        'slug',
         'description',
-        'status',
-        'is_published',
-    ];
-
-    protected $casts = [
-        'registration_open'  => 'date',
-        'registration_close' => 'date',
-        'start_at'           => 'datetime',
-        'end_at'             => 'datetime',
-        'price'              => 'decimal:2',
-        'is_published'       => 'boolean',
     ];
 
     public function category()

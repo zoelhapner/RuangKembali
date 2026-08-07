@@ -233,7 +233,7 @@
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'Berhasil!',
-                                    text: 'Data Proyek telah dihapus.',
+                                    text: 'Data Event telah dihapus.',
                                     timer: 2000,
                                     showConfirmButton: false
                             });
