@@ -3,10 +3,6 @@
 @section('content')
 
 <div class="container-xl">
-
-    {{-- ========================================================= --}}
-    {{-- HEADER --}}
-    {{-- ========================================================= --}}
     <div class="page-header d-print-none mb-4">
         <div class="row align-items-center">
 
@@ -38,7 +34,7 @@
                     <a href="{{ route('events.edit', $event->id) }}"
                        class="btn btn-primary">
                         <i class="ti ti-edit me-1"></i>
-                        Edit
+                        Daftar Sekarang
                     </a>
 
                     <div class="dropdown">
@@ -71,15 +67,8 @@
         </div>
     </div>
 
-
-    {{-- ========================================================= --}}
-    {{-- HERO --}}
-    {{-- ========================================================= --}}
     <div class="row g-4 mb-4">
 
-        {{-- ===================================================== --}}
-        {{-- LEFT --}}
-        {{-- ===================================================== --}}
         <div class="col-lg-8">
 
             <div class="card event-hero-card">
@@ -259,10 +248,6 @@
 
         </div>
 
-
-        {{-- ===================================================== --}}
-        {{-- RIGHT --}}
-        {{-- ===================================================== --}}
         <div class="col-lg-4">
 
             {{-- Status --}}
@@ -395,7 +380,6 @@
 
                         </div>
 
-
                         <div class="event-timeline-item">
 
                             <div class="event-timeline-icon">
@@ -455,7 +439,6 @@
 
                     </div>
 
-
                     <div>
 
                         <div class="text-secondary small mb-1">
@@ -511,10 +494,6 @@
 
     </div>
 
-
-    {{-- ========================================================= --}}
-    {{-- DETAIL EVENT --}}
-    {{-- ========================================================= --}}
     <div class="row g-4 mb-4">
 
         <div class="col-12">
@@ -731,10 +710,104 @@
 
     </div>
 
+    <div class="col-lg-4">
 
-    {{-- ========================================================= --}}
-    {{-- DESCRIPTION --}}
-    {{-- ========================================================= --}}
+        <div class="card mb-4">
+
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="ti ti-photo me-2"></i>
+                    Event Galleries
+                </h3>
+            </div>
+
+            <div class="card-body">
+
+                @if($event->galleries->count())
+
+                    <div class="event-gallery-scroll">
+
+                        @foreach($event->galleries as $gallery)
+
+                            <div class="event-gallery-item">
+
+                                <img src="{{ Storage::url($gallery->image) }}"
+                                    alt="{{ $gallery->caption ?? $event->name }}"
+                                    class="event-gallery-image"
+                                    loading="lazy">
+
+                                @if($gallery->caption)
+
+                                    <div class="event-gallery-caption">
+                                        {{ $gallery->caption }}
+                                    </div>
+
+                                @endif
+
+                            </div>
+
+                        @endforeach
+
+                    </div>
+
+                @else
+
+                    {{-- Empty State --}}
+                    <div class="event-gallery-empty">
+
+                        <i class="ti ti-photo-off"></i>
+
+                        <div class="fw-semibold mt-2">
+                            Belum ada galeri
+                        </div>
+
+                        <div class="text-secondary small">
+                            Belum ada foto dokumentasi event.
+                        </div>
+
+                    </div>
+
+                @endif
+
+            </div>
+
+        </div>
+
+        @if($event->youtube_url)
+
+            <div class="card mb-4">
+
+                <div class="card-header">
+
+                    <h3 class="card-title">
+                        <i class="ti ti-brand-youtube me-2"></i>
+                        Video Event
+                    </h3>
+
+                </div>
+
+                <div class="card-body p-0">
+
+                    <div class="event-video-wrapper">
+
+                        <iframe
+                            src="{{ $event->youtube_embed_url }}"
+                            title="{{ $event->name }}"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        @endif
+
+    </div>
+
     @if($event->description)
 
         <div class="card mb-4">
@@ -758,10 +831,6 @@
 
     @endif
 
-
-    {{-- ========================================================= --}}
-    {{-- THUMBNAIL --}}
-    {{-- ========================================================= --}}
     @if($event->thumbnail)
 
         <div class="card mb-4">
@@ -784,12 +853,7 @@
         </div>
 
     @endif
-
-
-    {{-- ========================================================= --}}
-    {{-- FOOTER ACTION --}}
-    {{-- ========================================================= --}}
-    <div class="d-flex justify-content-between align-items-center pb-4">
+    {{-- <div class="d-flex justify-content-between align-items-center pb-4">
 
         <a href="{{ route('events.index') }}"
            class="btn btn-outline-secondary">
@@ -803,14 +867,10 @@
             Edit Event
         </a>
 
-    </div>
+    </div> --}}
 
 </div>
 
-
-{{-- ============================================================= --}}
-{{-- DELETE FORM --}}
-{{-- ============================================================= --}}
 <form id="delete-form"
       action="{{ route('events.destroy', $event->id) }}"
       method="POST"

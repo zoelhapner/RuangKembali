@@ -8,7 +8,7 @@
                 <div class="btn-list">
                 {{-- @can('tambah data karyawan')        --}}
                 <span class="d-none d-sm-inline">
-                    <a href="{{ route("event_categories.create") }}" class="btn btn-dark d-none d-sm-inline-block" >
+                    <a href="{{ route("event_categories.create") }}" class="btn btn-primary d-none d-sm-inline-block" >
                         <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -34,7 +34,7 @@
                 <div class="card">
                     <div class="card-header">
                         <p class="text-center mb-4" style="font-size: 1.5rem; font-weight: 400; font-family: 'Poppins', sans-serif;">
-                                Daftar Kategori
+                                Daftar Kategori Event
                         </p>
                     </div>
                             @if(session('success'))
@@ -44,10 +44,9 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        
+                                        <th>No.</th>
                                         <th>Nama Kategori</th>
-                                        <th>Actions</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>

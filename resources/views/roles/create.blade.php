@@ -53,10 +53,6 @@
                     <i class="ti ti-lock me-2"></i> Permissions Berdasarkan Modul
                 </h5>
 
-                @php
-                    $groupedPermissions = $permissions->groupBy('modules');
-                @endphp
-
                 @foreach ($groupedPermissions as $moduleName => $modulePermissions)
                     <div class="card mb-3 border-0 shadow-sm">
                         <div class="card-header bg-light d-flex justify-content-between align-items-center">

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\EventCategory;
-use App\Models\Employee;
+use App\Models\EventGallery;
 use App\Models\Customer;
 use App\Models\Affiliator;
 use App\Models\Worker;
@@ -377,18 +377,319 @@ private function generateEventCode(): string
 
     return $prefix . str_pad($number, 4, '0', STR_PAD_LEFT);
 }
+public function edit(Event $event)
+{
+    $categories = EventCategory::orderBy('name')->get();
+
+    $eventTypes = [
+        'free' => 'Gratis',
+        'paid' => 'Berbayar',
+    ];
+
+    $audiences = [
+        'public' => 'Umum',
+        'gender' => 'Berdasarkan Gender',
+        'age' => 'Berdasarkan Usia',
+    ];
+    $statuses = [
+        'coming_soon' => 'Coming Soon',
+        'registration_open' => 'Pendaftaran',
+        'sold_out' => 'Sold Out',
+        'ongoing' => 'Sedang Berlangsung',
+        'finished' => 'Selesai',
+        'cancelled' => 'Dibatalkan',
+    ];
+
+    return view('events.edit', compact(
+        'event',
+        'categories',
+        'eventTypes',
+        'audiences',
+        'statuses'
+    ));
+}
 
 public function update(Request $request, Event $event)
 {
-    abort_if(auth()->user()->cannot('lihat daftar proyek'), 403);
-    
-    $event->update($request->all());
+    abort_if(
+        auth()->user()->cannot('lihat daftar event'),
+        403
+    );
 
-    return back()->with('success', 'Data proyek berhasil diperbarui!');
+    $request->validate([
+
+        // =========================
+        // EVENT
+        // =========================
+        'name' => 'required|string|max:255',
+
+        'event_category_id' =>
+            'required|exists:event_categories,id',
+
+        'event_type' =>
+            'required|in:free,paid',
+
+        'audience_type' =>
+            'required|in:public,gender,age',
+
+        'registration_open' =>
+            'nullable|date',
+
+        'registration_close' =>
+            'nullable|date|after_or_equal:registration_open',
+
+        'start_at' =>
+            'required|date',
+
+        'end_at' =>
+            'required|date|after:start_at',
+
+        'location' =>
+            'nullable|string|max:255',
+
+        'price' =>
+            'nullable|numeric|min:0',
+
+        'quota' =>
+            'nullable|integer|min:1',
+
+        'is_published' =>
+            'required|boolean',
+
+        'description' =>
+            'nullable|string',
+
+        // =========================
+        // MEDIA
+        // =========================
+        'poster' =>
+            'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+
+        'thumbnail' =>
+            'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+
+        'youtube_url' =>
+            'nullable|url|max:500',
+
+        // =========================
+        // GALLERY
+        // =========================
+        'gallery_images' =>
+            'nullable|array',
+
+        'gallery_images.*' =>
+            'image|mimes:jpg,jpeg,png,webp|max:2048',
+
+        'delete_gallery_ids' =>
+            'nullable|array',
+
+        'delete_gallery_ids.*' =>
+            'exists:event_galleries,id',
+
+        'gallery_captions' =>
+            'nullable|array',
+
+        'gallery_captions.*' =>
+            'nullable|string|max:255',
+    ]);
+
+    DB::beginTransaction();
+
+    $newFiles = [];
+
+    try {
+
+        $eventData = [
+            'name' => $request->name,
+            'event_category_id' => $request->event_category_id,
+            'event_type' => $request->event_type,
+            'audience_type' => $request->audience_type,
+
+            'registration_open' =>
+                $request->registration_open,
+
+            'registration_close' =>
+                $request->registration_close,
+
+            'start_at' =>
+                $request->start_at,
+
+            'end_at' =>
+                $request->end_at,
+
+            'location' =>
+                $request->location,
+
+            'price' => $request->event_type === 'free'
+                ? 0
+                : ($request->price ?? 0),
+
+            'quota' =>
+                $request->quota,
+
+            'youtube_url' =>
+                $request->youtube_url,
+
+            'description' =>
+                $request->description,
+
+            'is_published' =>
+                $request->boolean('is_published'),
+        ];
+
+
+        if ($request->hasFile('poster')) {
+
+            $oldPoster = $event->poster;
+
+            $poster = $request->file('poster')
+                ->store('events/posters', 'public');
+
+            $newFiles[] = $poster;
+
+            $eventData['poster'] = $poster;
+
+            if ($oldPoster) {
+                Storage::disk('public')
+                    ->delete($oldPoster);
+            }
+        }
+
+        if ($request->hasFile('thumbnail')) {
+
+            $oldThumbnail = $event->thumbnail;
+
+            $thumbnail = $request->file('thumbnail')
+                ->store('events/thumbnails', 'public');
+
+            $newFiles[] = $thumbnail;
+
+            $eventData['thumbnail'] = $thumbnail;
+
+            /*
+             * Hapus thumbnail lama.
+             */
+            if ($oldThumbnail) {
+                Storage::disk('public')
+                    ->delete($oldThumbnail);
+            }
+        }
+
+        $event->update($eventData);
+
+        if ($request->filled('delete_gallery_ids')) {
+
+            $galleries = EventGallery::where('event_id', $event->id)
+                ->whereIn(
+                    'id',
+                    $request->delete_gallery_ids
+                )
+                ->get();
+
+            foreach ($galleries as $gallery) {
+
+                /*
+                 * Hapus file gallery
+                 */
+                if ($gallery->image) {
+
+                    Storage::disk('public')
+                        ->delete($gallery->image);
+                }
+
+                /*
+                 * Hapus record
+                 */
+                $gallery->delete();
+            }
+        }
+
+        if ($request->filled('gallery_captions')) {
+
+            foreach (
+                $request->gallery_captions
+                as $galleryId => $caption
+            ) {
+
+                EventGallery::where('id', $galleryId)
+                    ->where('event_id', $event->id)
+                    ->update([
+                        'caption' => $caption,
+                    ]);
+            }
+        }
+
+        if ($request->hasFile('gallery_images')) {
+
+            $lastOrder = EventGallery::where(
+                'event_id',
+                $event->id
+            )->max('sort_order');
+
+            $lastOrder = $lastOrder ?? 0;
+
+            foreach (
+                $request->file('gallery_images')
+                as $index => $image
+            ) {
+
+                $path = $image->store(
+                    'events/galleries',
+                    'public'
+                );
+
+                $newFiles[] = $path;
+
+                EventGallery::create([
+                    'event_id' =>
+                        $event->id,
+
+                    'image' =>
+                        $path,
+
+                    'caption' =>
+                        null,
+
+                    'sort_order' =>
+                        $lastOrder + $index + 1,
+                ]);
+            }
+        }
+
+        DB::commit();
+
+        return redirect()
+            ->route('events.index')
+            ->with(
+                'success',
+                'Data event berhasil diperbarui!'
+            );
+
+    } catch (\Throwable $e) {
+
+        DB::rollBack();
+
+        /*
+         * Hapus file-file baru yang sudah berhasil
+         * di-upload tetapi proses update gagal.
+         */
+        foreach ($newFiles as $file) {
+
+            Storage::disk('public')
+                ->delete($file);
+        }
+
+        return back()
+            ->withInput()
+            ->with(
+                'error',
+                'Gagal memperbarui event: ' . $e->getMessage()
+            );
+    }
 }
 public function show($id)
 {
-    $event = Event::with('category')
+    $event = Event::with('category', 'galleries')
         ->findOrFail($id);
 
     return view('events.show', compact('event'));

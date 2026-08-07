@@ -29,6 +29,7 @@ class Event extends Model
         'description',
         'status',
         'is_published',
+        'youtube_url'
     ];
 
     protected $casts = [
@@ -57,7 +58,8 @@ class Event extends Model
 
     public function galleries()
     {
-        return $this->hasMany(EventGallery::class);
+        return $this->hasMany(EventGallery::class)
+            ->orderBy('sort_order');
     }
 
     public function sponsors()
@@ -176,4 +178,48 @@ class Event extends Model
     {
         return $query->where('status', $status);
     }
+
+    public function getYoutubeEmbedUrlAttribute()
+{
+    if (!$this->youtube_url) {
+        return null;
+    }
+
+    $url = $this->youtube_url;
+
+    /*
+     * youtube.com/watch?v=xxxxx
+     */
+    if (str_contains($url, 'youtube.com/watch')) {
+
+        parse_str(parse_url($url, PHP_URL_QUERY), $query);
+
+        if (!empty($query['v'])) {
+            return 'https://www.youtube.com/embed/' . $query['v'];
+        }
+    }
+
+    /*
+     * youtu.be/xxxxx
+     */
+    if (str_contains($url, 'youtu.be/')) {
+
+        $path = parse_url($url, PHP_URL_PATH);
+
+        $videoId = trim($path, '/');
+
+        if ($videoId) {
+            return 'https://www.youtube.com/embed/' . $videoId;
+        }
+    }
+
+    /*
+     * youtube.com/embed/xxxxx
+     */
+    if (str_contains($url, 'youtube.com/embed/')) {
+        return $url;
+    }
+
+    return null;
+}
 }

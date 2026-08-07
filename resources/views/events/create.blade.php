@@ -296,7 +296,32 @@
                                     Gunakan gambar dengan rasio yang sesuai untuk thumbnail.
                                 </div>
                             </div>
+                            {{-- YouTube --}}
+                            <div class="col-md-6">
 
+                                <label class="form-label">
+                                    Video YouTube
+                                </label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-text">
+                                        <i class="ti ti-brand-youtube"></i>
+                                    </span>
+
+                                    <input type="url"
+                                        name="youtube_url"
+                                        class="form-control"
+                                        value="{{ old('youtube_url', $event->youtube_url ?? '') }}"
+                                        placeholder="https://www.youtube.com/watch?v=...">
+
+                                </div>
+
+                                <div class="form-hint">
+                                    Masukkan link video YouTube event.
+                                </div>
+
+                            </div>
                         </div>
 
 

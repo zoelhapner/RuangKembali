@@ -5,41 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Models\Permission;
+use App\Models\Menu;
 use Yajra\DataTables\Facades\DataTables;
 
 class RoleController extends Controller
 {
-    // public function index()
-    // {
-    //         if (request()->ajax()) {
-    //             $roles = Role::withCount('permissions')->get();
-    //             $permissions = Permission::all();                
-
-    //             return datatables()->of($roles)
-    //                 ->addIndexColumn()
-    //                 ->addColumn('status', fn($row) => '<span class="badge bg-dark">Active</span>')
-    //                 ->addColumn('action', function ($role) {
-    //                 $buttons = '';
-    //                 {
-    //                     $buttons .= '<button data-role-id="' . $role->id . '" class="btn btn-icon btn-sm btn-dark me-1 edit permissions" title="Ubah">
-    //                                     <i class="ti ti-edit"></i>
-    //                                 </button>';
-    //                 }
-                    
-    //                 {
-    //                     $buttons .= '<button data-id="' . $role->id . '" class="btn btn-icon btn-sm btn-dark delete-role" title="Hapus">
-    //                                     <i class="ti ti-trash"></i>
-    //                                 </button>';
-    //                 }
-    //                 return $buttons;
-    //             })
-    //                 ->rawColumns(['status', 'action'])
-    //                 ->make(true);
-    //         }
-
-    //         return view('roles.index', compact('permissions'));
-    // }
-
     public function index()
     {
         $roles = Role::withCount('permissions')
@@ -78,26 +48,10 @@ class RoleController extends Controller
     ]);
 }
 
-
-
-   
-
-//     public function show(Role $role)
-// {
-//     if (request()->ajax()) {
-//         $permissions = $role->permissions()->select('id', 'name', 'modules')->get();
-//         return response()->json(['permissions' => $permissions]);
-//     }
-
-//     return abort(404);
-// }
-
-
-
     public function create()
     {
-        $permissions = Permission::all();
-        return view('roles.create', compact('permissions'));
+        $groupedPermissions = $this->getGroupedPermissions();
+        return view('roles.create', compact('groupedPermissions'));
     }
 
     public function store(Request $request)
@@ -126,9 +80,13 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = Role::findOrFail($id);
-        
-        $permissions = Permission::all();
-        return view('roles.edit', compact('role', 'permissions'));
+
+        $groupedPermissions = $this->getGroupedPermissions();
+
+        return view('roles.edit', compact(
+            'role',
+            'groupedPermissions'
+        ));
     }
 
     public function update(Request $request, Role $role)
@@ -186,4 +144,53 @@ class RoleController extends Controller
 
         }
     }
+        private function getGroupedPermissions()
+{
+    $permissions = Permission::all();
+
+    $permissionGroups = $permissions->groupBy('modules');
+
+    $parents = Menu::with([
+        'children' => function ($q) {
+            $q->orderBy('order');
+        }
+    ])
+    ->whereNull('parent_id')
+    ->orderBy('order')
+    ->get();
+
+    // Mapping permission -> module
+    $permissionMap = Permission::pluck('modules', 'name');
+
+    $groupedPermissions = collect();
+
+    foreach ($parents as $parent) {
+
+        foreach ($parent->children as $child) {
+
+            if (!$child->permission_name) {
+                continue;
+            }
+
+            $module = $permissionMap[$child->permission_name] ?? null;
+
+            if (!$module) {
+                continue;
+            }
+
+            if (!$groupedPermissions->has($module)) {
+                $groupedPermissions[$module] = $permissionGroups[$module] ?? collect();
+            }
+        }
+    }
+
+    // Tambahkan module yang belum ada di menu
+    foreach ($permissionGroups as $module => $items) {
+        if (!$groupedPermissions->has($module)) {
+            $groupedPermissions[$module] = $items;
+        }
+    }
+
+    return $groupedPermissions;
+}
 }
